@@ -1,17 +1,19 @@
+package main.config;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
-public class Connection
+public class DatabaseConnection
 {
-    private static Connection instance = null;
+    private static DatabaseConnection instance = null;
     private static java.sql.Connection connection = null;
 
-    public static Connection getInstance() {
+    public static DatabaseConnection getInstance() {
         if (instance == null) {
-            instance = new Connection();
+            instance = new DatabaseConnection();
         }
         return instance;
     }
@@ -31,7 +33,7 @@ public class Connection
         }
     }
 
-    public Connection(){
+    public DatabaseConnection(){
         try(InputStream input = new FileInputStream("src/resources/db.properties")){
             Properties props = new Properties();
             props.load(input);

@@ -1,3 +1,7 @@
+package main.config;
+
+import main.config.DatabaseConnection;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -8,7 +12,7 @@ public class ConnectionTest {
     }
 
     public static void dummyQuery(){
-        Connection connection = Connection.getInstance();
+        DatabaseConnection connection = DatabaseConnection.getInstance();
         try {
         String query = "select * from dummy";
             Statement stmt = connection.getConnection().createStatement();
