@@ -1,43 +1,53 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
 
 public class Connection
 {
+    private static Connection instance = null;
+    private static java.sql.Connection connection = null;
 
-    static final String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    static final String DB_URL = "jdbc:oracle:thin:@orca.csc.ncsu.edu:1521:orcl01";
-
-
-
-
-
-    public static void main(String[] Args){
-        System.out.println("Hello World");
-        dummyQuery();
+    public static Connection getInstance() {
+        if (instance == null) {
+            instance = new Connection();
+        }
+        return instance;
     }
 
-    public static void dummyQuery(){
-        try {
-            String user = "ssharm34";
-            String passwd = "200255931";
 
-            Class.forName(JDBC_DRIVER);
-            java.sql.Connection con=DriverManager.getConnection(
-                    DB_URL,user, passwd);
-            String query = "select * from dummy";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            System.out.println("Result");
-            System.out.println(rs);
-            while (rs.next()){
-                System.out.println("Query Result");
-                System.out.println(rs);
+    public java.sql.Connection getConnection(){
+        return connection;
+    }
+
+    public void destroyConnection(){
+        if (connection != null){
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("Error while closing connection:"+ e.getMessage());
             }
-
-        }catch (Exception e){
-            System.out.println(e.getMessage());
         }
     }
 
-
+    public Connection(){
+        try(InputStream input = new FileInputStream("src/resources/db.properties")){
+            Properties props = new Properties();
+            props.load(input);
+            try {
+                Class.forName(props.getProperty("db.driverClassName"));
+                connection = DriverManager.getConnection(
+                        props.getProperty("db.url"),
+                        props.getProperty("db.username"),
+                        props.getProperty("db.password"));
+                System.out.println("Connection established.");
+            }catch(Exception e) {
+                System.out.println("Problems while connecting to database:"+e.getMessage());
+            }
+        }
+        catch(IOException e){
+            System.out.println("Cannot read properties"+e.getMessage());
+        }
+    }
 }
