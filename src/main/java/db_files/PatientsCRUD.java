@@ -6,23 +6,6 @@ import java.sql.*;
 
 public class PatientsCRUD
 {
-    public static void executeUpdates(String query) throws SQLException {
-        Connection connection = new DatabaseConnection().getConnection();
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate(query);
-            try {
-                    statement.close();
-            }
-            catch (SQLException e) {
-                throw e;
-            }
-        } catch (SQLException e) {
-            throw e;
-        }
-    }
-
     public static void checkIfPatientTableExistsElseCreate(int facility_id){
         Connection connection = new DatabaseConnection().getConnection();
         Statement statement;
@@ -37,7 +20,7 @@ public class PatientsCRUD
             else {
                 System.out.println("Patient table not present, creating a new one...");
 //                try {
-//                    executeUpdates(new_patient_table);
+//                    BaseCRUD.executeSingleUpdate(new_patient_table);
 //                    System.out.println("Created a new patient table.");
 //                }
 //                catch (SQLException e){
