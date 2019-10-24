@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9cc9f945-a735-41c0-aaa6-e457311862a6" name="Default Changelist" comment="Updated tables.sql">
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+    <list default="true" id="9cc9f945-a735-41c0-aaa6-e457311862a6" name="Default Changelist" comment="Updated tables.sql (added procedure)">
+      <change afterPath="$PROJECT_DIR$/src/main/db_files/PatientsCRUD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/config/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/config/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/db_files/CreateTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/db_files/CreateTables.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/tables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/db_files/CreateTables.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/workflow/MainFlow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/workflow/MainFlow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/db.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -19,10 +19,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/db_files/CreateTables.java">
+        <entry file="file://$PROJECT_DIR$/src/main/db_files/PatientsCRUD.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+            <state relative-caret-position="283">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/db.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="56" lean-forward="true" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+            <state relative-caret-position="51">
+              <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -42,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/resources/tables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2159">
-              <caret line="127" column="28" selection-start-line="127" selection-start-column="28" selection-end-line="127" selection-end-column="28" />
+            <state relative-caret-position="-524">
+              <caret line="176" column="19" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -51,8 +51,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/workflow/MainFlow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
+            <state relative-caret-position="51">
+              <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -77,16 +77,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/resources/db.properties" />
         <option value="$PROJECT_DIR$/src/main/java/Test1.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/Connection.java" />
         <option value="$PROJECT_DIR$/src/main/config/Connection.java" />
         <option value="$PROJECT_DIR$/src/main/config/ConnectionTest.java" />
-        <option value="$PROJECT_DIR$/src/main/workflow/MainFlow.java" />
         <option value="$PROJECT_DIR$/src/main/config/DatabaseConnection.java" />
-        <option value="$PROJECT_DIR$/src/resources/tables.sql" />
         <option value="$PROJECT_DIR$/src/main/db_files/CreateTables.java" />
+        <option value="$PROJECT_DIR$/src/main/workflow/MainFlow.java" />
+        <option value="$PROJECT_DIR$/src/resources/db.properties" />
+        <option value="$PROJECT_DIR$/src/resources/tables.sql" />
+        <option value="$PROJECT_DIR$/src/main/db_files/PatientsCRUD.java" />
       </list>
     </option>
   </component>
@@ -117,8 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -142,21 +141,7 @@
               <item name="csc540" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="csc540" type="b2602c69:ProjectViewProjectNode" />
-              <item name="csc540" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="db_files" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="csc540" type="b2602c69:ProjectViewProjectNode" />
-              <item name="csc540" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="workflow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="csc540" type="b2602c69:ProjectViewProjectNode" />
@@ -168,12 +153,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571897480230" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1571951088692" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -302,7 +289,21 @@
       <option name="project" value="LOCAL" />
       <updated>1571805019847</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated tables.sql">
+      <created>1571897497351</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1571897497351</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated tables.sql (added procedure)">
+      <created>1571951032109</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571951032109</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -312,7 +313,7 @@
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26639676" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27125505" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -322,7 +323,7 @@
       <window_info id="DB Browser" order="7" />
       <window_info id="Project Explorer" order="8" weight="0.32955465" />
       <window_info id="Job Explorer" order="9" />
-      <window_info active="true" anchor="bottom" id="Messages" order="0" visible="true" weight="0.3283582" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.3283582" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.3283582" />
       <window_info anchor="bottom" id="Run" order="3" weight="0.37976784" />
@@ -357,7 +358,8 @@
     <MESSAGE value="Updated Connection class. Jar file needs to be checked later." />
     <MESSAGE value="Added tables.sql and other relevant files" />
     <MESSAGE value="Updated tables.sql" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated tables.sql" />
+    <MESSAGE value="Updated tables.sql (added procedure)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated tables.sql (added procedure)" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/hospital.iml">
@@ -395,31 +397,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/workflow/MainFlow.java">
+    <entry file="file://$PROJECT_DIR$/src/resources/db.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
+        <state relative-caret-position="51">
+          <caret line="3" column="23" lean-forward="true" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/resources/db.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/workflow/MainFlow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="56" lean-forward="true" selection-start-line="1" selection-start-column="56" selection-end-line="1" selection-end-column="56" />
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/resources/tables.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="127" column="28" selection-start-line="127" selection-start-column="28" selection-end-line="127" selection-end-column="28" />
+        <state relative-caret-position="-524">
+          <caret line="176" column="19" selection-start-line="176" selection-start-column="13" selection-end-line="176" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/db_files/CreateTables.java">
+    <entry file="file://$PROJECT_DIR$/src/main/db_files/PatientsCRUD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="41" column="12" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+        <state relative-caret-position="283">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
