@@ -1,24 +1,48 @@
 package main.java.workflow;
-import java.text.ParseException;
+//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
+import main.java.Utils.CommandLineUtils;
+import main.java.Utils.MessageUtils;
+import main.java.Utils.IScreen;
 
-public class PatientRouting {
+import java.net.StandardSocketOptions;
+
+public class PatientRouting implements IScreen {
     public void run() {
-        _display();
+        display();
         String opt = CommandLineUtils.ReadOption();
-        int option = 0;
+        int option = 1;
         try {
             option = Integer.parseInt(opt);
+            MessageUtils.PATIENT_ROUTING o = MessageUtils.PATIENT_ROUTING.values()[option];
+            switch (o) {
+                case PATIENT_ROUTING_CHECKIN:
+                    System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
+                    break;
+                case PATIENT_ROUTING_CHECK_OUT:
+                    System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+                    break;
+                case PATIENT_ROUTING_GO_BACK:
+                    System.out.println(MessageUtils.PATIENT_ROUTING_GO_BACK);
+                    break;
+                default:
+                    System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
+
+            }
 
         } catch (NumberFormatException e) {
 
         }
 
         }
-    private void _display(){
-        System.out.println(MessagesUtil.PATIENT_ROUTING.PATIENT_ROUTING_CHECKIN.toString() + MessagesUtil.PATIENT_ROUTING_CHECK_IN);
-        System.out.println(MessagesUtil.PATIENT_ROUTING.PATIENT_ROUTING_CHECK_OUT.toString() + MessagesUtil.PATIENT_ROUTING_CHECK_OUT_ACK);
-        System.out.println(MessagesUtil.PATIENT_ROUTING.PATIENT_ROUTING_GO_BACK.toString() + MessagesUtil.PATIENT_ROUTING_GO_BACK);
-        System.out.println(MessagesUtil.GLOBAL_ENTER_OPTION);
+    public void display(){
+        System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECKIN.ordinal()
+               + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_CHECK_IN);
+        System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECK_OUT.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+        System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_GO_BACK.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_GO_BACK);
+        System.out.println(MessageUtils.GLOBAL_NEWLINE);
+        System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
 
     }
 }
