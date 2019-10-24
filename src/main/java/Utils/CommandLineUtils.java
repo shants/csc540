@@ -1,4 +1,4 @@
-package main.java.workflow;
+package main.java.Utils;
 import java.util.Scanner;
 
 public class CommandLineUtils {
