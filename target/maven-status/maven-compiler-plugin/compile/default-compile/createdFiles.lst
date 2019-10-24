@@ -1,2 +1,4 @@
-ConnectionTest.class
-Connection.class
+main\config\DatabaseConnection.class
+main\workflow\MainFlow.class
+main\config\ConnectionTest.class
+main\db_files\PatientsCRUD.class

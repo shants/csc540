@@ -1,5 +1,5 @@
-package main.workflow;
-import main.db_files.PatientsCRUD;
+package main.java.workflow;
+import main.java.db_files.PatientsCRUD;
 //import java.sql.SQLException;
 
 public class MainFlow{

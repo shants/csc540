@@ -1,6 +1,6 @@
-package main.config;
+package main.java.config;
 
-import main.config.DatabaseConnection;
+import main.java.config.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
