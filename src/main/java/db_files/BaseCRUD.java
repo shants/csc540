@@ -1,6 +1,6 @@
-package main.java.db_files;
+package db_files;
 
-import main.java.config.DatabaseConnection;
+import config.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;

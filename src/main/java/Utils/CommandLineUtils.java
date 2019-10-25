@@ -1,4 +1,4 @@
-package main.java.Utils;
+package Utils;
 import java.util.Scanner;
 
 public class CommandLineUtils {

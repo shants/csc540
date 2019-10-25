@@ -1,16 +1,22 @@
-package main.java.config;
+package config;
 
-import main.java.config.DatabaseConnection;
-import main.java.workflow.PatientRouting;
+import Utils.StackFrame;
+import config.DatabaseConnection;
+import workflow.PatientRouting;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Stack;
+
 
 public class ConnectionTest {
     public static void main(String[] Args){
         System.out.println("Hello World");
         //dummyQuery();
+        StackFrame _globalStackFrame = StackFrame.getInstance();
+
         PatientRouting p = new PatientRouting();
+        _globalStackFrame.addFrame(p);
         p.run();
     }
 

@@ -1,4 +1,4 @@
-package main.java.config;
+package config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,22 +34,21 @@ public class DatabaseConnection
     }
 
     public DatabaseConnection(){
-        try(InputStream input = new FileInputStream("src/resources/db.properties")){
+        try {
+            InputStream input = new FileInputStream("src/resources/db.properties");
             Properties props = new Properties();
             props.load(input);
-            try {
-                Class.forName(props.getProperty("db.driverClassName"));
-                connection = DriverManager.getConnection(
-                        props.getProperty("db.url"),
-                        props.getProperty("db.username"),
-                        props.getProperty("db.password"));
-                System.out.println("Connection established.");
-            }catch(Exception e) {
+            Class.forName(props.getProperty("db.driverClassName"));
+            connection = DriverManager.getConnection(
+                            props.getProperty("db.url"),
+                            props.getProperty("db.username"),
+                            props.getProperty("db.password"));
+            System.out.println("Connection established.");
+            }catch(IOException e) {
                 System.out.println("Problems while connecting to database:"+e.getMessage());
             }
-        }
-        catch(IOException e){
-            System.out.println("Cannot read properties"+e.getMessage());
+            catch(Exception e){
+                System.out.println("Cannot read properties"+e.getMessage());
         }
     }
 }

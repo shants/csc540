@@ -1,8 +1,8 @@
-package main.java.workflow;
+package workflow;
 //import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
-import main.java.Utils.CommandLineUtils;
-import main.java.Utils.MessageUtils;
-import main.java.Utils.IScreen;
+import Utils.CommandLineUtils;
+import Utils.MessageUtils;
+import Utils.IScreen;
 
 import java.net.StandardSocketOptions;
 
