@@ -43,7 +43,7 @@ public class DatabaseConnection
                             props.getProperty("db.url"),
                             props.getProperty("db.username"),
                             props.getProperty("db.password"));
-            System.out.println("Connection established.");
+            //System.out.println("Connection established.");
             }catch(IOException e) {
                 System.out.println("Problems while connecting to database:"+e.getMessage());
             }

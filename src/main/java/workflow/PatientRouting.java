@@ -19,11 +19,22 @@ public class PatientRouting implements IScreen {
             MessageUtils.PATIENT_ROUTING o = MessageUtils.PATIENT_ROUTING.values()[option];
             switch (o) {
                 case PATIENT_ROUTING_CHECKIN:
-                    System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
+                    //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
                     ArrayList<MedicalFacility> facilityList = FacilityCRUD.read();
                     for (int i=0; i < facilityList.size(); i++){
                         System.out.println(facilityList.get(i).getName() + " "  +
                                 facilityList.get(i).getId());
+                    }
+                    System.out.println(MessageUtils.PATIENT_FACILITY_CHECK_IN);
+                    opt = CommandLineUtils.ReadOption();
+                    option = Integer.parseInt(opt);
+                    // if valid option and not checked-in
+                    if (true) {
+                        IScreen scr = new PatientCheckIn();
+                        scr.run();
+
+                    }else{
+                        // already checked in
                     }
                     break;
                 case PATIENT_ROUTING_CHECK_OUT:
