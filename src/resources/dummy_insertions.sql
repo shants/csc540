@@ -58,3 +58,9 @@ INSERT INTO staff_department_type(type_name) values ('NONMEDICAL');
 
 INSERT INTO certification(certification_name) values ('ISO-9011');
 INSERT INTO certification(certification_name) values ('ISO-9012');
+
+execute create_new_staff_tables(1);
+
+insert into staff_1(name, hire_date, designation, type_id) values ('dr A', TO_DATE('2019/10/26', 'yyyy/mm/dd'), 'Admin', 1);
+insert into staff_1(name, hire_date, designation, type_id) values ('dr B', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'vp', 1);
+insert into staff_1(name, hire_date, designation, type_id) values ('abc', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'office', 2);
