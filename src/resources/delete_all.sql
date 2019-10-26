@@ -1,3 +1,4 @@
+/*
 drop table facility_address cascade constraints;
 drop table facility cascade constraints;
 drop table facility_classification cascade constraints;
@@ -20,8 +21,7 @@ drop sequence certification_seq;
 drop sequence facility_address_seq;
 drop sequence facility_seq;
 drop sequence staff_department_type_seq;
-
-/*
+*/
 BEGIN
 
   --Bye Sequences!
@@ -38,5 +38,3 @@ BEGIN
 
 END;
 /
-
-*/
