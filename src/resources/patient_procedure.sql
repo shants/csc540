@@ -54,7 +54,7 @@ BEGIN
 END;';
 EXECUTE IMMEDIATE new_query;
 new_query := 'ALTER TABLE patient_address_'|| to_char(facility_id) || ' ADD (
-CONSTRAINT fk_pa_p_'|| to_char(facility_id) || ' FOREIGN KEY (patient_id) REFERENCES patient_'|| to_char(facility_id) || '(patient_id)) ON DELETE CASCADE';
+CONSTRAINT fk_pa_p_'|| to_char(facility_id) || ' FOREIGN KEY (patient_id) REFERENCES patient_'|| to_char(facility_id) || '(patient_id) ON DELETE CASCADE)';
 EXECUTE IMMEDIATE new_query;
 end create_new_patient_tables;
 /
