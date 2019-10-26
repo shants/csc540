@@ -226,3 +226,30 @@ CONSTRAINT fk_pa_p_'|| to_char(facility_id) || ' FOREIGN KEY (patient_id) REFERE
 EXECUTE IMMEDIATE new_query;
 end create_new_patient_tables;
 /
+
+CREATE TABLE symptom(
+symptom_code NUMBER(10) NOT NULL,
+symptom_name VARCHAR2(50) NOT NULL
+);
+ALTER TABLE symptom ADD (
+CONSTRAINT symptom_key PRIMARY KEY(symptom_code));
+
+CREATE TABLE staff_department_type(
+type_id NUMBER(10) NOT NULL,
+type_name VARCHAR2(50) NOT NULL
+);
+
+ALTER TABLE staff_department_type ADD (
+CONSTRAINT staff_department_type_key PRIMARY KEY(type_id))
+
+CREATE SEQUENCE staff_department_type_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER staff_department_type_trigger
+BEFORE INSERT ON staff_department_type
+FOR EACH ROW
+BEGIN
+  SELECT staff_department_type_seq.NEXTVAL
+  INTO   :new.type_id
+  FROM   dual;
+END;
+/

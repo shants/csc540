@@ -6,6 +6,10 @@ drop table city cascade constraints;
 drop table state cascade constraints;
 drop table country cascade constraints;
 drop table certification cascade constraints;
+drop table symptom cascade constraints;
+drop table staff_department_type cascade constraints;
+drop table staff cascade constraints;
+
 
 drop sequence fc_cls_seq;
 drop sequence street_seq;
@@ -15,3 +19,4 @@ drop sequence country_seq;
 drop sequence certification_seq;
 drop sequence facility_address_seq;
 drop sequence facility_seq;
+drop sequence staff_department_type_seq;

@@ -5,6 +5,9 @@ DELETE FROM STREET;
 DELETE FROM CITY;
 DELETE FROM STATE;
 DELETE FROM COUNTRY;
+DELETE FROM SYMPTOM;
+DELETE FROM CERTIFICATION;
+
 
 DROP sequence fc_cls_seq;
 CREATE SEQUENCE fc_cls_seq START WITH 1;
@@ -27,6 +30,12 @@ CREATE SEQUENCE facility_address_seq START WITH 1;
 DROP sequence facility_seq;
 CREATE SEQUENCE facility_seq START WITH 1;
 
+DROP sequence staff_department_type_seq;
+CREATE SEQUENCE staff_department_type_seq START WITH 1;
+
+DROP sequence certification_seq;
+CREATE SEQUENCE certification_seq START WITH 1;
+
 INSERT INTO FACILITY_CLASSIFICATION(classification_type) VALUES('PRIMARY');
 INSERT INTO FACILITY_CLASSIFICATION(classification_type) VALUES('SECONDARY');
 INSERT INTO FACILITY_CLASSIFICATION(classification_type) VALUES('TERTIARY');
@@ -38,3 +47,14 @@ INSERT INTO COUNTRY(country_name) VALUES('UK');
 
 INSERT INTO FACILITY_ADDRESS(street_num,street_id,city_id,state_id,country_id) VALUES('221B',1,1,1,1);
 INSERT INTO FACILITY(facility_name,capacity,classification_id,facility_address_id) VALUES('SHANTS HOSPITAL', 200, 1, 1);
+
+
+INSERT INTO SYMPTOM(symptom_code, symptom_name) values (1,'PAIN');
+INSERT INTO SYMPTOM(symptom_code, symptom_name) values (2, 'FEVER');
+INSERT INTO SYMPTOM(symptom_code, symptom_name) values (3, 'DIZZYNESS');
+
+INSERT INTO staff_department_type(type_name) values ('MEDICAL');
+INSERT INTO staff_department_type(type_name) values ('NONMEDICAL');
+
+INSERT INTO certification(certification_name) values ('ISO-9011');
+INSERT INTO certification(certification_name) values ('ISO-9012');
