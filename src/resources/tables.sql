@@ -212,11 +212,7 @@ CONSTRAINT fk_fac_cert_facility_id FOREIGN KEY (facility_id) REFERENCES facility
 CONSTRAINT fk_fac_cert_certification_id FOREIGN KEY (certification_id)
 REFERENCES certification(certification_id));
 
-
-
-/*
-create service_department
- */
+/* create service_department */
 
 CREATE TABLE service_department(
 service_dept_code VARCHAR2(5) NOT NULL,
@@ -225,3 +221,27 @@ name VARCHAR2(50) NOT NULL
 
 ALTER TABLE service_department ADD (
 CONSTRAINT service_dept_key PRIMARY KEY(service_dept_code));
+
+/* create priority */
+
+CREATE TABLE priority(
+priority_id NUMBER(5) NOT NULL,
+type VARCHAR2(50) NOT NULL,
+CONSTRAINT priority_key PRIMARY KEY (priority_id));
+
+CREATE SEQUENCE priority_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER priority_trigger
+BEFORE INSERT ON PRIORITY
+FOR EACH ROW
+BEGIN
+  SELECT priority_seq.NEXTVAL
+  INTO   :new.priority_id
+  FROM   dual;
+END;
+/
+
+
+
+
+

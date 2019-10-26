@@ -69,3 +69,7 @@ values (1,2,TO_DATE('2019/10/20', 'yyyy/mm/dd'), TO_DATE('2020/10/25', 'yyyy/mm/
 
 insert into service_department(SERVICE_DEPT_CODE, NAME)
 values ('GY-OB', 'GYNEC AND OBS');
+
+insert into priority(type) values('HIGH');
+insert into priority(type) values('NORMAL');
+insert into priority(type) values('QUARANTINE');

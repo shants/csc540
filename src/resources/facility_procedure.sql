@@ -47,5 +47,6 @@ DBMS_OUTPUT.PUT_LINE('Facility_id:' || to_char(v_facility_id));
 
 create_new_patient_tables(v_facility_id);
 create_new_staff_tables(v_facility_id);
+create_new_visit(v_facility_id);
 end create_new_facility;
 /

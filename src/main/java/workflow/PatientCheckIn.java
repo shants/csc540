@@ -4,7 +4,7 @@ import Utils.MessageUtils;
 import Utils.IScreen;
 import db_files.FacilityCRUD;
 import db_files.SymptomCRUD;
-import entities.MedicalFacility;
+import entities.Facility;
 import entities.Symptom;
 
 import java.net.StandardSocketOptions;

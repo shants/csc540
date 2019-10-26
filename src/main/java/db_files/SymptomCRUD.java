@@ -1,7 +1,7 @@
 package db_files;
 
 import config.DatabaseConnection;
-import entities.MedicalFacility;
+import entities.Facility;
 import entities.Symptom;
 
 import java.sql.Connection;

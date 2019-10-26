@@ -1,13 +1,11 @@
 package db_files;
-
 import config.DatabaseConnection;
-
 import java.sql.*;
 
 public class PatientsCRUD
 {
     public static void checkIfPatientTableExistsElseCreate(int facility_id){
-        Connection connection = new DatabaseConnection().getConnection();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
         Statement statement;
         String patient_table_name = "patient_"+ facility_id;
         String query = "SELECT table_name from user_tables where table_name = '"+patient_table_name+"'";

@@ -1,7 +1,7 @@
 package db_files;
 
 import config.DatabaseConnection;
-import entities.MedicalFacility;
+import entities.Facility;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -35,15 +35,15 @@ public class FacilityCRUD {
         }
     }
 
-    public static ArrayList<MedicalFacility> read() {
+    public static ArrayList<Facility> read() {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "select  *  from facility";
-        ArrayList<MedicalFacility> lstFacility = new ArrayList<MedicalFacility>();
+        ArrayList<Facility> lstFacility = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
-                MedicalFacility m = new MedicalFacility();
+                Facility m = new Facility();
                 m.setName(rs.getString("FACILITY_NAME"));
                 m.setId(rs.getInt("FACILITY_ID"));
                 lstFacility.add(m);

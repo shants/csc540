@@ -1,0 +1,8 @@
+-- pdc file
+@delete_all.sql;
+@tables.sql;
+@patient_procedure.sql;
+@staff_procedure.sql;
+@visit_procedure.sql;
+@facility_procedure.sql;
+@dummy_insertions.sql;

@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class BaseCRUD {
     public static void executeSingleUpdate(String query) throws SQLException {
-        Connection connection = new DatabaseConnection().getConnection();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
         Statement statement;
         try {
             statement = connection.createStatement();
