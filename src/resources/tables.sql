@@ -285,7 +285,33 @@ EXECUTE IMMEDIATE new_query;
 end create_new_staff_tables;
 /
 
+/*
+create facility_certification table
+*/
+
+
+CREATE TABLE facility_certificates(
+facility_id NUMBER(10) NOT NULL,
+certification_id NUMBER(10) NOT NULL,
+start_date DATE NOT NULL ,
+end_date DATE NOT NULL
+);
+ALTER TABLE facility_certificates ADD (
+CONSTRAINT facility_certification_key PRIMARY KEY(facility_id, certification_id),
+CONSTRAINT fk_fac_cert_facility_id FOREIGN KEY (facility_id) REFERENCES facility(facility_id),
+CONSTRAINT fk_fac_cert_certification_id FOREIGN KEY (certification_id)
+REFERENCES certification(certification_id));
 
 
 
+/*
+create service_department
+ */
 
+CREATE TABLE service_department(
+service_dept_code VARCHAR2(5) NOT NULL,
+name VARCHAR2(50) NOT NULL
+);
+
+ALTER TABLE service_department ADD (
+CONSTRAINT service_dept_key PRIMARY KEY(service_dept_code));

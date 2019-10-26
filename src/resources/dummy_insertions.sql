@@ -64,3 +64,12 @@ execute create_new_staff_tables(1);
 insert into staff_1(name, hire_date, designation, type_id) values ('dr A', TO_DATE('2019/10/26', 'yyyy/mm/dd'), 'Admin', 1);
 insert into staff_1(name, hire_date, designation, type_id) values ('dr B', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'vp', 1);
 insert into staff_1(name, hire_date, designation, type_id) values ('abc', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'office', 2);
+
+insert into facility_certificates(facility_id, certification_id, start_date, end_date)
+values (1,1,TO_DATE('2019/10/26', 'yyyy/mm/dd'), TO_DATE('2029/10/25', 'yyyy/mm/dd'));
+
+insert into facility_certificates(facility_id, certification_id, start_date, end_date)
+values (1,2,TO_DATE('2019/10/20', 'yyyy/mm/dd'), TO_DATE('2020/10/25', 'yyyy/mm/dd'));
+
+insert into service_department(SERVICE_DEPT_CODE, NAME)
+values ('GY-OB', 'GYNEC AND OBS');
