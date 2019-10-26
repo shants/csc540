@@ -124,7 +124,6 @@ street_id NUMBER(10) NOT NULL,
 city_id NUMBER(10) NOT NULL,
 state_id NUMBER(10) NOT NULL,
 country_id NUMBER(10) NOT NULL,
-facility_id NUMBER(10) NOT NULL,
 CONSTRAINT facility_address_key PRIMARY KEY (facility_address_id),
 CONSTRAINT fk_fa_street FOREIGN KEY (street_id) REFERENCES street(street_id),
 CONSTRAINT fk_fa_city FOREIGN KEY (city_id) REFERENCES city(city_id),
@@ -145,33 +144,29 @@ BEGIN
 END;
 /
 
-CREATE TABLE medical_facility(
+CREATE TABLE facility(
 facility_id NUMBER(10) NOT NULL,
 facility_name VARCHAR2(50) NOT NULL,
 capacity NUMBER(20) NOT NULL,
 classification_id NUMBER(10) NOT NULL,
 facility_address_id NUMBER (10) NOT NULL,
 CONSTRAINT facility_key PRIMARY KEY (facility_id),
-CONSTRAINT fk_mf_cs FOREIGN KEY (classification_id) REFERENCES facility_classification(classification_id),
-CONSTRAINT fk_mf_fa FOREIGN KEY (facility_address_id) REFERENCES facility_address(facility_address_id)
+CONSTRAINT fk_f_cs FOREIGN KEY (classification_id) REFERENCES facility_classification(classification_id),
+CONSTRAINT fk_f_fa FOREIGN KEY (facility_address_id) REFERENCES facility_address(facility_address_id)
 );
 
-CREATE SEQUENCE medical_facility_seq START WITH 1;
+CREATE SEQUENCE facility_seq START WITH 1;
 
-CREATE OR REPLACE TRIGGER medical_facility_trigger
-BEFORE INSERT ON medical_facility
+CREATE OR REPLACE TRIGGER facility_trigger
+BEFORE INSERT ON facility
 FOR EACH ROW
 
 BEGIN
-  SELECT medical_facility_seq.NEXTVAL
+  SELECT facility_seq.NEXTVAL
   INTO   :new.facility_id
   FROM   dual;
 END;
 /
-
-ALTER TABLE facility_address ADD (
-CONSTRAINT fk_fa_mf FOREIGN KEY (facility_id) REFERENCES medical_facility(facility_id) ON DELETE CASCADE
-);
 
 CREATE OR REPLACE PROCEDURE create_new_patient_tables
 (facility_id number)

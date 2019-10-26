@@ -1,0 +1,17 @@
+drop table facility_address cascade constraints;
+drop table facility cascade constraints;
+drop table facility_classification cascade constraints;
+drop table street cascade constraints;
+drop table city cascade constraints;
+drop table state cascade constraints;
+drop table country cascade constraints;
+drop table certification cascade constraints;
+
+drop sequence fc_cls_seq;
+drop sequence street_seq;
+drop sequence city_seq;
+drop sequence state_seq;
+drop sequence country_seq;
+drop sequence certification_seq;
+drop sequence facility_address_seq;
+drop sequence facility_seq;
