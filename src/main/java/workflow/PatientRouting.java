@@ -3,8 +3,11 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.MessageUtils;
 import Utils.IScreen;
+import db_files.FacilityCRUD;
+import entities.MedicalFacility;
 
 import java.net.StandardSocketOptions;
+import java.util.ArrayList;
 
 public class PatientRouting implements IScreen {
     public void run() {
@@ -17,6 +20,11 @@ public class PatientRouting implements IScreen {
             switch (o) {
                 case PATIENT_ROUTING_CHECKIN:
                     System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
+                    ArrayList<MedicalFacility> facilityList = FacilityCRUD.read();
+                    for (int i=0; i < facilityList.size(); i++){
+                        System.out.println(facilityList.get(i).getName() + " "  +
+                                facilityList.get(i).getId());
+                    }
                     break;
                 case PATIENT_ROUTING_CHECK_OUT:
                     System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
