@@ -1,6 +1,6 @@
 /* create new visit_<facility_id> table */
 
-CREATE OR REPLACE PROCEDURE create_new_visit
+CREATE OR REPLACE PROCEDURE create_new_visit_tables
 (facility_id number)
 AUTHID CURRENT_USER IS
 new_query varchar2(5000);
@@ -30,5 +30,5 @@ BEGIN
 END;';
 EXECUTE IMMEDIATE new_query;
 
-end create_new_visit;
+end create_new_visit_tables;
 /

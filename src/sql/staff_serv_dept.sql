@@ -15,7 +15,8 @@ service_dept_code VARCHAR2(5) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 is_primary char(1) NOT NULL,
 CONSTRAINT staff_serv_dept_'|| to_char(facility_id) || '_key PRIMARY KEY (service_dept_code,staff_id),
-CONSTRAINT fk_staff_serv_dept_'|| to_char(facility_id) || ' FOREIGN KEY (staff_id) REFERENCES staff_' || to_char(facility_id) || '(staff_id)
+CONSTRAINT fk_staff_serv_dept_'|| to_char(facility_id) || ' FOREIGN KEY (staff_id) REFERENCES staff_' || to_char(facility_id) || '(staff_id),
+CONSTRAINT fk_st_serv_dept_'|| to_char(facility_id) || ' FOREIGN KEY (service_dept_code) REFERENCES service_department(service_dept_code)
 )';
 
 EXECUTE IMMEDIATE new_query;
