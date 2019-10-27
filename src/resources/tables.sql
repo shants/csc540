@@ -241,7 +241,14 @@ BEGIN
 END;
 /
 
+/* body part */
+CREATE TABLE body_part(
+body_part_code VARCHAR2(5) NOT NULL,
+name VARCHAR2(50) NOT NULL
+);
 
+ALTER TABLE body_part ADD (
+CONSTRAINT body_part_key PRIMARY KEY(body_part_code));
 
 
 
