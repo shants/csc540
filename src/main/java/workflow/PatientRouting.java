@@ -1,23 +1,21 @@
 package workflow;
-//import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
 import Utils.CommandLineUtils;
 import Utils.MessageUtils;
 import Utils.IScreen;
 import db_files.FacilityCRUD;
 import entities.Facility;
 
-import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 
 public class PatientRouting implements IScreen {
     public void run() {
         display();
         String opt = CommandLineUtils.ReadOption();
-        int option = 1;
+        int option;
         try {
             option = Integer.parseInt(opt);
-            MessageUtils.PATIENT_ROUTING o = MessageUtils.PATIENT_ROUTING.values()[option];
-            switch (o) {
+            MessageUtils.PATIENT_ROUTING options = MessageUtils.PATIENT_ROUTING.values()[option];
+            switch (options) {
                 case PATIENT_ROUTING_CHECKIN:
                     //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
                     ArrayList<Facility> facilityList = FacilityCRUD.read();
@@ -49,7 +47,7 @@ public class PatientRouting implements IScreen {
             }
 
         } catch (NumberFormatException e) {
-
+            System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
         }
 
         }

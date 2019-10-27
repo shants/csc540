@@ -1,9 +1,10 @@
 package workflow;
 
-import db_files.FacilityCRUD;
+import Utils.IScreen;
 
 public class MainFlow{
     public static void main(String[] args){
-        FacilityCRUD.callPatientsTableProcedure(8888);
+        IScreen scr = new Home();
+        scr.run();
     }
 }
