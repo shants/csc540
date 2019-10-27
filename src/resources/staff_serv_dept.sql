@@ -1,5 +1,8 @@
 /* create staff_serv_dept_<facility_id> */
 
+/*
+oracle does not have bool, so use char(1)
+*/
 
 CREATE OR REPLACE PROCEDURE create_staff_serv_dept
 (facility_id number)

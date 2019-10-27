@@ -7,4 +7,5 @@
 @facility_procedure.sql;
 @facilities_service_dept.sql
 @staff_serv_dept.sql
+@service_dept_specification.sql
 @dummy_insertions.sql;
