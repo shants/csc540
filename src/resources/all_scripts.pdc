@@ -6,4 +6,5 @@
 @visit_procedure.sql;
 @facility_procedure.sql;
 @facilities_service_dept.sql
+@staff_serv_dept.sql
 @dummy_insertions.sql;
