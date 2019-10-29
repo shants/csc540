@@ -45,7 +45,7 @@ INSERT INTO CITY(city_name) VALUES('LONDON');
 INSERT INTO STATE(state_name) VALUES('LONDON');
 INSERT INTO COUNTRY(country_name) VALUES('UK');
 
-execute create_new_facility('Baker Street','London', 'London', 'UK', '221B', 'SHANTS HOSPITAL','PRIMARY', 200);
+execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS HOSPITAL','PRIMARY', 200);
 
 INSERT INTO SYMPTOM(symptom_code, symptom_name) values (1,'PAIN');
 INSERT INTO SYMPTOM(symptom_code, symptom_name) values (2, 'FEVER');
@@ -73,3 +73,5 @@ values ('GY-OB', 'GYNEC AND OBS');
 insert into priority(type) values('HIGH');
 insert into priority(type) values('NORMAL');
 insert into priority(type) values('QUARANTINE');
+
+execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','Shantanu', 'Sharma','2019/10/24',9193333333)

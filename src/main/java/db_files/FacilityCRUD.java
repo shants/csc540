@@ -1,37 +1,31 @@
 package db_files;
 
 import config.DatabaseConnection;
+import entities.Address;
 import entities.Facility;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 public class FacilityCRUD {
-    public static void callPatientsTableProcedure(int facility_id) {
+    public static void createNewFacility(Facility facility, Address address) {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         CallableStatement statement;
-        String procedure_call = "{call create_new_patient_tables(?)}";
+        String procedure_call = "{call create_new_facility(?,?,?,?,?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
-            statement.setInt(1,facility_id);
+            statement.setString(1,address.getStreetName());
+            statement.setString(2,address.getCityName());
+            statement.setString(3,address.getStateName());
+            statement.setString(4,address.getCountryName());
+            statement.setString(5,address.getStreetNumber());
+            statement.setString(6,facility.getName());
+            statement.setString(7,facility.getClassification());
+            statement.setInt(8, facility.getCapacity());
             statement.execute();
-            System.out.println("Procedure to create new patients' tables executed.");
+            System.out.println("New facility created");
         } catch (SQLException e) {
-            System.out.println("Unable to run patient's table procedure:"+e.getMessage());
-        }
-    }
-
-    public static void createNewFacility() {
-        Connection connection = DatabaseConnection.getInstance().getConnection();
-        String new_facility = "INSERT INTO MEDICAL_FACILITY (name, capacity, classification_id, facility_address_id)"+
-                " VALUES(?,?,?,?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(new_facility,
-                    Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1,"");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Unable to create new facility:"+e.getMessage());
         }
     }
 
@@ -52,7 +46,6 @@ public class FacilityCRUD {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return lstFacility;
     }
 }

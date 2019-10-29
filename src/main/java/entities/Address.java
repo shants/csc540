@@ -1,22 +1,22 @@
 package entities;
 
 public class Address {
-    private String streetNumber, streetName, cityName, stateName, CountryName;
+    private String streetNumber, streetName, cityName, stateName, countryName;
     private int id;
 
     public Address(String streetNumber, String streetName, String cityName, String stateName, String countryName, int id){
-        this.cityName = cityName;
-        this.CountryName = countryName;
-        this.stateName = stateName;
-        this.streetName = streetName;
-        this.streetNumber = streetNumber;
+        this.cityName = cityName.toUpperCase();
+        this.countryName = countryName.toUpperCase();
+        this.stateName = stateName.toUpperCase();
+        this.streetName = streetName.toUpperCase();
+        this.streetNumber = streetNumber.toUpperCase();
         this.id = id;
     }
 
     public Address(){}
 
     public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
+        this.streetNumber = streetNumber.toUpperCase();
     }
 
     public void setId(int id) {
@@ -28,38 +28,38 @@ public class Address {
     }
 
     public void setCityName(String cityName) {
-        this.cityName = cityName;
+        this.cityName = cityName.toUpperCase();
     }
 
     public void setCountryName(String countryName) {
-        CountryName = countryName;
+        this.countryName = countryName.toUpperCase();
     }
 
     public void setStateName(String stateName) {
-        this.stateName = stateName;
+        this.stateName = stateName.toUpperCase();
     }
 
     public void setStreetName(String streetName) {
-        this.streetName = streetName;
+        this.streetName = streetName.toUpperCase();
     }
 
     public String getStreetNumber() {
-        return streetNumber;
+        return this.streetNumber;
     }
 
     public String getCityName() {
-        return cityName;
+        return this.cityName;
     }
 
     public String getStateName() {
-        return stateName;
+        return this.stateName;
     }
 
     public String getCountryName() {
-        return CountryName;
+        return this.countryName;
     }
 
     public String getStreetName() {
-        return streetName;
+        return this.streetName;
     }
 }
