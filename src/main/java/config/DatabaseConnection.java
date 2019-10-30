@@ -33,7 +33,7 @@ public class DatabaseConnection
         }
     }
 
-    public DatabaseConnection(){
+    private DatabaseConnection(){
         try {
             InputStream input = new FileInputStream("src/resources/db.properties");
             Properties props = new Properties();

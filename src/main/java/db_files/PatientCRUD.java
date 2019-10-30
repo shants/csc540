@@ -5,7 +5,7 @@ import entities.Patient;
 
 import java.sql.*;
 
-public class PatientsCRUD
+public class PatientCRUD
 {
     public static void signUp(int facility_id, Patient patient, Address address) {
         Connection connection = DatabaseConnection.getInstance().getConnection();

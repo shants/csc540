@@ -1,6 +1,6 @@
 package Utils;
 
-public interface IScreen {
-    public void display();
-    public void run();
+public abstract class IScreen {
+    public abstract void display();
+    public abstract void run();
 }

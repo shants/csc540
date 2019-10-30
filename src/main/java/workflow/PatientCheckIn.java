@@ -7,10 +7,9 @@ import db_files.SymptomCRUD;
 import entities.Facility;
 import entities.Symptom;
 
-import java.net.StandardSocketOptions;
 import java.util.ArrayList;
 
-public class PatientCheckIn implements  IScreen {
+public class PatientCheckIn extends  IScreen {
 
     public void run(){
         display();

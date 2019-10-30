@@ -7,10 +7,10 @@ import entities.Facility;
 
 import java.util.ArrayList;
 
-public class PatientRouting implements IScreen {
+public class PatientRouting extends IScreen {
     public void run() {
         display();
-        String opt = CommandLineUtils.ReadOption();
+        String opt = CommandLineUtils.ReadInput();
         int option;
         try {
             option = Integer.parseInt(opt);
@@ -24,7 +24,7 @@ public class PatientRouting implements IScreen {
                                 facilityList.get(i).getId());
                     }
                     System.out.println(MessageUtils.PATIENT_FACILITY_CHECK_IN);
-                    opt = CommandLineUtils.ReadOption();
+                    opt = CommandLineUtils.ReadInput();
                     option = Integer.parseInt(opt);
                     // if valid option and not checked-in
                     if (true) {
