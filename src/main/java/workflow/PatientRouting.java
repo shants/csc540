@@ -10,47 +10,59 @@ import java.util.ArrayList;
 public class PatientRouting extends IScreen {
     public void run() {
         display();
-        String opt = CommandLineUtils.ReadInput();
-        int option;
-        try {
-            option = Integer.parseInt(opt);
-            MessageUtils.PATIENT_ROUTING options = MessageUtils.PATIENT_ROUTING.values()[option];
-            switch (options) {
-                case PATIENT_ROUTING_CHECKIN:
-                    //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
-                    ArrayList<Facility> facilityList = FacilityCRUD.readAll();
-                    for (int i=0; i < facilityList.size(); i++){
-                        System.out.println(facilityList.get(i).getName() + " "  +
-                                facilityList.get(i).getId());
-                    }
-                    System.out.println(MessageUtils.PATIENT_FACILITY_CHECK_IN);
-                    opt = CommandLineUtils.ReadInput();
-                    option = Integer.parseInt(opt);
-                    // if valid option and not checked-in
-                    if (true) {
-                        IScreen scr = new PatientCheckIn();
-                        scr.run();
+        boolean continue_loop = true;
+        while (continue_loop) {
+            String opt = CommandLineUtils.ReadInput();
+            int option;
+            try {
+                option = Integer.parseInt(opt);
+                MessageUtils.PATIENT_ROUTING options = MessageUtils.PATIENT_ROUTING.values()[option];
+                System.out.println("Please enter a valid option");
+                switch (options) {
+                    case PATIENT_ROUTING_CHECKIN:
+                        //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
+                        ArrayList<Facility> facilityList = FacilityCRUD.readAll();
+                        for (int i = 0; i < facilityList.size(); i++) {
+                            System.out.println(facilityList.get(i).getName() + " " +
+                                    facilityList.get(i).getId());
+                        }
+                        System.out.println(MessageUtils.PATIENT_FACILITY_CHECK_IN);
+                        opt = CommandLineUtils.ReadInput();
+                        option = Integer.parseInt(opt);
+                        // if valid option and not checked-in
+                        if (true) {
+                            IScreen scr = new PatientCheckIn();
+                            System.out.println("Patient Checkin");
+                            scr.run();
+                            continue_loop = false;
 
-                    }else{
-                        // already checked in
-                    }
-                    break;
-                case PATIENT_ROUTING_CHECK_OUT:
-                    System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
-                    break;
-                case PATIENT_ROUTING_GO_BACK:
-                    System.out.println(MessageUtils.GLOBAL_GO_BACK);
-                    break;
-                default:
-                    System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
+                        } else {
+                            // already checked in
+                        }
+                        break;
+                    case PATIENT_ROUTING_CHECK_OUT:
+                        System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+                        break;
+                    case PATIENT_ROUTING_GO_BACK:
+                        System.out.println(MessageUtils.GLOBAL_GO_BACK);
+                        break;
+                    default:
+                        System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
+
+                }
+
+            } catch (NumberFormatException  e) {
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+            }catch (Exception e){
+                // debug
+                System.out.println(e.getMessage());
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
 
             }
 
-        } catch (NumberFormatException e) {
-            System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
         }
+    }
 
-        }
     public void display(){
         System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECKIN.ordinal()
                + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_CHECK_IN);
