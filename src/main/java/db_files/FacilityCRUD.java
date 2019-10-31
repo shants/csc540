@@ -1,5 +1,8 @@
 package db_files;
 
+import Utils.CommandLineUtils;
+import Utils.MessageUtils;
+import Utils.ViewerContext;
 import config.DatabaseConnection;
 import entities.Address;
 import entities.Facility;
@@ -47,5 +50,31 @@ public class FacilityCRUD {
             e.printStackTrace();
         }
         return lstFacility;
+    }
+
+    public static void selectFacility() {
+        boolean invalid;
+        ArrayList<Facility> facilityList = FacilityCRUD.readAll();
+        do {
+            invalid = false;
+            System.out.println(MessageUtils.GLOBAL_SELECT_FACILITY);
+            for (int i = 0; i < facilityList.size(); i++) {
+                System.out.println(i + MessageUtils.GLOBAL_DELIMITER + facilityList.get(i).getName());
+            }
+            System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
+            String opt = CommandLineUtils.ReadInput();
+            try {
+                int option = Integer.parseInt(opt);
+                if (option >= facilityList.size()) {
+                    System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                    invalid = true;
+                } else {
+                    ViewerContext.getInstance().addValue(facilityList.get(option).getId(), ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                invalid = true;
+            }
+        }while(invalid);
     }
 }

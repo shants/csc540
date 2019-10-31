@@ -3,10 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
-import Utils.ViewerContext;
 import db_files.FacilityCRUD;
-import entities.Facility;
-import java.util.ArrayList;
 
 public class Home extends IScreen {
 
@@ -23,32 +20,6 @@ public class Home extends IScreen {
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
 
-    public void selectFacility() {
-        boolean invalid;
-        ArrayList<Facility> facilityList = FacilityCRUD.readAll();
-        do {
-            invalid = false;
-            System.out.println(MessageUtils.GLOBAL_SELECT_FACILITY);
-            for (int i = 0; i < facilityList.size(); i++) {
-                System.out.println(i + MessageUtils.GLOBAL_DELIMITER + facilityList.get(i).getName());
-            }
-            System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
-            String opt = CommandLineUtils.ReadInput();
-            try {
-                int option = Integer.parseInt(opt);
-                if (option >= facilityList.size()) {
-                    System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
-                    invalid = true;
-                } else {
-                    ViewerContext.getInstance().addValue(facilityList.get(option).getId(), ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
-                invalid = true;
-            }
-        }while(invalid);
-    }
-
     public void run() {
         boolean invalidOption;
         do {
@@ -62,12 +33,12 @@ public class Home extends IScreen {
                 IScreen scr;
                 switch (options) {
                     case HOME_SIGN_IN:
-                        selectFacility();
+                        FacilityCRUD.selectFacility();
                         scr = new SignIn();
                         scr.run();
                         break;
                     case HOME_SIGN_UP:
-                        selectFacility();
+                        FacilityCRUD.selectFacility();
                         scr = new SignUp();
                         scr.run();
                         break;
