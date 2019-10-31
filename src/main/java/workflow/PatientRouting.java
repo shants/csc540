@@ -39,7 +39,7 @@ public class PatientRouting extends IScreen {
                     System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
                     break;
                 case PATIENT_ROUTING_GO_BACK:
-                    System.out.println(MessageUtils.PATIENT_ROUTING_GO_BACK);
+                    System.out.println(MessageUtils.GLOBAL_GO_BACK);
                     break;
                 default:
                     System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
@@ -57,7 +57,7 @@ public class PatientRouting extends IScreen {
         System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECK_OUT.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
         System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_GO_BACK.ordinal()
-                + MessageUtils.GLOBAL_SPACE + MessageUtils.PATIENT_ROUTING_GO_BACK);
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_GO_BACK);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
 

@@ -3,7 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
-import entities.ViewerContext;
+import Utils.ViewerContext;
 
 public class Home extends IScreen {
 
@@ -21,33 +21,39 @@ public class Home extends IScreen {
     }
 
     public void run() {
-        display();
-        String opt = CommandLineUtils.ReadInput();
-        int option;
-        try {
-            option = Integer.parseInt(opt);
-            MessageUtils.HOME options = MessageUtils.HOME.values()[option];
-            IScreen scr;
-            switch(options) {
-                case HOME_SIGN_IN:
-                    scr = new SignIn();
-                    scr.run();
-                    break;
-                case HOME_SIGN_UP:
-                    ViewerContext.getInstance().addValue(1, ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
-                    scr = new SignUp();
-                    scr.run();
-                    break;
-                case HOME_DEMO_QUERIES:
-                    break;
-                case HOME_EXIT:
-                    return;
-                default:
-                    break;
+        boolean invalidOption;
+        do {
+            invalidOption = false;
+            int option;
+            display();
+            String opt = CommandLineUtils.ReadInput();
+            try {
+                option = Integer.parseInt(opt);
+                MessageUtils.HOME options = MessageUtils.HOME.values()[option];
+                IScreen scr;
+                switch (options) {
+                    case HOME_SIGN_IN:
+                        ViewerContext.getInstance().addValue(1, ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
+                        scr = new SignIn();
+                        scr.run();
+                        break;
+                    case HOME_SIGN_UP:
+                        ViewerContext.getInstance().addValue(1, ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
+                        scr = new SignUp();
+                        scr.run();
+                        break;
+                    case HOME_DEMO_QUERIES:
+                        break;
+                    case HOME_EXIT:
+                        return;
+                    default:
+                        invalidOption = true;
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                invalidOption = true;
             }
-        }catch (NumberFormatException e){
-            System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
-            run();
-        }
+        } while (invalidOption);
     }
 }

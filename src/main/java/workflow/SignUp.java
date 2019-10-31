@@ -3,10 +3,10 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 import db_files.PatientCRUD;
 import entities.Address;
 import entities.Patient;
-import entities.ViewerContext;
 
 public class SignUp extends IScreen {
     private Patient patient;

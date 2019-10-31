@@ -13,6 +13,7 @@ public class MessageUtils {
     public static String GLOBAL_NEWLINE = "\n";
     public static String GLOBAL_ENTER_OPTION = "Enter Option";
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
+    public static String GLOBAL_GO_BACK ="Go Back";
     public static String HOME_DEMO_QUERIES = "Demo Queries";
     public static String HOME_EXIT= "Exit";
     public static String HOME_SIGN_IN = "Sign In";
@@ -20,11 +21,13 @@ public class MessageUtils {
     public static String PATIENT_FACILITY_CHECK_IN = "Enter Id to Check-in";
     public static String PATIENT_ROUTING_CHECK_IN="Check In";
     public static String PATIENT_ROUTING_CHECK_OUT_ACK="Check Out Acknowledgement";
-    public static String PATIENT_ROUTING_GO_BACK="Go Back";
     public static String PATIENT_SIGNUP_FIRSTNAME = "Enter first name";
     public static String PATIENT_SIGNUP_LASTNAME = "Enter last name";
     public static String PATIENT_SIGNUP_DOB = "Enter date of birth (yyyy/mm/dd)";
     public static String PATIENT_SIGNUP_PHONE_NUM = "Enter phone number";
+    public static String PATIENT_SIGNIN_LASTNAME = "Enter last name";
+    public static String PATIENT_SIGNIN_DOB = "Enter date of birth (yyyy/mm/dd)";
+    public static String PATIENT_SIGNIN_CITY = "Enter city of Address";
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -35,7 +38,11 @@ public class MessageUtils {
     }
 
     public enum PATIENT_SIGNUP {
-        PATIENT_SIGNUP_FIRSTNAME, PATIENT_SIGNUP_LASTNAME, PATIENT_SIGNUP_DOB, PATIENT_SIGNUP_PHONE_NUM
+        PATIENT_SIGNUP_START, PATIENT_SIGNUP_GO_BACK
+    }
+
+    public enum PATIENT_SIGNIN {
+        PATIENT_SIGNIN_START, PATIENT_SIGNIN_GO_BACK
     }
 
     public enum HOME {

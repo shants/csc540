@@ -1,6 +1,4 @@
-package entities;
-
-import Utils.StackFrame;
+package Utils;
 
 import java.util.HashMap;
 
