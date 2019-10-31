@@ -18,7 +18,7 @@ public class PatientRouting extends IScreen {
             switch (options) {
                 case PATIENT_ROUTING_CHECKIN:
                     //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
-                    ArrayList<Facility> facilityList = FacilityCRUD.read();
+                    ArrayList<Facility> facilityList = FacilityCRUD.readAll();
                     for (int i=0; i < facilityList.size(); i++){
                         System.out.println(facilityList.get(i).getName() + " "  +
                                 facilityList.get(i).getId());

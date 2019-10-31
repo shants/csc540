@@ -29,7 +29,7 @@ public class FacilityCRUD {
         }
     }
 
-    public static ArrayList<Facility> read() {
+    public static ArrayList<Facility> readAll() {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "select  *  from facility";
         ArrayList<Facility> lstFacility = new ArrayList<>();

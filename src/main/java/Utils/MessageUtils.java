@@ -12,6 +12,7 @@ public class MessageUtils {
     public static String GLOBAL_UNABLE_TO_HANDLE = "Unable to handle";
     public static String GLOBAL_NEWLINE = "\n";
     public static String GLOBAL_ENTER_OPTION = "Enter Option";
+    public static String GLOBAL_SELECT_FACILITY = "Select facility from below";
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
     public static String GLOBAL_GO_BACK ="Go Back";
     public static String HOME_DEMO_QUERIES = "Demo Queries";
