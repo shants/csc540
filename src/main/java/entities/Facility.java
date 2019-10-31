@@ -7,8 +7,8 @@ public class Facility {
 
 
     public Facility(String name, String classification, int capacity, Address address, int id){
-        this.name = name;
-        this.classification = classification;
+        this.name = name.toUpperCase();
+        this.classification = classification.toUpperCase();
         this.capacity = capacity;
         this.address = address;
         this.id = id;
@@ -31,10 +31,10 @@ public class Facility {
     public int getCapacity() { return this.capacity; }
 
     public void setName(String _name){
-        this.name = _name;
+        this.name = _name.toUpperCase();
     }
     public void setClassification(String _classification){
-         this.classification = _classification;
+         this.classification = _classification.toUpperCase();
     }
     public void setId(int _id) { this.id = _id;}
     public void setCapacity(int capacity) { this.capacity = capacity;}

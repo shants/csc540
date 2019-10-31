@@ -9,8 +9,8 @@ public class Patient {
                    String lastName, String dateOfBirth, Address address, int patientId){
         this.facilityId = facilityId;
         this.phoneNumber = phoneNumber;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = firstName.toUpperCase();
+        this.lastName = lastName.toUpperCase();
         this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.id = patientId;
@@ -39,7 +39,7 @@ public class Patient {
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.toUpperCase();
     }
 
     public void setPhoneNumber(int phoneNumber) {
@@ -47,7 +47,7 @@ public class Patient {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.toUpperCase();
     }
 
     public void setDateOfBirth(String dateOfBirth) {
