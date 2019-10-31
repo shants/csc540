@@ -5,7 +5,11 @@
 @staff_procedure.sql;
 @visit_procedure.sql;
 @facility_procedure.sql;
-@facilities_service_dept.sql
-@staff_serv_dept.sql
-@service_dept_specification.sql
+@facilities_service_dept.sql;
+@staff_serv_dept.sql;
+@service_dept_specification.sql;
+@symptoms.sql;
+@patient_symptoms.sql;
+@rules_procedure.sql;
+@report_procedure.sql;
 @dummy_insertions.sql;
