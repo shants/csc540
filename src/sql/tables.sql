@@ -169,7 +169,7 @@ END;
 /
 
 CREATE TABLE symptom(
-symptom_code NUMBER(10) NOT NULL,
+symptom_code VARCHAR2(20) NOT NULL,
 symptom_name VARCHAR2(50) NOT NULL
 );
 ALTER TABLE symptom ADD (
