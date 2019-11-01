@@ -71,7 +71,7 @@ public class FacilityCRUD {
                 } else {
                     ViewerContext.getInstance().addValue(facilityList.get(option).getId(), ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
                 }
-            } catch (NumberFormatException e) {
+            } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalid = true;
             }

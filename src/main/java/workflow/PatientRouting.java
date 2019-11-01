@@ -51,8 +51,6 @@ public class PatientRouting extends IScreen {
 
                 }
 
-            } catch (NumberFormatException  e) {
-                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
             }catch (Exception e){
                 // debug
                 System.out.println(e.getMessage());

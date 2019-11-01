@@ -58,7 +58,7 @@ public class SignIn extends IScreen {
                             invalidOption = true;
                             break;
                     }
-                } catch (NumberFormatException e) {
+                } catch (Exception e) {
                     System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                     invalidOption = true;
                 }
