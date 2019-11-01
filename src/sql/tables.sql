@@ -175,6 +175,18 @@ symptom_name VARCHAR2(50) NOT NULL
 ALTER TABLE symptom ADD (
 CONSTRAINT symptom_key PRIMARY KEY(symptom_code));
 
+CREATE SEQUENCE symptom_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER symptom_trigger
+BEFORE INSERT ON SYMPTOM
+FOR EACH ROW
+BEGIN
+  SELECT  'SYM' || to_char(symptom_seq.NEXTVAL)
+  INTO   :new.symptom_code
+  FROM   dual;
+END;
+/
+
 CREATE TABLE staff_department_type(
 type_id NUMBER(10) NOT NULL,
 type_name VARCHAR2(50) NOT NULL
@@ -243,12 +255,30 @@ END;
 
 /* body part */
 CREATE TABLE body_part(
-body_part_code VARCHAR2(5) NOT NULL,
-name VARCHAR2(50) NOT NULL
+body_part_code VARCHAR2(20) NOT NULL,
+name VARCHAR2(50)
 );
 
 ALTER TABLE body_part ADD (
 CONSTRAINT body_part_key PRIMARY KEY(body_part_code));
 
+CREATE SEQUENCE bp_seq START WITH 1;
 
+CREATE OR REPLACE TRIGGER bp_trigger
+BEFORE INSERT ON BODY_PART
+FOR EACH ROW
+BEGIN
+  SELECT  'BP' || to_char(bp_seq.NEXTVAL)
+  INTO   :new.body_part_code
+  FROM   dual;
+END;
+/
+
+CREATE TABLE symptom_body_part(
+symptom_code VARCHAR2(20) NOT NULL,
+body_part_code VARCHAR2(10) NOT NULL,
+CONSTRAINT symptom_body_part_key PRIMARY KEY(symptom_code,body_part_code),
+CONSTRAINT fk_symp_bp_1_key FOREIGN KEY (symptom_code) REFERENCES symptom(symptom_code),
+CONSTRAINT fk_symp_bp_2_key FOREIGN KEY (body_part_code) REFERENCES body_part(body_part_code)
+);
 

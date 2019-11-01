@@ -72,13 +72,23 @@ insert into priority(type) values('NORMAL');
 insert into priority(type) values('QUARANTINE');
 
 execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','SHANTANU', 'SHARMA','2019/10/24',9193333333)
-insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('SYM01','COUGH');
-insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('SYM02','FEVER');
-insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('SYM03','HEADACHE');
+insert into symptom(SYMPTOM_NAME) values('COUGH');
+insert into symptom(SYMPTOM_NAME) values('FEVER');
+insert into symptom(SYMPTOM_NAME) values('HEADACHE');
 
-insert into symptom_severity_1(type, symptom_code, staff_id) values('RANGE', 'SYM01', 1);
-insert into symptom_severity_1(type, symptom_code, staff_id) values('ENUM', 'SYM02', 1);
-insert into symptom_severity_1(type, symptom_code, staff_id) values('ENUM', 'SYM03', 2);
+insert into body_part(name) values('NECK');
+insert into body_part(name) values('HEAD');
+insert into body_part(name) values('HAND');
+insert into body_part(name) values('BODY');
+insert into body_part(name) values('LEG');
+
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM1','BP1');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM3','BP3');
+
+insert into symptom_severity_1(type, symptom_code, staff_id) values('RANGE', 'SYM1', 1);
+insert into symptom_severity_1(type, symptom_code, staff_id) values('ENUM', 'SYM2', 1);
+insert into symptom_severity_1(type, symptom_code, staff_id) values('ENUM', 'SYM3', 2);
 
 insert into severity_scale_1(symptom_severity_id,index_number,value) values(1,1,'1');
 insert into severity_scale_1(symptom_severity_id,index_number,value) values(1,2,'2');
@@ -95,9 +105,9 @@ insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,3,
 insert into visit_1(patient_id) values(1);
 
 insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
-values(1, 'SYM01', '2', 'POST EATING SWEETS', 'N', 2);
+values(1, 'SYM1', '2', 'POST EATING SWEETS', 'N', 2);
 insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
-values(1, 'SYM02', 'MID', 'POST EATING SWEETS', 'N', 2);
+values(1, 'SYM2', 'MID', 'POST EATING SWEETS', 'N', 2);
 
 update visit_1 set start_time = to_date('2019/10/31', 'yyyy/mm/dd'), bp_low = 80, bp_high = 160,
 body_temperature  = 120, priority_id =  2 where visit_id = 1;
