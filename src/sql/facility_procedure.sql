@@ -53,5 +53,6 @@ new_patient_symptoms(v_facility_id);
 create_facility_service_dept(v_facility_id);
 create_staff_serv_dept(v_facility_id);
 new_serv_dept_spec(v_facility_id);
+create_new_service(v_facility_id);
 end create_new_facility;
 /
