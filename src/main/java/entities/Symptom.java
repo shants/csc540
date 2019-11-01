@@ -3,6 +3,15 @@ package entities;
 public class Symptom {
     private String symptom_code;
     private String symptom_name;
+    private BodyPart bodyPart;
+
+    public BodyPart getBodyPart() {
+        return bodyPart;
+    }
+
+    public void setBodyPart(BodyPart bodyPart) {
+        this.bodyPart = bodyPart;
+    }
 
     public String getSymptom_code() {
         return symptom_code;

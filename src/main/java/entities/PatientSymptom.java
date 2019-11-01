@@ -2,16 +2,25 @@ package entities;
 
 public class PatientSymptom {
     private int visitID, facilityID, duration;
-    private String symptomCode, severityValue, postEvent, isRecurring;
+    private String severityValue, postEvent, isRecurring;
+    private Symptom symptom;
 
-    public PatientSymptom(int visitID, int facilityID, int duration, String symptomCode, String severityValue, String postEvent, String isRecurring) {
+    public PatientSymptom(int visitID, int facilityID, int duration, Symptom symptom, String severityValue, String postEvent, String isRecurring) {
         this.visitID = visitID;
         this.facilityID = facilityID;
         this.duration = duration;
-        this.symptomCode = symptomCode.toUpperCase();
         this.severityValue = severityValue.toUpperCase();
         this.postEvent = postEvent.toUpperCase();
+        this.symptom = symptom;
         this.isRecurring = isRecurring.toUpperCase();
+    }
+
+    public Symptom getSymptom() {
+        return symptom;
+    }
+
+    public void setSymptom(Symptom symptom) {
+        this.symptom = symptom;
     }
 
     public int getVisitID() {
@@ -36,14 +45,6 @@ public class PatientSymptom {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public String getSymptomCode() {
-        return symptomCode;
-    }
-
-    public void setSymptomCode(String symptomCode) {
-        this.symptomCode = symptomCode.toUpperCase();
     }
 
     public String getSeverityValue() {
