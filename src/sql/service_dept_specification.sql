@@ -1,4 +1,4 @@
-/* create service_department_sepcification_<facility_id> */
+/* create service_department_specification_<facility_id> */
 
 CREATE OR REPLACE PROCEDURE new_serv_dept_spec
 (facility_id number)

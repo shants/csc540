@@ -227,7 +227,7 @@ REFERENCES certification(certification_id));
 /* create service_department */
 
 CREATE TABLE service_department(
-service_dept_code VARCHAR2(5) NOT NULL,
+service_dept_code VARCHAR2(10) NOT NULL,
 name VARCHAR2(50) NOT NULL
 );
 

@@ -11,7 +11,7 @@ new_query varchar2(5000);
 
 BEGIN
 new_query := 'CREATE TABLE staff_serv_dept_'|| to_char(facility_id) || '(
-service_dept_code VARCHAR2(5) NOT NULL,
+service_dept_code VARCHAR2(10) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 is_primary char(1) NOT NULL,
 CONSTRAINT staff_serv_dept_'|| to_char(facility_id) || '_key PRIMARY KEY (service_dept_code,staff_id),

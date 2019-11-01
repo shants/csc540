@@ -8,7 +8,7 @@ new_query varchar2(5000);
 BEGIN
 new_query := 'CREATE TABLE fc_serv_dept_'|| to_char(facility_id) || '(
 fc_serv_dept_id NUMBER(10) NOT NULL,
-service_dept_code VARCHAR2(5) NOT NULL,
+service_dept_code VARCHAR2(10) NOT NULL,
 director_id NUMBER(10) NOT NULL,
 CONSTRAINT fc_serv_dept_'|| to_char(facility_id) || '_key PRIMARY KEY (fc_serv_dept_id),
 CONSTRAINT fk_fc_dept_sd'|| to_char(facility_id) || ' FOREIGN KEY (service_dept_code) REFERENCES service_department(service_dept_code),
