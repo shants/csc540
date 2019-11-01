@@ -3,6 +3,10 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
+import db_files.StaffCRUD;
+import db_files.VisitCRUD;
+import entities.Staff;
 
 public class StaffMenu extends IScreen {
 
@@ -32,10 +36,19 @@ public class StaffMenu extends IScreen {
                 option = Integer.parseInt(opt);
                 MessageUtils.STAFF_MENU options = MessageUtils.STAFF_MENU.values()[option];
                 IScreen scr;
+                Staff staff = new Staff();
+                staff.setStaff_id(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
+                staff.setFacilityID(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID));
                 switch (options) {
                     case STAFF_MENU_CHECKED_IN_PATIENT:
-                        scr = new StaffProcessPatient();
-                        scr.run();
+                        if (StaffCRUD.isMedicalStaff(staff)) {
+                            VisitCRUD.showCheckedInPatient();
+                            scr = new StaffProcessPatient();
+                            scr.run();
+                        }
+                        else{
+                            System.out.println(MessageUtils.GLOBAL_ACCESS_DENIED);
+                        }
                         break;
                     case STAFF_MENU_TREATED_PATIENT:
                         break;

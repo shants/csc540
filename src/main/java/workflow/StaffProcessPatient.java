@@ -29,6 +29,8 @@ public class StaffProcessPatient extends IScreen {
                 IScreen scr;
                 switch (options) {
                     case STAFF_PROCESS_PATIENT_ENTER_VITALS:
+                        scr = new StaffEnterVitals();
+                        scr.run();
                         break;
                     case STAFF_PROCESS_PATIENT_TREAT_PATIENT:
                         break;
