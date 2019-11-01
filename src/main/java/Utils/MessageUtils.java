@@ -29,6 +29,13 @@ public class MessageUtils {
     public static String PATIENT_SIGNIN_LASTNAME = "Enter last name";
     public static String PATIENT_SIGNIN_DOB = "Enter date of birth (yyyy/mm/dd)";
     public static String PATIENT_SIGNIN_CITY = "Enter city of Address";
+    public static String STAFF_MENU_CHECKED_IN_PATIENT = "Checked in patient list";
+    public static String STAFF_MENU_TREATED_PATIENT = "Treated patient list";
+    public static String STAFF_MENU_ADD_SYMPTOMS = "Add Symptoms";
+    public static String STAFF_MENU_ADD_SEVERITY_SCALE = "Add Severity Scale";
+    public static String STAFF_MENU_ADD_ASSESSMENT_RULE = "Add Assessment Rule";
+    public static String STAFF_PROCESS_PATIENT_ENTER_VITALS = "Enter Vitals";
+    public static String STAFF_PROCESS_PATIENT_TREAT_PATIENT = "Treat Patient";
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -38,12 +45,21 @@ public class MessageUtils {
         ADDRESS_START, ADDRESS_STREETNUM, ADDRESS_STREETNAME, ADDRESS_CITYNAME, ADDRESS_STATENAME, ADDRESS_COUNTRY
     }
 
+    public enum STAFF_PROCESS_PATIENT {
+        STAFF_PROCESS_PATIENT_ENTER_VITALS, STAFF_PROCESS_PATIENT_TREAT_PATIENT, STAFF_PROCESS_PATIENT_GO_BACK
+    }
+
     public enum PATIENT_SIGNUP {
         PATIENT_SIGNUP_START, PATIENT_SIGNUP_GO_BACK
     }
 
     public enum PATIENT_SIGNIN {
         PATIENT_SIGNIN_START, PATIENT_SIGNIN_GO_BACK
+    }
+
+    public enum STAFF_MENU {
+        STAFF_MENU_CHECKED_IN_PATIENT, STAFF_MENU_TREATED_PATIENT, STAFF_MENU_ADD_SYMPTOMS,
+        STAFF_MENU_ADD_SEVERITY_SCALE, STAFF_MENU_ADD_ASSESSMENT_RULE
     }
 
     public enum HOME {
