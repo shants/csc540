@@ -50,7 +50,8 @@ public class SignIn extends IScreen {
                                 System.out.println("Please select a facility to sign in for.");
                                 return;
                             }
-                            PatientCRUD.signIn(facility_id, patient,address);
+                            patient.setFacilityId(facility_id);
+                            PatientCRUD.signIn(patient,address);
                             break;
                         case PATIENT_SIGNIN_GO_BACK:
                             break;

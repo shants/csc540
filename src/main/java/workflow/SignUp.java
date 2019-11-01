@@ -65,7 +65,8 @@ public class SignUp extends IScreen {
                             System.out.println("Please select a facility to sign up for.");
                             return;
                         }
-                        PatientCRUD.signUp(facility_id, patient,address);
+                        patient.setFacilityId(facility_id);
+                        PatientCRUD.signUp(patient,address);
                         break;
                     case PATIENT_SIGNUP_GO_BACK:
                         break;

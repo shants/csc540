@@ -7,13 +7,13 @@ import java.sql.*;
 
 public class PatientCRUD
 {
-    public static void signUp(int facility_id, Patient patient, Address address) {
+    public static void signUp(Patient patient, Address address) {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         CallableStatement statement;
         String procedure_call = "{call sign_up_new_patient(?,?,?,?,?,?,?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
-            statement.setInt(1,facility_id);
+            statement.setInt(1,patient.getFacilityId());
             statement.setString(2,address.getStreetName());
             statement.setString(3,address.getCityName());
             statement.setString(4,address.getStateName());
@@ -30,11 +30,11 @@ public class PatientCRUD
         }
     }
 
-    public static void signIn(int facility_id, Patient patient, Address address) {
+    public static void signIn(Patient patient, Address address) {
         int patient_id;
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String patient_table = "PATIENT_" + facility_id;
-        String patient_address_table = "PATIENT_ADDRESS_" + facility_id;
+        String patient_table = "PATIENT_" + patient.getFacilityId();
+        String patient_address_table = "PATIENT_ADDRESS_" + patient.getFacilityId();
         String query = "SELECT PATIENT_ID from (SELECT * from " + patient_table +
                     " inner join " + patient_address_table+ " on " + patient_table +
                     ".patient_address_id = " + patient_address_table + ".patient_address_id) tbl inner join city " +
