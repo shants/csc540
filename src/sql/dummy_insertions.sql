@@ -43,6 +43,32 @@ insert into body_part(name) values('HEAD');
 insert into body_part(name) values('HAND');
 insert into body_part(name) values('BODY');
 insert into body_part(name) values('LEG');
+insert into body_part(name) values('HEART');
+
+insert into service_department(service_dept_code, name) values('CRDLY', 'CARDIOLOGY');
+insert into service_department(service_dept_code, name) values('NRLY', 'NEUROLOGY');
+insert into service_department(service_dept_code, name) values('PHCY', 'PHARMACY');
+insert into service_department(service_dept_code, name) values('EMRCY', 'EMERGENCY');
+
+insert into fc_has_serv_dept_1(service_dept_code, director_id) values('CRDLY',1);
+insert into fc_has_serv_dept_1(service_dept_code, director_id) values('NRLY',1);
+insert into fc_has_serv_dept_1(service_dept_code, director_id) values('PHCY',3);
+insert into fc_has_serv_dept_1(service_dept_code, director_id) values('EMRCY',2);
+
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('CRDLY', 1, 'Y');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('CRDLY', 2, 'N');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('NRLY', 1, 'N');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('NRLY', 2, 'Y');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('PHCY', 3, 'Y');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('EMRCY', 1, 'N');
+insert into staff_in_serv_dept_1(service_dept_code,staff_id, is_primary) values('EMRCY', 2, 'Y');
+
+insert into serv_dept_spec_1(service_dept_code, body_part_code) values('CRDLY','BP6');
+insert into serv_dept_spec_1(service_dept_code, body_part_code) values('NRLY','BP2');
+
+insert into service_1(service_code, service_dept_code, equipment, name) values('SR1','NRLY','MACHINE', 'CT_SCAN');
+insert into service_1(service_code, service_dept_code, equipment, name) values('SR2','CRDLY','MACHINE', 'ECG');
+insert into service_1(service_code, service_dept_code, equipment, name) values('SR3','EMRCY','WARD', 'WARD');
 
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM1','BP1');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
