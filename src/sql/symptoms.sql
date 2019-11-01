@@ -7,7 +7,7 @@ BEGIN
 new_query := 'CREATE TABLE symptom_severity_'|| to_char(facility_id) || '(
 symptom_severity_id NUMBER(10) NOT NULL,
 type VARCHAR2(5) NOT NULL,
-symptom_code NUMBER(10) NOT NULL,
+symptom_code VARCHAR2(20) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 CONSTRAINT symptom_severity_'||to_char(facility_id)||'_key PRIMARY KEY (symptom_severity_id),
 CONSTRAINT fk_severity_staff_id_'|| to_char(facility_id) || ' FOREIGN KEY (staff_id) REFERENCES staff_'|| to_char(facility_id) ||' (staff_id),
