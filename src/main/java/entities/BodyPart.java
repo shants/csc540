@@ -9,7 +9,7 @@ public class BodyPart {
     }
 
     public void setBody_part(String body_part) {
-        this.body_part = body_part;
+        this.body_part = body_part.toUpperCase();
     }
 
     public String getName() {
@@ -17,6 +17,6 @@ public class BodyPart {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 }

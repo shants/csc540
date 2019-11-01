@@ -22,7 +22,7 @@ public class Staff {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.toUpperCase();
     }
 
     public Date getHire_date() {
@@ -38,7 +38,7 @@ public class Staff {
     }
 
     public void setDesignation(String designation) {
-        this.designation = designation;
+        this.designation = designation.toUpperCase();
     }
 
     public int getType_id() {

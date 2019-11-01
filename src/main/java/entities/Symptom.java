@@ -9,7 +9,7 @@ public class Symptom {
     }
 
     public void setSymptom_code(String symptom_code) {
-        this.symptom_code = symptom_code;
+        this.symptom_code = symptom_code.toUpperCase();
     }
 
     public String getSymptom_name() {
@@ -17,6 +17,6 @@ public class Symptom {
     }
 
     public void setSymptom_name(String symptom_name) {
-        this.symptom_name = symptom_name;
+        this.symptom_name = symptom_name.toUpperCase();
     }
 }
