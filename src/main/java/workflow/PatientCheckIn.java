@@ -17,6 +17,8 @@ public class PatientCheckIn extends  IScreen {
 
     public void display(){
         ArrayList<Symptom> arr = SymptomCRUD.read();
+        System.out.println("loggin : PatientCheckIn");
+        System.out.println(arr);
         for(int i=0; i < arr.size(); i++){
             System.out.println(Integer.toString(i) + " "  + ((Symptom)arr.get(i)).getSymptom_name());
         }

@@ -75,3 +75,7 @@ execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','S
 insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym01','cough');
 insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym02','fever');
 insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym03','headache');
+
+
+/* last statement always*/
+execute commit ;
