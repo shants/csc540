@@ -9,8 +9,7 @@ BEGIN
 new_query := 'CREATE TABLE patient_symptoms_'|| to_char(facility_id) || '(
 visit_id NUMBER(10) NOT NULL,
 symptom_code VARCHAR2(20) NOT NULL,
-symptom_severity_id NUMBER(10) NOT NULL,
-severity_value NUMBER(10) NOT NULL,
+severity_value VARCHAR2(20) NOT NULL,
 post_event VARCHAR2(10) NOT NULL,
 is_recurring CHAR(1) NOT NULL,
 duration NUMBER(10) NOT NULL,

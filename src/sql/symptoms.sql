@@ -30,7 +30,7 @@ EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE TABLE severity_scale_'|| to_char(facility_id) || '(
 symptom_severity_id NUMBER(10) NOT NULL,
 index_number NUMBER(10) NOT NULL,
-value NUMBER(10) NOT NULL,
+value VARCHAR2(20) NOT NULL,
 CONSTRAINT severity_scale_'||to_char(facility_id)||'_key PRIMARY KEY (symptom_severity_id, index_number),
 CONSTRAINT fk_sev_scale_sym_sev_id_'||to_char(facility_id)||' FOREIGN KEY (symptom_severity_id) REFERENCES symptom_severity_'||to_char(facility_id)||'(symptom_severity_id))';
 
