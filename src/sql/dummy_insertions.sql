@@ -47,9 +47,6 @@ INSERT INTO COUNTRY(country_name) VALUES('UK');
 
 execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS HOSPITAL','PRIMARY', 200);
 
-INSERT INTO SYMPTOM(symptom_code, symptom_name) values (1,'PAIN');
-INSERT INTO SYMPTOM(symptom_code, symptom_name) values (2, 'FEVER');
-INSERT INTO SYMPTOM(symptom_code, symptom_name) values (3, 'DIZZYNESS');
 
 INSERT INTO staff_department_type(type_name) values ('MEDICAL');
 INSERT INTO staff_department_type(type_name) values ('NONMEDICAL');
@@ -75,3 +72,6 @@ insert into priority(type) values('NORMAL');
 insert into priority(type) values('QUARANTINE');
 
 execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','SHANTANU', 'SHARMA','2019/10/24',9193333333)
+insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym01','cough');
+insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym02','fever');
+insert into symptom(SYMPTOM_CODE, SYMPTOM_NAME) values('sym03','headache');
