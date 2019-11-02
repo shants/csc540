@@ -1,5 +1,8 @@
 package Utils;
 
+import entities.PatientSymptom;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ViewerContext {
@@ -12,6 +15,7 @@ public class ViewerContext {
 
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
     private StackFrame stackFrame;
+    private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
 
     private ViewerContext(){
         stackFrame = StackFrame.getInstance();
@@ -40,4 +44,5 @@ public class ViewerContext {
     public StackFrame getStackFrame() {
         return stackFrame;
     }
+    public void addSymptom(PatientSymptom ps) { symptomList.add(ps);}
 }
