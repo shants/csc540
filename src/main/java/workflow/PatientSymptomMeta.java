@@ -2,15 +2,16 @@ package workflow;
 
 import Utils.CommandLineUtils;
 import Utils.IScreen;
+import Utils.MessageUtils;
 import Utils.ViewerContext;
 import entities.PatientSymptom;
 
 public class PatientSymptomMeta extends IScreen {
     public void display(){
-        System.out.println("1. Enter Body Part ( NA if not applicable )");
+        System.out.println(MessageUtils.PATIENT_SYM_META_BP);
         String bodyPart = CommandLineUtils.ReadInput();
 
-        System.out.println("2. Duration ( 0 if NA)");
+        System.out.println(MessageUtils.PATIENT_SYM_META_DUR);
         String durationStr = CommandLineUtils.ReadInput();
         int duration = 0;
         try {
@@ -19,13 +20,13 @@ public class PatientSymptomMeta extends IScreen {
             e.printStackTrace();
         }
 
-        System.out.println("3. ReOccuring Yes / No");
+        System.out.println(MessageUtils.PATIENT_SYM_META_REOCCUR);
         String reoccuring = CommandLineUtils.ReadInput();
 
-        System.out.println("4. Severity NA if not applicable");
+        System.out.println(MessageUtils.PATIENT_SYM_META_SEV);
         String severity = CommandLineUtils.ReadInput();
 
-        System.out.println("5. Cause ( incident ) NA if not applicable");
+        System.out.println(MessageUtils.PATIENT_SYM_META_CAUSE);
         String incident = CommandLineUtils.ReadInput();
 
         PatientSymptom pSym = new PatientSymptom();
