@@ -1,5 +1,6 @@
 package workflow;
 import Utils.CommandLineUtils;
+import Utils.HelperUtils;
 import Utils.MessageUtils;
 import Utils.IScreen;
 import db_files.FacilityCRUD;
@@ -18,6 +19,7 @@ public class PatientRouting extends IScreen {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_ROUTING options = MessageUtils.PATIENT_ROUTING.values()[option];
                 System.out.println("Please enter a valid option");
+
                 switch (options) {
                     case PATIENT_ROUTING_CHECKIN:
                         //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
@@ -30,7 +32,8 @@ public class PatientRouting extends IScreen {
                         opt = CommandLineUtils.ReadInput();
                         option = Integer.parseInt(opt);
                         // if valid option and not checked-in
-                        if (true) {
+                        boolean alreadyCheckedIn = HelperUtils.isCheckedIn();
+                        if (!alreadyCheckedIn) {
                             IScreen scr = new PatientCheckIn();
                             System.out.println("Patient Checkin");
                             scr.run();
@@ -54,7 +57,6 @@ public class PatientRouting extends IScreen {
                 }
 
             }catch (Exception e){
-                // debug
                 System.out.println(e.getMessage());
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
             }
