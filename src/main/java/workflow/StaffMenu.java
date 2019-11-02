@@ -5,7 +5,6 @@ import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
 import db_files.StaffCRUD;
-import db_files.VisitCRUD;
 import entities.Staff;
 
 public class StaffMenu extends IScreen {
@@ -27,6 +26,14 @@ public class StaffMenu extends IScreen {
 
     public void run() {
         boolean invalidOption;
+        int staffID = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID) != null ?
+                        ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID ): 0;
+        int facilityID = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID) != null ?
+                ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID): 0;
+        if (staffID == 0 || facilityID == 0) {
+            System.out.println(MessageUtils.GLOBAL_LOGIN_MESSAGE);
+            return;
+        }
         do {
             invalidOption = false;
             int option;
@@ -37,12 +44,11 @@ public class StaffMenu extends IScreen {
                 MessageUtils.STAFF_MENU options = MessageUtils.STAFF_MENU.values()[option];
                 IScreen scr;
                 Staff staff = new Staff();
-                staff.setStaff_id(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
+                staff.setStaff_id(staffID);
                 staff.setFacilityID(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID));
                 switch (options) {
                     case STAFF_MENU_CHECKED_IN_PATIENT:
                         if (StaffCRUD.isMedicalStaff(staff)) {
-                            VisitCRUD.showCheckedInPatient();
                             scr = new StaffProcessPatient();
                             scr.run();
                         }

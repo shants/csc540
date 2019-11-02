@@ -1,16 +1,17 @@
 package entities;
 
-import java.util.Date;
-
 public class Visit {
-    private int visit_id;
-    private int patient_id;
-    private Date start_time;
-    private Date end_time;
-    private int bp_low;
-    private int bp_high;
-    private int body_temp;
-    private int priority_id;
+    private int visit_id,patient_id,priority_id, facilityID;
+    private String start_time, end_time;
+    private float bp_low, bp_high, body_temp;
+
+    public int getFacilityID() {
+        return facilityID;
+    }
+
+    public void setFacilityID(int facilityID) {
+        this.facilityID = facilityID;
+    }
 
     public int getVisit_id() {
         return visit_id;
@@ -28,43 +29,43 @@ public class Visit {
         this.patient_id = patient_id;
     }
 
-    public Date getStart_time() {
+    public String getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(String start_time) {
         this.start_time = start_time;
     }
 
-    public Date getEnd_time() {
+    public String getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 
-    public int getBp_low() {
+    public float getBp_low() {
         return bp_low;
     }
 
-    public void setBp_low(int bp_low) {
+    public void setBp_low(float bp_low) {
         this.bp_low = bp_low;
     }
 
-    public int getBp_high() {
+    public float getBp_high() {
         return bp_high;
     }
 
-    public void setBp_high(int bp_high) {
+    public void setBp_high(float bp_high) {
         this.bp_high = bp_high;
     }
 
-    public int getBody_temp() {
+    public float getBody_temp() {
         return body_temp;
     }
 
-    public void setBody_temp(int body_temp) {
+    public void setBody_temp(float body_temp) {
         this.body_temp = body_temp;
     }
 

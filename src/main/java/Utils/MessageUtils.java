@@ -9,10 +9,13 @@ public class MessageUtils {
     public static String ADDRESS_COUNTRYNAME = "Country";
     public static String GLOBAL_ACCESS_DENIED = "Access Denied";
     public static String GLOBAL_SPACE = " ";
+    public static String GLOBAL_HYPHEN = "-";
     public static String GLOBAL_DELIMITER = ":";
     public static String GLOBAL_UNABLE_TO_HANDLE = "Unable to handle";
+    public static String GLOBAL_PROPER_VALUE = "Please enter proper values";
     public static String GLOBAL_NEWLINE = "\n";
     public static String GLOBAL_ENTER_OPTION = "Enter Option";
+    public static String GLOBAL_LOGIN_MESSAGE = "Please login to continue";
     public static String GLOBAL_SELECT_FACILITY = "Select facility from below";
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
     public static String GLOBAL_GO_BACK ="Go Back";
@@ -37,9 +40,17 @@ public class MessageUtils {
     public static String STAFF_MENU_ADD_ASSESSMENT_RULE = "Add Assessment Rule";
     public static String STAFF_PROCESS_PATIENT_ENTER_VITALS = "Enter Vitals";
     public static String STAFF_PROCESS_PATIENT_TREAT_PATIENT = "Treat Patient";
+    public static String STAFF_ENTER_VITALS_RECORD = "Record Vitals";
+    public static String STAFF_ENTER_VITALS_TEMPERATURE = "Enter Body Temperature";
+    public static String STAFF_ENTER_VITALS_BP_LOW = "Enter Systolic Blood Pressure";
+    public static String STAFF_ENTER_VITALS_BP_HIGH = "Enter Diastolic Blood Pressure";
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
+    }
+
+    public enum STAFF_ENTER_VITALS {
+        STAFF_ENTER_VITALS_RECORD, STAFF_ENTER_VITALS_GO_BACK
     }
 
     public enum ADDRESS{
