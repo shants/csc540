@@ -44,6 +44,11 @@ public class MessageUtils {
     public static String STAFF_ENTER_VITALS_TEMPERATURE = "Enter Body Temperature";
     public static String STAFF_ENTER_VITALS_BP_LOW = "Enter Systolic Blood Pressure";
     public static String STAFF_ENTER_VITALS_BP_HIGH = "Enter Diastolic Blood Pressure";
+    public static String NEGATIVE_EXP_CODE = "Negative experience Code";
+    public static String STAFF_PATIENT_REPORT_CONFIRM = "Confirm";
+    public static String GLOBAL_YES = "Yes";
+    public static String GLOBAL_NO = "No";
+
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -77,5 +82,17 @@ public class MessageUtils {
     public enum HOME {
         HOME_SIGN_IN, HOME_SIGN_UP, HOME_DEMO_QUERIES, HOME_EXIT
     }
+
+    public enum NEGATIVE_EXP {
+        NEGATIVE_EXP_CODE, GO_BACK
+    }
+    public enum STAFF_PATIENT_REPORT_CONFIR {
+        CONFIRM, GO_BACK
+    }
+
+    public enum PATIENT_CHECKOUT_ACK {
+        YES, NO, GO_BACK
+    }
+
 }
 
