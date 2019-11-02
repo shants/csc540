@@ -10,13 +10,14 @@ new_query varchar2(5000);
 BEGIN
 new_query := 'CREATE TABLE report_'|| to_char(facility_id) || '(
 report_id NUMBER(10) NOT NULL,
-negative_experience_value CHAR(1) NOT NULL,
+neg_exp_id NUMBER(10) NOT NULL,
 negative_experience_text VARCHAR2(100) NOT NULL,
 treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,
 CONSTRAINT report_id_'|| to_char(facility_id) ||'_key PRIMARY KEY (report_id),
-CONSTRAINT fk_report_visit_'|| to_char(facility_id) ||' FOREIGN KEY (visit_id) REFERENCES visit_'|| to_char(facility_id) ||' (visit_id))';
+CONSTRAINT fk_report_visit_'|| to_char(facility_id) ||' FOREIGN KEY (visit_id) REFERENCES visit_'|| to_char(facility_id) ||' (visit_id),
+CONSTRAINT fk_report_neg_exp_'|| to_char(facility_id) ||' FOREIGN KEY (neg_exp_id) REFERENCES negative_experience(neg_exp_id))';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE report_'|| to_char(facility_id) ||'_seq START WITH 1';
