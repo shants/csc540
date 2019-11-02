@@ -9,6 +9,19 @@ public class Staff {
     private String designation;
     private int type_id;
 
+    public int getFacilityID() {
+        return facilityID;
+    }
+
+    public void setFacilityID(int facilityID) {
+        this.facilityID = facilityID;
+    }
+
+    private int facilityID;
+
+    public Staff() {
+    }
+
     public int getStaff_id() {
         return staff_id;
     }

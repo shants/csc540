@@ -10,7 +10,7 @@ public class ViewerContext {
     private static ViewerContext vcSingletonInstance;
 
     public enum IDENTIFIER_TYPES {
-        PATIENT_ID, STAFF_ID, FACILITY_ID
+        PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
 
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
