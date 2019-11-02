@@ -90,7 +90,7 @@ insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,1,
 insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,2,'MID');
 insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,3,'HIGH');
 
-insert into visit_1(patient_id) values(1);
+insert into visit_1(patient_id, start_time) values(1, to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI'));
 
 insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
 values(1, 'SYM1', '2', 'POST EATING SWEETS', 'N', 2);

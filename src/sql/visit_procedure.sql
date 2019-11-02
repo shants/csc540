@@ -13,6 +13,7 @@ end_time TIMESTAMP,
 bp_low NUMBER(10),
 bp_high NUMBER(10),
 body_temperature NUMBER(10),
+is_treated CHAR(1),
 priority_id NUMBER(10),
 CONSTRAINT visit_'|| to_char(facility_id) || '_key PRIMARY KEY (visit_id),
 CONSTRAINT fk_visit_priority_'|| to_char(facility_id) || ' FOREIGN KEY (priority_id) REFERENCES priority(priority_id) ON DELETE SET NULL)';
