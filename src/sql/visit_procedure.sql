@@ -8,7 +8,7 @@ BEGIN
 new_query := 'CREATE TABLE visit_'|| to_char(facility_id) || '(
 visit_id NUMBER(10) NOT NULL,
 patient_id NUMBER(10) NOT NULL,
-start_time TIMESTAMP,
+start_time TIMESTAMP NOT NULL,
 end_time TIMESTAMP,
 bp_low NUMBER(10),
 bp_high NUMBER(10),
