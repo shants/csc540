@@ -282,3 +282,21 @@ CONSTRAINT fk_symp_bp_1_key FOREIGN KEY (symptom_code) REFERENCES symptom(sympto
 CONSTRAINT fk_symp_bp_2_key FOREIGN KEY (body_part_code) REFERENCES body_part(body_part_code)
 );
 
+CREATE TABLE negative_experience(
+neg_exp_id NUMBER(10) NOT NULL,
+exp_name VARCHAR(150) NOT NULL,
+CONSTRAINT negative_experience_key PRIMARY KEY(neg_exp_id)
+);
+
+CREATE SEQUENCE neg_exp_seq START WITH 1;
+
+CREATE OR REPLACE TRIGGER neg_exp_trigger
+BEFORE INSERT ON negative_experience
+FOR EACH ROW
+BEGIN
+  SELECT  neg_exp_seq.NEXTVAL
+  INTO   :new.neg_exp_id
+  FROM   dual;
+END;
+/
+

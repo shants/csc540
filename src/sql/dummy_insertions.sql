@@ -100,6 +100,8 @@ values(1, 'SYM2', 'MID', 'POST EATING SWEETS', 'N', 2);
 update visit_1 set start_time = to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI') , bp_low = 80, bp_high = 160,
 body_temperature  = 120, priority_id =  2 where visit_id = 1;
 
+insert into negative_experience(exp_name) values('Misdiagnosis');
+insert into negative_experience(exp_name) values('Acquired infection during stay');
 
 /* last statement always*/
 execute commit ;
