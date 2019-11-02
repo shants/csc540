@@ -47,6 +47,7 @@ public class MessageUtils {
     public static String STAFF_ENTER_VITALS_BP_HIGH = "Enter Diastolic Blood Pressure";
     public static String NEGATIVE_EXP_CODE = "Negative experience Code";
     public static String STAFF_PATIENT_REPORT_CONFIRM = "Confirm";
+    public static String STAFF_TREATED_PATIENT_CHECKOUT = "Check out";
     public static String GLOBAL_YES = "Yes";
     public static String GLOBAL_NO = "No";
 
@@ -78,6 +79,10 @@ public class MessageUtils {
     public enum STAFF_MENU {
         STAFF_MENU_CHECKED_IN_PATIENT, STAFF_MENU_TREATED_PATIENT, STAFF_MENU_ADD_SYMPTOMS,
         STAFF_MENU_ADD_SEVERITY_SCALE, STAFF_MENU_ADD_ASSESSMENT_RULE
+    }
+
+    public enum STAFF_TREATED_PATIENT {
+        STAFF_TREATED_PATIENT_CHECKOUT, STAFF_TREATED_PATIENT_GO_BACK
     }
 
     public enum HOME {
