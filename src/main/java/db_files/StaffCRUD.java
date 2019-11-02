@@ -2,6 +2,7 @@ package db_files;
 
 import config.DatabaseConnection;
 import entities.Staff;
+import entities.Visit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +27,48 @@ public class StaffCRUD {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Error occured while checking for medical staff:"+e.getMessage());
+            System.out.println("Error occurred while checking for medical staff:"+e.getMessage());
         }
         return isMedical;
+    }
+
+    public static boolean canTreatPatient(Visit visit) {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        boolean canTreat = false;
+        String query = "SELECT a.body_part_code from "+
+            " (SELECT body_part_code from serv_dept_spec_"+visit.getFacilityID()+
+            " where service_dept_code in (select service_dept_code from "+
+            " staff_in_serv_dept_"+visit.getFacilityID()+" where staff_id = ?)) a "+
+            " inner join (select body_part_code from patient_symptoms_"+visit.getFacilityID()+
+            " inner join symptom_body_part on patient_symptoms_"+visit.getFacilityID()+
+            ".symptom_code = symptom_body_part.symptom_code where visit_id = ?) b on a.body_part_code "+
+            " = b.body_part_code";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1,1);
+            statement.setInt(2,visit.getVisit_id());
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                canTreat = true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while checking staff's ability to treat patient:"+e.getMessage());
+        }
+        return canTreat;
+    }
+
+    public static void treatPatient(Visit visit) {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "UPDATE VISIT_" + visit.getFacilityID() + " SET IS_TREATED = 'Y' WHERE " +
+                " VISIT_ID = ?";
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setInt(1,visit.getVisit_id());
+            statement.executeUpdate();
+            System.out.println("Patient treated. Updated Status in records. ");
+        } catch (SQLException e) {
+            System.out.println("Unable to treat patient:"+e.getMessage());
+        }
     }
 }

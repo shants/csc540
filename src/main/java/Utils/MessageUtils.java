@@ -8,6 +8,7 @@ public class MessageUtils {
     public static String ADDRESS_STATENAME = "State";
     public static String ADDRESS_COUNTRYNAME = "Country";
     public static String GLOBAL_ACCESS_DENIED = "Access Denied";
+    public static String GLOBAL_INADEQUATE_PRIVILEGES = "Inadequate Privileges";
     public static String GLOBAL_SPACE = " ";
     public static String GLOBAL_HYPHEN = "-";
     public static String GLOBAL_DELIMITER = ":";

@@ -33,6 +33,8 @@ public class StaffProcessPatient extends IScreen {
                         scr.run();
                         break;
                     case STAFF_PROCESS_PATIENT_TREAT_PATIENT:
+                        scr = new StaffTreatPatient();
+                        scr.run();
                         break;
                     case STAFF_PROCESS_PATIENT_GO_BACK:
                         break;
