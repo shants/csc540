@@ -2,7 +2,7 @@ package entities;
 
 public class PatientSymptom {
     private int visitID, facilityID, duration;
-    private String severityValue, postEvent, isRecurring;
+    private String severityValue, postEvent, isRecurring, bodyPart;
     private Symptom symptom;
 
     public PatientSymptom(int visitID, int facilityID, int duration, Symptom symptom, String severityValue, String postEvent, String isRecurring) {
@@ -13,7 +13,10 @@ public class PatientSymptom {
         this.postEvent = postEvent.toUpperCase();
         this.symptom = symptom;
         this.isRecurring = isRecurring.toUpperCase();
+
     }
+
+    public PatientSymptom(){}
 
     public Symptom getSymptom() {
         return symptom;
@@ -69,5 +72,13 @@ public class PatientSymptom {
 
     public void setIsRecurring(String isRecurring) {
         this.isRecurring = isRecurring.toUpperCase();
+    }
+
+    public String getBodyPart() {
+        return bodyPart;
+    }
+
+    public void setBodyPart(String bodyPart) {
+        this.bodyPart = bodyPart;
     }
 }

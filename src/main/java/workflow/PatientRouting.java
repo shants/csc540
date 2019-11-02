@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class PatientRouting extends IScreen {
     public void run() {
         display();
-        boolean continue_loop = true;
-        while (continue_loop) {
+        boolean bContinue = true;
+        while (bContinue) {
             String opt = CommandLineUtils.ReadInput();
             int option;
             try {
@@ -31,10 +31,10 @@ public class PatientRouting extends IScreen {
                         option = Integer.parseInt(opt);
                         // if valid option and not checked-in
                         if (true) {
-                            PatientCheckIn scr = new PatientCheckIn();
+                            IScreen scr = new PatientCheckIn();
                             System.out.println("Patient Checkin");
                             scr.run();
-                            continue_loop = false;
+                            bContinue = false;
 
                         } else {
                             // already checked in
@@ -42,9 +42,11 @@ public class PatientRouting extends IScreen {
                         break;
                     case PATIENT_ROUTING_CHECK_OUT:
                         System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+                        bContinue = false;
                         break;
                     case PATIENT_ROUTING_GO_BACK:
                         System.out.println(MessageUtils.GLOBAL_GO_BACK);
+                        bContinue = false;
                         break;
                     default:
                         System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
@@ -55,11 +57,10 @@ public class PatientRouting extends IScreen {
                 // debug
                 System.out.println(e.getMessage());
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
-
+            }
             }
 
         }
-    }
 
     public void display(){
         System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECKIN.ordinal()
