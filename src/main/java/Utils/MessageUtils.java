@@ -44,6 +44,10 @@ public class MessageUtils {
     public static String STAFF_ENTER_VITALS_TEMPERATURE = "Enter Body Temperature";
     public static String STAFF_ENTER_VITALS_BP_LOW = "Enter Systolic Blood Pressure";
     public static String STAFF_ENTER_VITALS_BP_HIGH = "Enter Diastolic Blood Pressure";
+    public static String ADD_SYMPTOM_RECORD = "Add Symptom";
+    public static String ADD_SYMPTOM_SYMPTOM_NAME = "Enter the symptom name";
+    public static String ADD_SYMPTOM_BODY_PART = "Enter the body part";
+    public static String ADD_SYMPTOM_SEVERITY_TYPE = "Enter the severity type";
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -52,6 +56,11 @@ public class MessageUtils {
     public enum STAFF_ENTER_VITALS {
         STAFF_ENTER_VITALS_RECORD, STAFF_ENTER_VITALS_GO_BACK
     }
+
+    public enum ADD_SYMPTOM {
+        ADD_SYMPTOM_RECORD, ADD_SYMPTOM_GO_BACK
+    }
+
 
     public enum ADDRESS{
         ADDRESS_START, ADDRESS_STREETNUM, ADDRESS_STREETNAME, ADDRESS_CITYNAME, ADDRESS_STATENAME, ADDRESS_COUNTRY
