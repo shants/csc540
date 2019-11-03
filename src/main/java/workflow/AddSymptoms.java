@@ -46,6 +46,7 @@ public class AddSymptoms extends IScreen {
 
         symptom_severity.setFacilityID(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID));
         symptom_severity.setStaffID(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
+        newSymptomsPrompt(symptom, bp, symptom_severity);
         SymptomCRUD.symptom_add(symptom, symptom_severity);
 
     }
