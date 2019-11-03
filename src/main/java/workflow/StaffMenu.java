@@ -57,6 +57,8 @@ public class StaffMenu extends IScreen {
                         }
                         break;
                     case STAFF_MENU_TREATED_PATIENT:
+                        scr = new StaffTreatedPatient();
+                        scr.run();
                         break;
                     case STAFF_MENU_ADD_SYMPTOMS:
                         break;

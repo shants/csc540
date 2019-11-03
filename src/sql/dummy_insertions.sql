@@ -33,10 +33,15 @@ insert into priority(type) values('HIGH');
 insert into priority(type) values('NORMAL');
 insert into priority(type) values('QUARANTINE');
 
-execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','SHANTANU', 'SHARMA','2019/10/24',9193333333)
+execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','SHANTANU', 'SHARMA','2019/10/24',9193333333);
+execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','RAVINDERSINGH', 'RAJPAL','2019/10/24',9193333333);
+execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','TAPAS', 'MALLICK','2019/10/24',9193333333);
+execute sign_up_new_patient(1,'BAKER STREET','LONDON', 'LONDON', 'UK', '221B','PARDHA', 'KESHWAR','2019/10/24',9193333333);
+
 insert into symptom(SYMPTOM_NAME) values('COUGH');
 insert into symptom(SYMPTOM_NAME) values('FEVER');
 insert into symptom(SYMPTOM_NAME) values('HEADACHE');
+insert into symptom(SYMPTOM_NAME) values('HEART ATTACK');
 
 insert into body_part(name) values('NECK');
 insert into body_part(name) values('HEAD');
@@ -72,7 +77,8 @@ insert into service_1(service_code, service_dept_code, equipment, name) values('
 
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM1','BP1');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
-insert into symptom_body_part(symptom_code, body_part_code) values('SYM3','BP3');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM3','BP2');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM4','BP6');
 
 insert into symptom_severity_1(type, symptom_code, staff_id) values('RANGE', 'SYM1', 1);
 insert into symptom_severity_1(type, symptom_code, staff_id) values('ENUM', 'SYM2', 1);
@@ -91,14 +97,35 @@ insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,2,
 insert into severity_scale_1(symptom_severity_id,index_number,value) values(3,3,'HIGH');
 
 insert into visit_1(patient_id, start_time) values(1, to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI'));
+insert into visit_1(patient_id, start_time) values(2, to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI'));
+insert into visit_1(patient_id, start_time) values(3, to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI'));
+insert into visit_1(patient_id, start_time) values(4, to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI'));
 
 insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
-values(1, 'SYM1', '2', 'POST EATING SWEETS', 'N', 2);
+values(1, 'SYM3', '2', 'POST EATING SWEETS', 'N', 2);
 insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
-values(1, 'SYM2', 'MID', 'POST EATING SWEETS', 'N', 2);
+values(1, 'SYM4', 'MID', 'POST EATING SWEETS', 'N', 2);
 
-update visit_1 set start_time = to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI') , bp_low = 80, bp_high = 160,
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(2, 'SYM1', '2', 'POST EATING SWEETS', 'N', 2);
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(2, 'SYM2', 'MID', 'POST EATING SWEETS', 'N', 2);
+
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(3, 'SYM1', '2', 'POST EATING SWEETS', 'N', 2);
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(3, 'SYM3', 'MID', 'POST EATING SWEETS', 'N', 2);
+
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(4, 'SYM2', '2', 'POST EATING SWEETS', 'N', 2);
+insert into patient_symptoms_1(visit_id,symptom_code,severity_value,post_event,is_recurring ,duration)
+values(4, 'SYM4', 'MID', 'POST EATING SWEETS', 'N', 2);
+
+update visit_1 set end_time = to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI') , bp_low = 80, bp_high = 160,
 body_temperature  = 120, priority_id =  2 where visit_id = 1;
+
+update visit_1 set end_time = to_timestamp('2012/07/18 13:27', 'YYYY/MM/DD HH24:MI') , bp_low = 80, bp_high = 160,
+body_temperature  = 120, priority_id =  2, is_treated = 'Y' where visit_id = 2;
 
 insert into negative_experience(exp_name) values('Misdiagnosis');
 insert into negative_experience(exp_name) values('Acquired infection during stay');

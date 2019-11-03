@@ -4,13 +4,11 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 
-public class StaffProcessPatient extends IScreen {
+public class StaffTreatedPatient extends IScreen {
     public void display() {
-        System.out.println(MessageUtils.STAFF_PROCESS_PATIENT.STAFF_PROCESS_PATIENT_ENTER_VITALS.ordinal()
-                + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_PROCESS_PATIENT_ENTER_VITALS);
-        System.out.println(MessageUtils.STAFF_PROCESS_PATIENT.STAFF_PROCESS_PATIENT_TREAT_PATIENT.ordinal()
-                + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_PROCESS_PATIENT_TREAT_PATIENT);
-        System.out.println(MessageUtils.STAFF_PROCESS_PATIENT.STAFF_PROCESS_PATIENT_GO_BACK.ordinal()
+        System.out.println(MessageUtils.STAFF_TREATED_PATIENT.STAFF_TREATED_PATIENT_CHECKOUT.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_TREATED_PATIENT_CHECKOUT);
+        System.out.println(MessageUtils.STAFF_TREATED_PATIENT.STAFF_TREATED_PATIENT_GO_BACK.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_GO_BACK);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
@@ -25,18 +23,14 @@ public class StaffProcessPatient extends IScreen {
             String opt = CommandLineUtils.ReadInput();
             try {
                 option = Integer.parseInt(opt);
-                MessageUtils.STAFF_PROCESS_PATIENT options = MessageUtils.STAFF_PROCESS_PATIENT.values()[option];
+                MessageUtils.STAFF_TREATED_PATIENT options = MessageUtils.STAFF_TREATED_PATIENT.values()[option];
                 IScreen scr;
                 switch (options) {
-                    case STAFF_PROCESS_PATIENT_ENTER_VITALS:
-                        scr = new StaffEnterVitals();
+                    case STAFF_TREATED_PATIENT_CHECKOUT:
+                        scr = new StaffTreatedPatientCheckout();
                         scr.run();
                         break;
-                    case STAFF_PROCESS_PATIENT_TREAT_PATIENT:
-                        scr = new StaffTreatPatient();
-                        scr.run();
-                        break;
-                    case STAFF_PROCESS_PATIENT_GO_BACK:
+                    case STAFF_TREATED_PATIENT_GO_BACK:
                         break;
                     default:
                         invalidOption = true;

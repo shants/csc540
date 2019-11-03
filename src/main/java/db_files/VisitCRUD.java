@@ -4,19 +4,38 @@ import config.DatabaseConnection;
 import entities.Facility;
 import entities.Visit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class VisitCRUD {
+
+    public static ArrayList<Visit> getPatientsToTreat(Facility facility) {
+        ArrayList<Visit> records = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String visit_table = "VISIT_" + facility.getId();
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where END_TIME IS NOT NULL and IS_TREATED IS NULL";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Visit visit = new Visit();
+                visit.setPatient_id(rs.getInt("PATIENT_ID"));
+                visit.setVisit_id(rs.getInt("VISIT_ID"));
+                visit.setStart_time(rs.getTimestamp("START_TIME").toString());
+                visit.setEnd_time(rs.getTimestamp("END_TIME").toString());
+                records.add(visit);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while fetching patients to treat:"+e.getMessage());
+        }
+        return records;
+    }
 
     public static ArrayList<Visit> getCheckedInPatient(Facility facility) {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String visit_table = "VISIT_" + facility.getId();
-        String query = "SELECT * from " + visit_table + " where END_TIME IS NULL";
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME from " + visit_table + " where END_TIME IS NULL";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
@@ -51,5 +70,27 @@ public class VisitCRUD {
         } catch (SQLException e) {
             System.out.println("Unable to complete entering vitals for patient:"+e.getMessage());
         }
+    }
+
+    public static ArrayList<Visit> getTreatedPatientsToCheckout(Facility facility) {
+        ArrayList<Visit> records = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String visit_table = "VISIT_" + facility.getId();
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where IS_TREATED = 'Y'";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Visit visit = new Visit();
+                visit.setPatient_id(rs.getInt("PATIENT_ID"));
+                visit.setVisit_id(rs.getInt("VISIT_ID"));
+                visit.setStart_time(rs.getTimestamp("START_TIME").toString());
+                visit.setEnd_time(rs.getTimestamp("END_TIME").toString());
+                records.add(visit);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while fetching treated patients:"+e.getMessage());
+        }
+        return records;
     }
 }

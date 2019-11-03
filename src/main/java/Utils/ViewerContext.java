@@ -1,6 +1,7 @@
 package Utils;
 
 import entities.PatientSymptom;
+import entities.Visit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public class ViewerContext {
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
     private StackFrame stackFrame;
     private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
-
+    private Visit patientToCheckout;
     private ViewerContext(){
         stackFrame = StackFrame.getInstance();
     }
@@ -40,7 +41,13 @@ public class ViewerContext {
             return identifiers.get(type);
         }
     }
+    public Visit getPatientToCheckout() {
+        return patientToCheckout;
+    }
 
+    public void setPatientToCheckout(Visit patientToCheckout) {
+        this.patientToCheckout = patientToCheckout;
+    }
     public StackFrame getStackFrame() {
         return stackFrame;
     }

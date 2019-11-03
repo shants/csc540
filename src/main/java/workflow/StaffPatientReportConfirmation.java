@@ -4,14 +4,14 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 
-public class PatientCheckoutAcknowledgement extends IScreen {
+public class StaffPatientReportConfirmation extends IScreen {
     public void display(){
 
-        //Display the report that
-        //is filled by the staff
+        //Display the report and
+        //ask the user for
+        //confirmation
 
-        System.out.println(MessageUtils.GLOBAL_YES);
-        System.out.println(MessageUtils.GLOBAL_NO);
+        System.out.println(MessageUtils.STAFF_PATIENT_REPORT_CONFIRM);
         System.out.println(MessageUtils.GLOBAL_GO_BACK);
     }
     public void run(){
@@ -24,19 +24,16 @@ public class PatientCheckoutAcknowledgement extends IScreen {
             String opt = CommandLineUtils.ReadInput();
             try {
                 option = Integer.parseInt(opt);
-                MessageUtils.PATIENT_CHECKOUT_ACK options = MessageUtils.PATIENT_CHECKOUT_ACK.values()[option];
+                MessageUtils.STAFF_PATIENT_REPORT_CONFIR options = MessageUtils.STAFF_PATIENT_REPORT_CONFIR.values()[option];
                 switch (options) {
-                    case YES:
-                        System.out.println("YES");
-                        invalidOption = false;
-                        break;
-                    case NO:
-                        System.out.println("NO");
+                    case CONFIRM:
+                        System.out.println("STAFF_PATIENT_REPORT_CONFIR");
                         invalidOption = false;
                         break;
                     case GO_BACK:
-                        System.out.println("Go back");
+                        System.out.println("GO BACK");
                         invalidOption = false;
+                        break;
                     default:
                         invalidOption = true;
                 }
