@@ -8,7 +8,6 @@ public class MessageUtils {
     public static String ADDRESS_STATENAME = "State";
     public static String ADDRESS_COUNTRYNAME = "Country";
     public static String GLOBAL_ACCESS_DENIED = "Access Denied";
-    public static String GLOBAL_INADEQUATE_PRIVILEGES = "Inadequate Privileges";
     public static String GLOBAL_SPACE = " ";
     public static String GLOBAL_HYPHEN = "-";
     public static String GLOBAL_DELIMITER = ":";
@@ -45,16 +44,6 @@ public class MessageUtils {
     public static String STAFF_ENTER_VITALS_TEMPERATURE = "Enter Body Temperature";
     public static String STAFF_ENTER_VITALS_BP_LOW = "Enter Systolic Blood Pressure";
     public static String STAFF_ENTER_VITALS_BP_HIGH = "Enter Diastolic Blood Pressure";
-    public static String ADD_SYMPTOM_RECORD = "Add Symptom";
-    public static String ADD_SYMPTOM_SYMPTOM_NAME = "Enter the symptom name";
-    public static String ADD_SYMPTOM_BODY_PART = "Enter the body part";
-    public static String ADD_SYMPTOM_SEVERITY_TYPE = "Enter the severity type";
-    public static String NEGATIVE_EXP_CODE = "Negative experience Code";
-    public static String STAFF_PATIENT_REPORT_CONFIRM = "Confirm";
-    public static String STAFF_TREATED_PATIENT_CHECKOUT = "Check out";
-    public static String GLOBAL_YES = "Yes";
-    public static String GLOBAL_NO = "No";
-
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -63,11 +52,6 @@ public class MessageUtils {
     public enum STAFF_ENTER_VITALS {
         STAFF_ENTER_VITALS_RECORD, STAFF_ENTER_VITALS_GO_BACK
     }
-
-    public enum ADD_SYMPTOM {
-        ADD_SYMPTOM_RECORD, ADD_SYMPTOM_GO_BACK
-    }
-
 
     public enum ADDRESS{
         ADDRESS_START, ADDRESS_STREETNUM, ADDRESS_STREETNAME, ADDRESS_CITYNAME, ADDRESS_STATENAME, ADDRESS_COUNTRY
@@ -90,24 +74,8 @@ public class MessageUtils {
         STAFF_MENU_ADD_SEVERITY_SCALE, STAFF_MENU_ADD_ASSESSMENT_RULE
     }
 
-    public enum STAFF_TREATED_PATIENT {
-        STAFF_TREATED_PATIENT_CHECKOUT, STAFF_TREATED_PATIENT_GO_BACK
-    }
-
     public enum HOME {
         HOME_SIGN_IN, HOME_SIGN_UP, HOME_DEMO_QUERIES, HOME_EXIT
     }
-
-    public enum NEGATIVE_EXP {
-        NEGATIVE_EXP_CODE, GO_BACK
-    }
-    public enum STAFF_PATIENT_REPORT_CONFIR {
-        CONFIRM, GO_BACK
-    }
-
-    public enum PATIENT_CHECKOUT_ACK {
-        YES, NO, GO_BACK
-    }
-
 }
 
