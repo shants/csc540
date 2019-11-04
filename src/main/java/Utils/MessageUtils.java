@@ -7,6 +7,9 @@ public class MessageUtils {
     public static String ADDRESS_CITYNAME = "City";
     public static String ADDRESS_STATENAME = "State";
     public static String ADDRESS_COUNTRYNAME = "Country";
+    public static String ADD_REASON = "Enter Reason for Referral";
+    public static String ENTER_FACILITY_ID = "Enter Facility-id";
+    public static String ENTER_REFERRER_ID = "Enter Referrer-id";
     public static String GLOBAL_ACCESS_DENIED = "Access Denied";
     public static String GLOBAL_SPACE = " ";
     public static String GLOBAL_HYPHEN = "-";
@@ -19,10 +22,12 @@ public class MessageUtils {
     public static String GLOBAL_SELECT_FACILITY = "Select facility from below";
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
     public static String GLOBAL_GO_BACK ="Go Back";
+    public static String GLOBAL_SUBMIT = "Submit";
     public static String HOME_DEMO_QUERIES = "Demo Queries";
     public static String HOME_EXIT= "Exit";
     public static String HOME_SIGN_IN = "Sign In";
     public static String HOME_SIGN_UP = "Sign Up";
+    public static String MEDICAL_FACILITY_ID = "Enter Medical-id ";
     public static String PATIENT_FACILITY_CHECK_IN = "Enter Id to Check-in";
     public static String PATIENT_ROUTING_CHECK_IN="Check In";
     public static String PATIENT_ROUTING_CHECK_OUT_ACK="Check Out Acknowledgement";
@@ -33,6 +38,15 @@ public class MessageUtils {
     public static String PATIENT_SIGNIN_LASTNAME = "Enter last name";
     public static String PATIENT_SIGNIN_DOB = "Enter date of birth (yyyy/mm/dd)";
     public static String PATIENT_SIGNIN_CITY = "Enter city of Address";
+    public static String PATIENT_REPORT_TREATMENT = "Report the treatment";
+    public static String PATIENT_REFERRER_ID = "Enter Referrer-id";
+    public static String PATIENT_SUCCESSFUL_TREATMENT = "Patient Successfully Treated";
+    public static String PATIENT_DECEASED = "Patient Deceased";
+    public static String PATIENT_REFERRED = "Patient Referred";
+    public static String REPORT_DISCHARGE_STATUS = "Report Discharge Status";
+    public static String REPORT_REFERRAL_STATUS = "Report Referral Status";
+    public static String REPORT_TREATMENT = "Report treatment";
+    public static String REPORT_NEGATIVE_EXPERIENCE = "Report Negative Experience";
     public static String STAFF_MENU_CHECKED_IN_PATIENT = "Checked in patient list";
     public static String STAFF_MENU_TREATED_PATIENT = "Treated patient list";
     public static String STAFF_MENU_ADD_SYMPTOMS = "Add Symptoms";
@@ -76,6 +90,22 @@ public class MessageUtils {
 
     public enum HOME {
         HOME_SIGN_IN, HOME_SIGN_UP, HOME_DEMO_QUERIES, HOME_EXIT
+    }
+
+    public enum PATIENT_REPORT {
+        REPORT_DISCHARGE_STATUS, REPORT_REFERRAL_STATUS, REPORT_TREATMENT, REPORT_NEGATIVE_EXPERIENCE, GLOBAL_GO_BACK, GLOBAL_SUBMIT
+    }
+
+    public enum PATIENT_REFERRAL_STATUS {
+        MEDICAL_FACILITY_ID, PATIENT_REFERRER_ID, ADD_REASON, GLOBAL_GO_BACK
+    }
+
+    public enum SUBMIT_REASON {
+        ADD_REASON, GLOBAL_GO_BACK
+    }
+
+    public enum PATIENT_DISCHARGE_STATUS {
+        PATIENT_SUCCESSFUL_TREATMENT, PATIENT_DECEASED, PATIENT_REFERRED, GLOBAL_GO_BACK
     }
 }
 
