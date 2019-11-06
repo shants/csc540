@@ -69,6 +69,7 @@ public class SignUp extends IScreen {
                         PatientCRUD.signUp(patient,address);
                         break;
                     case PATIENT_SIGNUP_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                         break;
                     default:
                         invalidOption = true;

@@ -1,68 +1,54 @@
 package workflow;
-import Utils.CommandLineUtils;
-import Utils.HelperUtils;
-import Utils.MessageUtils;
-import Utils.IScreen;
-import db_files.FacilityCRUD;
-import entities.Facility;
-
-import java.util.ArrayList;
+import Utils.*;
+import db_files.VisitCRUD;
 
 public class PatientRouting extends IScreen {
     public void run() {
-        display();
-        boolean bContinue = true;
-        while (bContinue) {
+        boolean invalidOption;
+        do {
+            invalidOption = false;
+            display();
             String opt = CommandLineUtils.ReadInput();
             int option;
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_ROUTING options = MessageUtils.PATIENT_ROUTING.values()[option];
-                System.out.println("Please enter a valid option");
-
                 switch (options) {
                     case PATIENT_ROUTING_CHECKIN:
-                        //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_IN);
-                        ArrayList<Facility> facilityList = FacilityCRUD.readAll();
-                        for (int i = 0; i < facilityList.size(); i++) {
-                            System.out.println(facilityList.get(i).getName() + " " +
-                                    facilityList.get(i).getId());
+                        if (ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID) == null) {
+                            System.out.println(MessageUtils.SELECT_FACILITY_MESSAGE);
+                            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
+                            break;
                         }
-                        System.out.println(MessageUtils.PATIENT_FACILITY_CHECK_IN);
-                        opt = CommandLineUtils.ReadInput();
-                        option = Integer.parseInt(opt);
-                        // if valid option and not checked-in
-                        boolean alreadyCheckedIn = HelperUtils.isCheckedIn();
-                        if (!alreadyCheckedIn) {
-                            IScreen scr = new PatientCheckIn();
-                            System.out.println("Patient Checkin");
-                            scr.run();
-                            bContinue = false;
-
-                        } else {
-                            // already checked in
+                        else if(
+                            ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID) != null
+                            &&
+                            VisitCRUD.isCheckedIn()
+                        ) {
+                                System.out.println(MessageUtils.CHECKIN_MESSAGE);
+                                IScreen scr = new PatientCheckIn();
+                                scr.run();
+                        }
+                        else {
+                            invalidOption = true;
                         }
                         break;
                     case PATIENT_ROUTING_CHECK_OUT:
                         System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
-                        bContinue = false;
                         break;
                     case PATIENT_ROUTING_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                         System.out.println(MessageUtils.GLOBAL_GO_BACK);
-                        bContinue = false;
                         break;
                     default:
                         System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
-
                 }
-
             }catch (Exception e){
                 System.out.println(e.getMessage());
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
             }
-            }
-
-        }
+        } while (invalidOption);
+    }
 
     public void display(){
         System.out.println(MessageUtils.PATIENT_ROUTING.PATIENT_ROUTING_CHECKIN.ordinal()
@@ -73,6 +59,5 @@ public class PatientRouting extends IScreen {
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_GO_BACK);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
-
     }
 }

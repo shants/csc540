@@ -93,4 +93,8 @@ public class VisitCRUD {
         }
         return records;
     }
+
+    public static boolean isCheckedIn() {
+        return true;
+    }
 }

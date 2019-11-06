@@ -72,6 +72,8 @@ public class MessageUtils {
     public static String GLOBAL_NO = "No";
     public static String MAIN_PATIENT = "Visiting as a Patient";
     public static String MAIN_STAFF = "Visiting as a Staff";
+    public static String CHECKIN_MESSAGE = "Checked in successfully";
+    public static String SELECT_FACILITY_MESSAGE = "Select a facility to continue";
 
     public enum MAIN {
         MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
