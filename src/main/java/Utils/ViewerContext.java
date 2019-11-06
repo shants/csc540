@@ -9,11 +9,15 @@ import java.util.HashMap;
 public class ViewerContext {
 
     private static ViewerContext vcSingletonInstance;
-
+    private PAGES goToPage = null;
+    private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
+    private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
+    private Visit patientToCheckout;
 
     public enum IDENTIFIER_TYPES {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
+
 
     public enum PAGES {
         AddReason, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
@@ -23,15 +27,6 @@ public class ViewerContext {
         StaffTreatedPatientCheckout, StaffTreatPatient
     }
 
-    private PAGES goToPage = null;
-    private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
-    private StackFrame stackFrame;
-    private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
-    private Visit patientToCheckout;
-
-    private ViewerContext(){
-        stackFrame = StackFrame.getInstance();
-    }
 
     public PAGES getGoToPage() {
         return goToPage;
@@ -70,6 +65,7 @@ public class ViewerContext {
             return identifiers.get(type);
         }
     }
+
     public Visit getPatientToCheckout() {
         return patientToCheckout;
     }
@@ -77,8 +73,7 @@ public class ViewerContext {
     public void setPatientToCheckout(Visit patientToCheckout) {
         this.patientToCheckout = patientToCheckout;
     }
-    public StackFrame getStackFrame() {
-        return stackFrame;
-    }
+
+
     public void addSymptom(PatientSymptom ps) { symptomList.add(ps);}
 }
