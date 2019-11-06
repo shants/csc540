@@ -27,7 +27,7 @@ BEGIN
 END;';
 
 EXECUTE IMMEDIATE new_query;
-new_query := 'CREATE TABLE asses_rules'|| to_char(facility_id) || '(
+new_query := 'CREATE TABLE asses_rules_'|| to_char(facility_id) || '(
 rule_id NUMBER(10) NOT NULL,
 asses_rule VARCHAR2(50) NOT NULL,
 priority_id NUMBER(10) NOT NULL,

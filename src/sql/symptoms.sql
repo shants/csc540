@@ -44,7 +44,8 @@ sym_body_part varchar2, sym_sev_type varchar2)
 
 AUTHID CURRENT_USER IS
 new_query varchar2(5000);
-new_sym_code varchar2;
+new_sym_code varchar2(20);
+bp_code varchar2(20);
 
 BEGIN
 new_query := 'INSERT INTO SYMPTOM(symptom_name) SELECT :b1 FROM DUAL WHERE NOT EXISTS(SELECT * FROM SYMPTOM WHERE SYMPTOM_NAME = :b2)';
@@ -53,6 +54,11 @@ SELECT symptom_code into new_sym_code from SYMPTOM where symptom_name = new_sym_
 
 new_query := 'INSERT INTO BODY_PART(name) SELECT :b1 FROM DUAL WHERE NOT EXISTS(SELECT * FROM BODY_PART WHERE NAME = :b2)';
 execute immediate new_query using sym_body_part, sym_body_part;
+SELECT body_part_code into bp_code from BODY_PART where name = sym_body_part;
+
+new_query := 'INSERT INTO SYMPTOM_BODY_PART(symptom_code, body_part_code)
+VALUES(:b1, :b2)';
+execute immediate new_query using new_sym_code, bp_code;
 
 new_query := 'INSERT INTO SYMPTOM_SEVERITY_'|| to_char(sym_facility_id) ||' (type, symptom_code, staff_id)
 VALUES(:b1, :b2, :b3)';

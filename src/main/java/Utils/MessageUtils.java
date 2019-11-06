@@ -49,6 +49,8 @@ public class MessageUtils {
     public static String ADD_SYMPTOM_SYMPTOM_NAME = "Enter the symptom name";
     public static String ADD_SYMPTOM_BODY_PART = "Enter the body part";
     public static String ADD_SYMPTOM_SEVERITY_TYPE = "Enter the severity type";
+    public static String ADD_SEVERITY_RANGE = "Add the new level";
+    public static String ADD_SEVERITY_NO_LEVEL = "All the levels are added, No more levels";
     public static String NEGATIVE_EXP_CODE = "Negative experience Code";
     public static String STAFF_PATIENT_REPORT_CONFIRM = "Confirm";
     public static String STAFF_TREATED_PATIENT_CHECKOUT = "Check out";
@@ -68,6 +70,9 @@ public class MessageUtils {
         ADD_SYMPTOM_RECORD, ADD_SYMPTOM_GO_BACK
     }
 
+    public enum ADD_SEVERITY_SCALE{
+        ADD_SEVERITY_SCALE_RANGE, ADD_SEVERITY_SCALE_NO_LEVEL
+    }
 
     public enum ADDRESS{
         ADDRESS_START, ADDRESS_STREETNUM, ADDRESS_STREETNAME, ADDRESS_CITYNAME, ADDRESS_STATENAME, ADDRESS_COUNTRY
