@@ -9,7 +9,7 @@ import entities.Symptom;
 import entities.SymptomSeverity;
 import db_files.SymptomCRUD;
 
-public class AddSymptoms extends IScreen {
+public class StaffAddSymptoms extends IScreen {
 
     public void display(){
         System.out.println(MessageUtils.ADD_SYMPTOM.ADD_SYMPTOM_RECORD.ordinal()

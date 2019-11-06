@@ -44,7 +44,7 @@ public class SymptomCRUD {
             statement.setString(4, symptom.getBodyPart().getBody_part());
             statement.setString(5,symptom_severity.getType());
             statement.execute();
-            //System.out.println("New Patient signed up.");
+            System.out.println("New Symptom added.");
         } catch (SQLException e) {
             System.out.println("Unable to add a new symptom:"+e.getMessage());
         }

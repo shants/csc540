@@ -16,7 +16,7 @@ public class Home extends IScreen {
         System.out.println(MessageUtils.HOME.HOME_DEMO_QUERIES.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.HOME_DEMO_QUERIES);
         System.out.println(MessageUtils.HOME.HOME_EXIT.ordinal()
-                + MessageUtils.GLOBAL_SPACE + MessageUtils.HOME_EXIT);
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_EXIT);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
