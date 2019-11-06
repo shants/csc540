@@ -5,7 +5,7 @@ public class CommandLineUtils {
     public static String ReadInput(){
         Scanner scanner = new Scanner(System.in);
 
-        String input = scanner.next();
+        String input = scanner.nextLine();
         return input;
     }
 

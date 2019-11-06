@@ -52,8 +52,16 @@ public class SignIn extends IScreen {
                             }
                             patient.setFacilityId(facility_id);
                             PatientCRUD.signIn(patient,address);
+                            if (ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.PATIENT_ID) != null){
+                                IScreen scr = new PatientRouting();
+                                scr.run();
+                            }
+                            else {
+                                invalidOption = true;
+                            }
                             break;
                         case PATIENT_SIGNIN_GO_BACK:
+                            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                             break;
                         default:
                             invalidOption = true;

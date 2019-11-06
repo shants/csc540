@@ -1,4 +1,5 @@
 package db_files;
+import Utils.ViewerContext;
 import config.DatabaseConnection;
 import entities.Address;
 import entities.Patient;
@@ -47,13 +48,13 @@ public class PatientCRUD
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 patient_id = rs.getInt("PATIENT_ID");
-                System.out.println("Patient ID:"+ patient_id);
+                ViewerContext.getInstance().addValue(patient_id, ViewerContext.IDENTIFIER_TYPES.PATIENT_ID);
             }
             else {
                 System.out.println("No records found. Please try again.");
             }
         } catch (SQLException e) {
-            System.out.println("Error occured while signing in:"+e.getMessage());
+            System.out.println("Error occurred while signing in:"+e.getMessage());
         }
     }
 }

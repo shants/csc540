@@ -9,18 +9,37 @@ import java.util.HashMap;
 public class ViewerContext {
 
     private static ViewerContext vcSingletonInstance;
+    private PAGES goToPage = null;
+    private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
+    private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
+    private Visit patientToCheckout;
 
     public enum IDENTIFIER_TYPES {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
 
-    private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
-    private StackFrame stackFrame;
-    private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
-    private Visit patientToCheckout;
-    private ViewerContext(){
-        stackFrame = StackFrame.getInstance();
+
+    public enum PAGES {
+        AddReason, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
+        PatientCheckin, PatientCheckoutAcknowledgement, PatientRouting, PatientSymptomMeta,
+        ReferralStatus, Signin, Signup, StaffEnterVitals, StaffMenu, StaffPatientReport,
+        StaffPatientReportConfirmation, StaffProcessPatient, StaffTreatedPatient,
+        StaffTreatedPatientCheckout, StaffTreatPatient
     }
+
+
+    public PAGES getGoToPage() {
+        return goToPage;
+    }
+
+    public void setGoToPage(PAGES goToPage) {
+        this.goToPage = goToPage;
+    }
+
+    public void resetGoToPage() {
+        this.goToPage = null;
+    }
+
 
     public static ViewerContext getInstance() {
         if (vcSingletonInstance == null) {
@@ -28,6 +47,11 @@ public class ViewerContext {
         }
         return vcSingletonInstance;
     }
+
+    public static void destroyInstance() {
+        vcSingletonInstance = null;
+    }
+
 
     public void addValue(int id, IDENTIFIER_TYPES type){
         identifiers.put(type, id);
@@ -41,6 +65,7 @@ public class ViewerContext {
             return identifiers.get(type);
         }
     }
+
     public Visit getPatientToCheckout() {
         return patientToCheckout;
     }
@@ -48,8 +73,7 @@ public class ViewerContext {
     public void setPatientToCheckout(Visit patientToCheckout) {
         this.patientToCheckout = patientToCheckout;
     }
-    public StackFrame getStackFrame() {
-        return stackFrame;
-    }
+
+
     public void addSymptom(PatientSymptom ps) { symptomList.add(ps);}
 }

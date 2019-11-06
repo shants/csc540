@@ -20,6 +20,8 @@ public class StaffMenu extends IScreen {
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_MENU_ADD_SEVERITY_SCALE);
         System.out.println(MessageUtils.STAFF_MENU.STAFF_MENU_ADD_ASSESSMENT_RULE.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_MENU_ADD_ASSESSMENT_RULE);
+        System.out.println(MessageUtils.STAFF_MENU.STAFF_MENU_EXIT.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_EXIT);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
@@ -61,10 +63,14 @@ public class StaffMenu extends IScreen {
                         scr.run();
                         break;
                     case STAFF_MENU_ADD_SYMPTOMS:
+                        scr = new StaffAddSymptoms();
+                        scr.run();
                         break;
                     case STAFF_MENU_ADD_SEVERITY_SCALE:
                         break;
                     case STAFF_MENU_ADD_ASSESSMENT_RULE:
+                        break;
+                    case STAFF_MENU_EXIT:
                         break;
                     default:
                         invalidOption = true;
