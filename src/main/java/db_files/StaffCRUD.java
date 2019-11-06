@@ -1,5 +1,6 @@
 package db_files;
 
+import Utils.ViewerContext;
 import config.DatabaseConnection;
 import entities.Staff;
 import entities.Visit;
@@ -69,6 +70,27 @@ public class StaffCRUD {
             System.out.println("Patient treated. Updated Status in records. ");
         } catch (SQLException e) {
             System.out.println("Unable to treat patient:"+e.getMessage());
+        }
+    }
+
+    public static void signin(Staff staff) {
+        int staff_id;
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String staff_table = "STAFF_" + staff.getFacilityID();
+        String query = "SELECT staff_id from " + staff_table + " where name = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1,staff.getName());
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                staff_id = rs.getInt("STAFF_ID");
+                ViewerContext.getInstance().addValue(staff_id, ViewerContext.IDENTIFIER_TYPES.STAFF_ID);
+            }
+            else {
+                System.out.println("No records found. Please try again.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while signing in:"+e.getMessage());
         }
     }
 }

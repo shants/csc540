@@ -24,8 +24,8 @@ public class MessageUtils {
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
     public static String GLOBAL_GO_BACK ="Go Back";
     public static String GLOBAL_SUBMIT = "Submit";
+    public static String GLOBAL_EXIT = "Exit";
     public static String HOME_DEMO_QUERIES = "Demo Queries";
-    public static String HOME_EXIT= "Exit";
     public static String HOME_SIGN_IN = "Sign In";
     public static String HOME_SIGN_UP = "Sign Up";
     public static String MEDICAL_FACILITY_ID = "Enter Medical-id ";
@@ -66,8 +66,16 @@ public class MessageUtils {
     public static String NEGATIVE_EXP_CODE = "Negative experience Code";
     public static String STAFF_PATIENT_REPORT_CONFIRM = "Confirm";
     public static String STAFF_TREATED_PATIENT_CHECKOUT = "Check out";
+    public static String STAFF_SIGNIN_NAME = "Enter Name";
+    public static String STAFF_SIGNIN_START = "Sign in";
     public static String GLOBAL_YES = "Yes";
     public static String GLOBAL_NO = "No";
+    public static String MAIN_PATIENT = "Visiting as a Patient";
+    public static String MAIN_STAFF = "Visiting as a Staff";
+
+    public enum MAIN {
+        MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
+    }
 
     public enum PATIENT_ROUTING {
         PATIENT_ROUTING_CHECKIN, PATIENT_ROUTING_CHECK_OUT, PATIENT_ROUTING_GO_BACK
@@ -99,7 +107,7 @@ public class MessageUtils {
 
     public enum STAFF_MENU {
         STAFF_MENU_CHECKED_IN_PATIENT, STAFF_MENU_TREATED_PATIENT, STAFF_MENU_ADD_SYMPTOMS,
-        STAFF_MENU_ADD_SEVERITY_SCALE, STAFF_MENU_ADD_ASSESSMENT_RULE
+        STAFF_MENU_ADD_SEVERITY_SCALE, STAFF_MENU_ADD_ASSESSMENT_RULE, STAFF_MENU_EXIT
     }
 
     public enum STAFF_TREATED_PATIENT {
@@ -116,6 +124,10 @@ public class MessageUtils {
 
     public enum PATIENT_REFERRAL_STATUS {
         MEDICAL_FACILITY_ID, PATIENT_REFERRER_ID, ADD_REASON, GLOBAL_GO_BACK
+    }
+
+    public enum STAFF_SIGNIN {
+        STAFF_SIGNIN_START, STAFF_SIGNIN_EXIT
     }
 
     public enum SUBMIT_REASON {

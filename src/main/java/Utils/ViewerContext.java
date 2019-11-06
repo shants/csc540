@@ -10,6 +10,7 @@ public class ViewerContext {
 
     private static ViewerContext vcSingletonInstance;
 
+
     public enum IDENTIFIER_TYPES {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
@@ -51,6 +52,11 @@ public class ViewerContext {
         }
         return vcSingletonInstance;
     }
+
+    public static void destroyInstance() {
+        vcSingletonInstance = null;
+    }
+
 
     public void addValue(int id, IDENTIFIER_TYPES type){
         identifiers.put(type, id);
