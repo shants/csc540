@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 import db_files.FacilityCRUD;
 
 public class Home extends IScreen {
@@ -21,9 +22,9 @@ public class Home extends IScreen {
     }
 
     public void run() {
-        boolean invalidOption;
+        boolean invalidOption, goBack;
         do {
-            invalidOption = false;
+            invalidOption = goBack = false;
             int option;
             display();
             String opt = CommandLineUtils.ReadInput();
@@ -50,10 +51,14 @@ public class Home extends IScreen {
                         invalidOption = true;
                         break;
                 }
+                if (ViewerContext.getInstance().getGoToPage() == ViewerContext.PAGES.Home) {
+                    goBack = true;
+                    ViewerContext.getInstance().resetGoToPage();
+                }
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);
+        } while (invalidOption || goBack);
     }
 }

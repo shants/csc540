@@ -12,12 +12,11 @@ public class StackFrame {
         stack.push(screen);
     }
 
-    public void popFrame(){
+    public IScreen popFrame(){
         if (stack == null){
-            return ;
-        }else {
-            stack.pop();
+            return null;
         }
+        return (IScreen) stack.pop();
     }
 
     private StackFrame(){}

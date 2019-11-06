@@ -14,13 +14,36 @@ public class ViewerContext {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
 
+    public enum PAGES {
+        AddReason, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
+        PatientCheckin, PatientCheckoutAcknowledgement, PatientRouting, PatientSymptomMeta,
+        ReferralStatus, Signin, Signup, StaffEnterVitals, StaffMenu, StaffPatientReport,
+        StaffPatientReportConfirmation, StaffProcessPatient, StaffTreatedPatient,
+        StaffTreatedPatientCheckout, StaffTreatPatient
+    }
+
+    private PAGES goToPage = null;
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
     private StackFrame stackFrame;
     private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
     private Visit patientToCheckout;
+
     private ViewerContext(){
         stackFrame = StackFrame.getInstance();
     }
+
+    public PAGES getGoToPage() {
+        return goToPage;
+    }
+
+    public void setGoToPage(PAGES goToPage) {
+        this.goToPage = goToPage;
+    }
+
+    public void resetGoToPage() {
+        this.goToPage = null;
+    }
+
 
     public static ViewerContext getInstance() {
         if (vcSingletonInstance == null) {

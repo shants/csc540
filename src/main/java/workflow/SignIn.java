@@ -41,6 +41,7 @@ public class SignIn extends IScreen {
                     MessageUtils.PATIENT_SIGNIN options = MessageUtils.PATIENT_SIGNIN.values()[option];
                     switch (options) {
                         case PATIENT_SIGNIN_START:
+                            ViewerContext.getInstance().getStackFrame().addFrame(this);
                             patient = new Patient();
                             address = new Address();
                             displaySignIn();
@@ -54,6 +55,7 @@ public class SignIn extends IScreen {
                             PatientCRUD.signIn(patient,address);
                             break;
                         case PATIENT_SIGNIN_GO_BACK:
+                            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                             break;
                         default:
                             invalidOption = true;
