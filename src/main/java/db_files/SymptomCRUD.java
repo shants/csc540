@@ -1,7 +1,6 @@
 package db_files;
 
 import config.DatabaseConnection;
-import entities.Facility;
 import entities.Symptom;
 import entities.SymptomSeverity;
 
@@ -31,11 +30,11 @@ public class SymptomCRUD {
     }
 
 
-    public static void  symptom_add(Symptom symptom, SymptomSeverity symptom_severity){
+    public static void symptom_add(Symptom symptom, SymptomSeverity symptom_severity){
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         CallableStatement statement;
-        String procedure_call = "{call add_new_symptom(?,?,?,?,?,)}";
+        String procedure_call = "{call add_new_symptom(?,?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
             statement.setInt(1,symptom_severity.getFacilityID());
