@@ -1,6 +1,7 @@
 package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
+import Utils.ViewerContext;
 import db_files.PatientSymptomCRUD;
 import db_files.SymptomCRUD;
 import entities.Symptom;
@@ -20,25 +21,21 @@ public class PatientCheckIn extends  IScreen {
                 if (option <= totalOptions){
                     IScreen meta = new PatientSymptomMeta();
                     meta.run();
-
                 }
                 if (option == totalOptions-1){
-                    // all sysmptom meta data entered,
-                    // go back
-                    System.out.println("Hello1");
+                    // all symptom meta data entered,
+                    // save and go back
+                    PatientSymptomCRUD.addPatientSymptoms();
+                    ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                     return;
                 }
-
                 display();
                 opt = CommandLineUtils.ReadInput();
                 option = Integer.parseInt(opt);
-
             }
-
         }catch (Exception e){
             run();
         }
-        PatientSymptomCRUD.addPatientSymptoms();
     }
 
     public void display(){

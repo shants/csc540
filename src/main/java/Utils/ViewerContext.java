@@ -24,7 +24,7 @@ public class ViewerContext {
         PatientCheckin, PatientCheckoutAcknowledgement, PatientRouting, PatientSymptomMeta,
         ReferralStatus, Signin, Signup, StaffEnterVitals, StaffMenu, StaffPatientReport,
         StaffPatientReportConfirmation, StaffProcessPatient, StaffTreatedPatient,
-        StaffTreatedPatientCheckout, StaffTreatPatient
+        StaffTreatedPatientCheckout, StaffTreatPatient, StaffSignIn
     }
 
 

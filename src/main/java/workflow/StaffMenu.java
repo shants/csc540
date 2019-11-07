@@ -20,14 +20,14 @@ public class StaffMenu extends IScreen {
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_MENU_ADD_SEVERITY_SCALE);
         System.out.println(MessageUtils.STAFF_MENU.STAFF_MENU_ADD_ASSESSMENT_RULE.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.STAFF_MENU_ADD_ASSESSMENT_RULE);
-        System.out.println(MessageUtils.STAFF_MENU.STAFF_MENU_EXIT.ordinal()
-                + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_EXIT);
+        System.out.println(MessageUtils.STAFF_MENU.STAFF_MENU_GO_BACK.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.GLOBAL_GO_BACK);
         System.out.println(MessageUtils.GLOBAL_NEWLINE);
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
 
     public void run() {
-        boolean invalidOption;
+        boolean invalidOption, goBack;
         int staffID = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID) != null ?
                         ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID ): 0;
         int facilityID = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID) != null ?
@@ -37,7 +37,7 @@ public class StaffMenu extends IScreen {
             return;
         }
         do {
-            invalidOption = false;
+            invalidOption = goBack = false;
             int option;
             display();
             String opt = CommandLineUtils.ReadInput();
@@ -70,16 +70,21 @@ public class StaffMenu extends IScreen {
                         break;
                     case STAFF_MENU_ADD_ASSESSMENT_RULE:
                         break;
-                    case STAFF_MENU_EXIT:
+                    case STAFF_MENU_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffSignIn);
                         break;
                     default:
                         invalidOption = true;
                         break;
                 }
+                if (ViewerContext.getInstance().getGoToPage() == ViewerContext.PAGES.StaffMenu) {
+                    goBack = true;
+                    ViewerContext.getInstance().resetGoToPage();
+                }
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);
+        } while (invalidOption || goBack);
     }
 }

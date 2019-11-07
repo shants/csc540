@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class StaffProcessPatient extends IScreen {
     public void display() {
@@ -17,9 +18,9 @@ public class StaffProcessPatient extends IScreen {
     }
 
     public void run() {
-        boolean invalidOption;
+        boolean invalidOption, goBack;
         do {
-            invalidOption = false;
+            invalidOption = goBack = false;
             int option;
             display();
             String opt = CommandLineUtils.ReadInput();
@@ -37,15 +38,20 @@ public class StaffProcessPatient extends IScreen {
                         scr.run();
                         break;
                     case STAFF_PROCESS_PATIENT_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     default:
                         invalidOption = true;
                         break;
                 }
+                if (ViewerContext.getInstance().getGoToPage() == ViewerContext.PAGES.StaffProcessPatient) {
+                    goBack = true;
+                    ViewerContext.getInstance().resetGoToPage();
+                }
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);
+        } while (invalidOption || goBack);
     }
 }

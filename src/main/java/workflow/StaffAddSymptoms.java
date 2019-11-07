@@ -66,6 +66,7 @@ public class StaffAddSymptoms extends IScreen {
                     case ADD_SYMPTOM_RECORD:
                         enterSymptom();
                     case ADD_SYMPTOM_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     default:
                         invalidOption = true;

@@ -38,15 +38,15 @@ public class PatientRouting extends IScreen {
                         break;
                     case PATIENT_ROUTING_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
-                        System.out.println(MessageUtils.GLOBAL_GO_BACK);
                         break;
                     default:
-                        System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
                         invalidOption = true;
+                        break;
                 }
             }catch (Exception e){
-                System.out.println(e.getMessage());
-                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                invalidOption = true;
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR +
+                        MessageUtils.GLOBAL_DELIMITER + e.getMessage());
             }
         } while (invalidOption);
     }

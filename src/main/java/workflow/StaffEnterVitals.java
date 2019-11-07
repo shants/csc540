@@ -84,6 +84,7 @@ public class StaffEnterVitals extends IScreen {
                     case STAFF_ENTER_VITALS_RECORD:
                         enterVitals();
                     case STAFF_ENTER_VITALS_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffProcessPatient);
                         break;
                     default:
                         invalidOption = true;
