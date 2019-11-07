@@ -20,11 +20,11 @@ public class ViewerContext {
 
 
     public enum PAGES {
-        AddReason, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
+        AddReason, AddSeverityScale, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
         PatientCheckin, PatientCheckoutAcknowledgement, PatientRouting, PatientSymptomMeta,
-        ReferralStatus, Signin, Signup, StaffEnterVitals, StaffMenu, StaffPatientReport,
-        StaffPatientReportConfirmation, StaffProcessPatient, StaffTreatedPatient,
-        StaffTreatedPatientCheckout, StaffTreatPatient, StaffSignIn
+        ReferralStatus, Signin, Signup, StaffAddSymptoms, StaffEnterVitals, StaffMenu, StaffPatientReport,
+        StaffPatientReportConfirmation, StaffProcessPatient, StaffSignIn, StaffTreatedPatient,
+        StaffTreatedPatientCheckout, StaffTreatPatient
     }
 
 

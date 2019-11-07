@@ -27,11 +27,9 @@ public class NegativeExperience extends IScreen {
                 switch (options) {
                     case NEGATIVE_EXP_CODE:
                         System.out.println("NEGATIVE_EXP_CODE");
-                        invalidOption = false;
                         break;
                     case GO_BACK:
-                        System.out.println("GO BACK");
-                        invalidOption = false;
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
                         break;
                     default:
                         invalidOption = true;
@@ -40,5 +38,6 @@ public class NegativeExperience extends IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);    }
+        } while (invalidOption);
+    }
 }

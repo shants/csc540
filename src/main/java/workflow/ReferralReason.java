@@ -3,8 +3,9 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
-public class AddReason extends IScreen {
+public class ReferralReason extends IScreen {
     public void display() {
         System.out.println(MessageUtils.SUBMIT_REASON.ADD_REASON.ordinal()
                 + MessageUtils.GLOBAL_SPACE + MessageUtils.ADD_REASON);
@@ -30,7 +31,7 @@ public class AddReason extends IScreen {
                         // ADD Reason
                         break;
                     case GLOBAL_GO_BACK:
-                        // Do Something
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.ReferralStatus);
                         break;
                     default:
                         invalidOption = true;

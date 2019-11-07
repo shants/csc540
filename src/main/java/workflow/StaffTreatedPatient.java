@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class StaffTreatedPatient extends IScreen {
     public void display() {
@@ -31,6 +32,7 @@ public class StaffTreatedPatient extends IScreen {
                         scr.run();
                         break;
                     case STAFF_TREATED_PATIENT_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     default:
                         invalidOption = true;

@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class PatientCheckoutAcknowledgement extends IScreen {
     public void display(){
@@ -27,16 +28,15 @@ public class PatientCheckoutAcknowledgement extends IScreen {
                 MessageUtils.PATIENT_CHECKOUT_ACK options = MessageUtils.PATIENT_CHECKOUT_ACK.values()[option];
                 switch (options) {
                     case YES:
-                        System.out.println("YES");
-                        invalidOption = false;
+                        // YES
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.PatientRouting);
                         break;
                     case NO:
                         System.out.println("NO");
-                        invalidOption = false;
                         break;
                     case GO_BACK:
-                        System.out.println("Go back");
-                        invalidOption = false;
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.PatientRouting);
+                        break;
                     default:
                         invalidOption = true;
                 }
@@ -44,5 +44,6 @@ public class PatientCheckoutAcknowledgement extends IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);    }
+        } while (invalidOption);
+    }
 }

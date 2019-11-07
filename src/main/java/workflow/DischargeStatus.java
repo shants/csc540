@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class DischargeStatus extends IScreen {
 
@@ -41,6 +42,7 @@ public class DischargeStatus extends IScreen {
                         // Do Something
                         break;
                     case GLOBAL_GO_BACK:
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
                         break;
                     default:
                         invalidOption = true;

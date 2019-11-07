@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class StaffPatientReportConfirmation extends IScreen {
     public void display(){
@@ -27,12 +28,12 @@ public class StaffPatientReportConfirmation extends IScreen {
                 MessageUtils.STAFF_PATIENT_REPORT_CONFIR options = MessageUtils.STAFF_PATIENT_REPORT_CONFIR.values()[option];
                 switch (options) {
                     case CONFIRM:
-                        System.out.println("STAFF_PATIENT_REPORT_CONFIR");
+                        // CONFIRM
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         invalidOption = false;
                         break;
                     case GO_BACK:
-                        System.out.println("GO BACK");
-                        invalidOption = false;
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
                         break;
                     default:
                         invalidOption = true;

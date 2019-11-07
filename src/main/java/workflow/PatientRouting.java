@@ -4,9 +4,9 @@ import db_files.VisitCRUD;
 
 public class PatientRouting extends IScreen {
     public void run() {
-        boolean invalidOption;
+        boolean invalidOption, goBack;
         do {
-            invalidOption = false;
+            invalidOption = goBack =false;
             display();
             String opt = CommandLineUtils.ReadInput();
             int option;
@@ -43,12 +43,16 @@ public class PatientRouting extends IScreen {
                         invalidOption = true;
                         break;
                 }
+                if (ViewerContext.getInstance().getGoToPage() == ViewerContext.PAGES.PatientRouting) {
+                    goBack = true;
+                    ViewerContext.getInstance().resetGoToPage();
+                }
             }catch (Exception e){
                 invalidOption = true;
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR +
                         MessageUtils.GLOBAL_DELIMITER + e.getMessage());
             }
-        } while (invalidOption);
+        } while (invalidOption || goBack);
     }
 
     public void display(){

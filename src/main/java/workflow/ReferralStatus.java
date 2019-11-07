@@ -3,6 +3,7 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
+import Utils.ViewerContext;
 
 public class ReferralStatus extends IScreen {
 
@@ -20,9 +21,9 @@ public class ReferralStatus extends IScreen {
     }
 
     public void run() {
-        boolean invalidOption;
+        boolean invalidOption, goBack;
         do {
-            invalidOption = false;
+            invalidOption = goBack = false;
             int option;
             display();
             String opt = CommandLineUtils.ReadInput();
@@ -40,19 +41,23 @@ public class ReferralStatus extends IScreen {
                         String referrer_id = CommandLineUtils.ReadInput();
                         break;
                     case ADD_REASON:
-                        scr = new AddReason();
+                        scr = new ReferralReason();
                         scr.run();
                         break;
                     case GLOBAL_GO_BACK:
-                        // Do Something
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
                     default:
                         invalidOption = true;
                         break;
+                }
+                if (ViewerContext.getInstance().getGoToPage() == ViewerContext.PAGES.ReferralStatus) {
+                    goBack = true;
+                    ViewerContext.getInstance().resetGoToPage();
                 }
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);
+        } while (invalidOption || goBack);
     }
 }
