@@ -64,6 +64,5 @@ new_query := 'INSERT INTO SYMPTOM_SEVERITY_'|| to_char(sym_facility_id) ||' (typ
 VALUES(:b1, :b2, :b3)';
 execute immediate new_query using sym_sev_type, new_sym_code, sym_staff_id;
 
-EXECUTE IMMEDIATE new_query;
 end add_new_symptom;
 /
