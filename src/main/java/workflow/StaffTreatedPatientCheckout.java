@@ -4,7 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
-import db_files.VisitCRUD;
+import db_utils.VisitCRUD;
 import entities.Facility;
 import entities.Visit;
 

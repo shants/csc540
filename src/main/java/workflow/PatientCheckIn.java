@@ -2,8 +2,8 @@ package workflow;
 import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.ViewerContext;
-import db_files.PatientSymptomCRUD;
-import db_files.SymptomCRUD;
+import db_utils.PatientSymptomCRUD;
+import db_utils.SymptomCRUD;
 import entities.Symptom;
 
 import java.util.ArrayList;

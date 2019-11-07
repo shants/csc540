@@ -1,6 +1,6 @@
 package workflow;
 import Utils.*;
-import db_files.VisitCRUD;
+import db_utils.VisitCRUD;
 
 public class PatientRouting extends IScreen {
     public void run() {

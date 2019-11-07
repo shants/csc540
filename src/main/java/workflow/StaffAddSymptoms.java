@@ -7,7 +7,7 @@ import Utils.ViewerContext;
 import entities.BodyPart;
 import entities.Symptom;
 import entities.SymptomSeverity;
-import db_files.SymptomCRUD;
+import db_utils.SymptomCRUD;
 
 public class StaffAddSymptoms extends IScreen {
 

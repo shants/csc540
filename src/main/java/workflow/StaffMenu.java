@@ -4,7 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
-import db_files.StaffCRUD;
+import db_utils.StaffCRUD;
 import entities.Staff;
 
 public class StaffMenu extends IScreen {

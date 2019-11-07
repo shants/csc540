@@ -1,4 +1,4 @@
-package db_files;
+package db_utils;
 
 public class PatientSymptomCRUD {
     public static void addPatientSymptoms(){

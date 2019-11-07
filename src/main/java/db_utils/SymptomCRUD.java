@@ -1,4 +1,4 @@
-package db_files;
+package db_utils;
 
 import config.DatabaseConnection;
 import entities.Symptom;

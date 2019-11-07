@@ -4,7 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
-import db_files.FacilityCRUD;
+import db_utils.FacilityCRUD;
 
 public class Home extends IScreen {
 
