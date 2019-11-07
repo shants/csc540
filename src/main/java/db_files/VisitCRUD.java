@@ -1,5 +1,6 @@
 package db_files;
 
+import Utils.ViewerContext;
 import config.DatabaseConnection;
 import entities.Facility;
 import entities.Visit;
@@ -95,6 +96,34 @@ public class VisitCRUD {
     }
 
     public static boolean isCheckedIn() {
-        return true;
+        Integer pid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.PATIENT_ID);
+        if (pid == null){
+            return false;
+        }
+
+        Integer fid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
+        if (fid == null){
+            return false;
+        }
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String visit_table = "VISIT_" + fid.toString();
+        String query = "SELECT count(*) from " + visit_table + " where IS_TREATED is null " +
+                "and END_TIME is null and PATIENT_ID = " + pid.toString();
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                // if in the loop atleast 1 entry exists => pateint already checked in
+                if (rs.getInt("COUNT(*)")==0){
+                    return false;
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while fetching patient, facility, visit " +e.getMessage());
+        }
+
+        return false;
     }
 }

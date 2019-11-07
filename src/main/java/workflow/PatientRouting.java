@@ -23,7 +23,7 @@ public class PatientRouting extends IScreen {
                         else if(
                             ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID) != null
                             &&
-                            VisitCRUD.isCheckedIn()
+                            !VisitCRUD.isCheckedIn()
                         ) {
                                 System.out.println(MessageUtils.CHECKIN_MESSAGE);
                                 IScreen scr = new PatientCheckIn();
@@ -42,6 +42,7 @@ public class PatientRouting extends IScreen {
                         break;
                     default:
                         System.out.println(MessageUtils.GLOBAL_UNABLE_TO_HANDLE);
+                        invalidOption = true;
                 }
             }catch (Exception e){
                 System.out.println(e.getMessage());
