@@ -60,17 +60,19 @@ public class SymptomCRUD {
         for(int i=0; i < s_values.size(); i++){
             scale_values[i] = s_values.get(i);
         }
-        ArrayDescriptor arrDesc = ArrayDescriptor.createDescriptor("SEV_SCALE_ARRAY", connection);
-        Array sev_scale_list = new ARRAY(arrDesc, connection, scale_values);
+
         String procedure_call = "{call Add_severity_scale(?,?,?,?)}";
         try {
+
+            ArrayDescriptor arrDesc = ArrayDescriptor.createDescriptor("SEV_SCALE_ARRAY", connection);
+            Array sev_scale_list = new ARRAY(arrDesc, connection, scale_values);
+
             statement = connection.prepareCall(procedure_call);
             statement.setInt(1,symptom_severity.getFacilityID());
             statement.setInt(2,symptom_severity.getStaffID());
             statement.setString(3,symptom.getSymptom_name());
             statement.setArray(4,sev_scale_list);
             statement.execute();
-
             System.out.println("New Severity Scale added.");
         } catch (SQLException e) {
             System.out.println("Unable to add a new severityscale:"+e.getMessage());

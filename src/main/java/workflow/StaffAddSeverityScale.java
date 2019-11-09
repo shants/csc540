@@ -50,6 +50,7 @@ public class StaffAddSeverityScale extends IScreen{
                         System.out.println("Enter the Scale value:");
                         scale_values.add(CommandLineUtils.ReadInput());
                         invalidOption = true;
+                        break;
                     case ADD_SEVERITY_SCALE_NO_LEVEL:
                         CompleteSeverityScale(scale_values);
                         break;
