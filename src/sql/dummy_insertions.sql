@@ -9,16 +9,15 @@ INSERT INTO COUNTRY(country_name) VALUES('UK');
 
 execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS HOSPITAL','PRIMARY', 200);
 
-
 INSERT INTO staff_department_type(type_name) values ('MEDICAL');
 INSERT INTO staff_department_type(type_name) values ('NONMEDICAL');
 
 INSERT INTO certification(certification_name) values ('ISO-9011');
 INSERT INTO certification(certification_name) values ('ISO-9012');
 
-insert into staff_1(name, hire_date, designation, type_id) values ('DR A', TO_DATE('2019/10/26', 'yyyy/mm/dd'), 'Admin', 1);
-insert into staff_1(name, hire_date, designation, type_id) values ('DR B', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'vp', 1);
-insert into staff_1(name, hire_date, designation, type_id) values ('ABC', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 'office', 2);
+insert into staff_1(name, hire_date, type_id) values ('DR A', TO_DATE('2019/10/26', 'yyyy/mm/dd'),  1);
+insert into staff_1(name, hire_date, type_id) values ('DR B', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 1);
+insert into staff_1(name, hire_date, type_id) values ('ABC', TO_DATE('2019/10/25', 'yyyy/mm/dd'), 2);
 
 insert into facility_certificates(facility_id, certification_id, start_date, end_date)
 values (1,1,TO_DATE('2019/10/26', 'yyyy/mm/dd'), TO_DATE('2029/10/25', 'yyyy/mm/dd'));
@@ -129,6 +128,16 @@ body_temperature  = 120, priority_id =  2, is_treated = 'Y' where visit_id = 2;
 
 insert into negative_experience(exp_name) values('Misdiagnosis');
 insert into negative_experience(exp_name) values('Acquired infection during stay');
+
+insert into rules_symptoms_1(staff_id, symptom_code) values(1, 'SYM1');
+insert into rules_symptoms_1(staff_id, symptom_code) values(1, 'SYM2');
+insert into rules_symptoms_1(staff_id, symptom_code) values(1, 'SYM3');
+insert into rules_symptoms_1(staff_id, symptom_code) values(1, 'SYM4');
+
+insert into asses_rules_1(rule_id, asses_rule, priority_id) values(1,'Value greater than 3', 1);
+insert into asses_rules_1(rule_id, asses_rule, priority_id) values(2,'Value is MID', 2);
+insert into asses_rules_1(rule_id, asses_rule, priority_id) values(2,'Value is HIGH', 1);
+insert into asses_rules_1(rule_id, asses_rule, priority_id) values(3,'Value is HIGH', 1);
 
 /* last statement always*/
 execute commit ;

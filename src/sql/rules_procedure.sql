@@ -31,7 +31,7 @@ new_query := 'CREATE TABLE asses_rules_'|| to_char(facility_id) || '(
 rule_id NUMBER(10) NOT NULL,
 asses_rule VARCHAR2(50) NOT NULL,
 priority_id NUMBER(10) NOT NULL,
-CONSTRAINT asses_rules_'||to_char(facility_id)||'_key PRIMARY KEY (rule_id),
+CONSTRAINT asses_rules_'||to_char(facility_id)||'_key PRIMARY KEY (rule_id, priority_id),
 CONSTRAINT fk_ass_rules_rule_id_'||to_char(facility_id)||' FOREIGN KEY (rule_id) REFERENCES rules_symptoms_'||to_char(facility_id)||'(rule_id),
 CONSTRAINT fk_ass_rules_priority_'|| to_char(facility_id) || ' FOREIGN KEY (priority_id) REFERENCES priority(priority_id) ON DELETE SET NULL)';
 EXECUTE IMMEDIATE new_query;

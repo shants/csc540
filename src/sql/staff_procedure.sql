@@ -10,7 +10,6 @@ new_query := 'CREATE TABLE staff_'|| to_char(facility_id) || '(
 staff_id NUMBER(10) NOT NULL,
 name VARCHAR2(50) NOT NULL,
 hire_date DATE,
-designation VARCHAR2(50) NOT NULL,
 type_id NUMBER(10) NOT NULL,
 CONSTRAINT staff_id_'|| to_char(facility_id) || '_key PRIMARY KEY (staff_id))';
 

@@ -55,5 +55,6 @@ create_staff_serv_dept(v_facility_id);
 new_serv_dept_spec(v_facility_id);
 create_new_service(v_facility_id);
 create_new_report(v_facility_id);
+new_rules_tables(v_facility_id);
 end create_new_facility;
 /
