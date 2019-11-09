@@ -11,6 +11,7 @@ public class ViewerContext {
     private static ViewerContext vcSingletonInstance;
     private PAGES goToPage = null;
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
+    private HashMap<IDENTIFIER_NAMES, String> Names = new HashMap<>();
     private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
     private Visit patientToCheckout;
 
@@ -18,6 +19,9 @@ public class ViewerContext {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
 
+    public enum IDENTIFIER_NAMES{
+        SYMPTOM_NAME
+    }
 
     public enum PAGES {
         AddReason, AddSeverityScale, AddSymptoms, DischargeStatus, Home, MainFlow, NegativeExperience,
@@ -53,9 +57,9 @@ public class ViewerContext {
     }
 
 
-    public void addValue(int id, IDENTIFIER_TYPES type){
-        identifiers.put(type, id);
-    }
+    public void addValue(int id, IDENTIFIER_TYPES type){ identifiers.put(type, id); }
+
+    public void addNames(String name, IDENTIFIER_NAMES type) {Names.put(type, name); }
 
     public Integer getValue(IDENTIFIER_TYPES type) {
         if (!identifiers.containsKey(type)){
@@ -63,6 +67,15 @@ public class ViewerContext {
         }
         else {
             return identifiers.get(type);
+        }
+    }
+
+    public String getNames(IDENTIFIER_NAMES type) {
+        if (!Names.containsKey(type)){
+            return null;
+        }
+        else {
+            return Names.get(type);
         }
     }
 

@@ -66,3 +66,29 @@ execute immediate new_query using sym_sev_type, new_sym_code, sym_staff_id;
 
 end add_new_symptom;
 /
+
+/* procedure for adding the severity scale */
+CREATE OR REPLACE TYPE sev_scale_array AS VARRAY(100) OF VARCHAR2(40);
+/
+
+CREATE OR REPLACE PROCEDURE Add_severity_scale
+(sc_facility_id number, sc_staff_id number,
+sc_sym_name varchar2, sev_scale_values sev_scale_array )
+
+AS
+new_query varchar2(5000);
+sym_code varchar2(20);
+sev_id number;
+
+BEGIN
+SELECT symptom_code into sym_code from SYMPTOM where symptom_name = sc_sym_name;
+new_query := 'SELECT symptom_severity_id FROM SYMPTOM_SEVERITY_'||to_char(sc_facility_id)||
+' WHERE SYMPTOM_CODE =:b2 AND STAFF_ID =:b3';
+execute immediate new_query into sev_id using sym_code,sc_staff_id;
+FOR i IN 1..sev_scale_values.COUNT
+  LOOP
+    new_query := 'INSERT INTO SEVERITY_SCALE_'||to_char(sc_facility_id)||'(symptom_severity_id, index_number, value) VALUES(:b1, :b2, :b3)';
+    execute immediate new_query using sev_id, i, sev_scale_values(i);
+  END LOOP;
+END Add_severity_scale;
+/

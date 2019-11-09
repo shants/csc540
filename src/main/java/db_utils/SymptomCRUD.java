@@ -6,6 +6,9 @@ import entities.SymptomSeverity;
 
 import java.sql.*;
 import java.util.ArrayList;
+import oracle.jdbc.*;
+import oracle.sql.*;
+
 
 public class SymptomCRUD {
     public static ArrayList<Symptom> read() {
@@ -47,5 +50,31 @@ public class SymptomCRUD {
         } catch (SQLException e) {
             System.out.println("Unable to add a new symptom:"+e.getMessage());
         }
+    }
+
+    public static void add_new_severity_scale(ArrayList<String> s_values, Symptom symptom, SymptomSeverity symptom_severity){
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        CallableStatement statement;
+        String[] scale_values = new String[s_values.size()];
+        for(int i=0; i < s_values.size(); i++){
+            scale_values[i] = s_values.get(i);
+        }
+        ArrayDescriptor arrDesc = ArrayDescriptor.createDescriptor("SEV_SCALE_ARRAY", connection);
+        Array sev_scale_list = new ARRAY(arrDesc, connection, scale_values);
+        String procedure_call = "{call Add_severity_scale(?,?,?,?)}";
+        try {
+            statement = connection.prepareCall(procedure_call);
+            statement.setInt(1,symptom_severity.getFacilityID());
+            statement.setInt(2,symptom_severity.getStaffID());
+            statement.setString(3,symptom.getSymptom_name());
+            statement.setArray(4,sev_scale_list);
+            statement.execute();
+
+            System.out.println("New Severity Scale added.");
+        } catch (SQLException e) {
+            System.out.println("Unable to add a new severityscale:"+e.getMessage());
+        }
+
     }
 }
