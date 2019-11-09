@@ -4,6 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import entities.ReportRefererral;
 
 public class ReferralReason extends IScreen {
     public void display() {
@@ -15,6 +16,32 @@ public class ReferralReason extends IScreen {
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
 
+    public void display_reason() {
+        System.out.println(MessageUtils.REASON_CODE.SERVICE_UNAVAILABLE_TIME.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.SERVICE_UNAVAILABLE_TIME);
+        System.out.println(MessageUtils.REASON_CODE.SERVICE_NOT_PRESENT.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.SERVICE_NOT_PRESENT);
+        System.out.println(MessageUtils.REASON_CODE.NON_PAYMENT.ordinal()
+                + MessageUtils.GLOBAL_SPACE + MessageUtils.NON_PAYMENT);
+        System.out.println(MessageUtils.GLOBAL_NEWLINE);
+        System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
+    }
+
+    public String getReasonFromCode(int code) {
+        MessageUtils.REASON_CODE options = MessageUtils.REASON_CODE.values()[code];
+        switch (options) {
+            case SERVICE_UNAVAILABLE_TIME:
+                return MessageUtils.SERVICE_UNAVAILABLE_TIME;
+            case SERVICE_NOT_PRESENT:
+                return MessageUtils.SERVICE_NOT_PRESENT;
+            case NON_PAYMENT:
+                return MessageUtils.NON_PAYMENT;
+            default:
+                break;
+        }
+        return "INVALID CODE";
+    }
+
     public void run() {
         boolean invalidOption;
         do {
@@ -24,13 +51,15 @@ public class ReferralReason extends IScreen {
             String opt = CommandLineUtils.ReadInput();
             try {
                 option = Integer.parseInt(opt);
-                MessageUtils.PATIENT_REFERRAL_STATUS options = MessageUtils.PATIENT_REFERRAL_STATUS.values()[option];
-                //IScreen scr;
+                MessageUtils.SUBMIT_REASON options = MessageUtils.SUBMIT_REASON.values()[option];
                 switch (options) {
                     case ADD_REASON:
-                        System.out.println(MessageUtils.REFERRAL_CODE + MessageUtils.GLOBAL_DELIMITER);
-                        String cod = CommandLineUtils.ReadInput();
-                        int code = Integer.parseInt(cod);
+                        display_reason();
+                        String code = CommandLineUtils.ReadInput();
+                        int reason_code = Integer.parseInt(code);
+                        String reason = getReasonFromCode(reason_code);
+                        ReportRefererral rep = new ReportRefererral();
+                        rep.setReason(reason);
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.ReferralStatus);

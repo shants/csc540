@@ -4,6 +4,8 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import entities.ReportRefererral;
+import oracle.jdbc.aq.AQMessageProperties;
 
 public class DischargeStatus extends IScreen {
 
@@ -30,16 +32,20 @@ public class DischargeStatus extends IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_DISCHARGE_STATUS options = MessageUtils.PATIENT_DISCHARGE_STATUS.values()[option];
-                //IScreen scr;
+                ReportRefererral rep = new ReportRefererral();
+                String status;
                 switch (options) {
                     case PATIENT_SUCCESSFUL_TREATMENT:
-                        // Do Something
+                        status = MessageUtils.PATIENT_SUCCESSFUL_TREATMENT;
+                        rep.setDischarge_status(status);
                         break;
                     case PATIENT_DECEASED:
-                        // Do Something
+                        status = MessageUtils.PATIENT_DECEASED;
+                        rep.setDischarge_status(status);
                         break;
                     case PATIENT_REFERRED:
-                        // Do Something
+                        status = MessageUtils.PATIENT_REFERRED;
+                        rep.setDischarge_status(status);
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);

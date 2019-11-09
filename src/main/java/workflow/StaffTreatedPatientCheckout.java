@@ -41,5 +41,7 @@ public class StaffTreatedPatientCheckout extends IScreen {
 
     public void run() {
         display();
+        IScreen scr  =  new StaffPatientReport();
+        scr.run();
     }
 }

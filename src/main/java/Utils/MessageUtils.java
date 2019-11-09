@@ -78,11 +78,13 @@ public class MessageUtils {
     public static String PATIENT_SYM_META_REOCCUR = "ReOccuring Yes / No";
     public static String PATIENT_SYM_META_SEV = "Severity NA if not applicable";
     public static String PATIENT_SYM_META_CAUSE = "Cause ( incident ) NA if not applicable";
-
     public static String MAIN_PATIENT = "Visiting as a Patient";
     public static String MAIN_STAFF = "Visiting as a Staff";
     public static String CHECKIN_MESSAGE = "Checked in successfully";
     public static String SELECT_FACILITY_MESSAGE = "Select a facility to continue";
+    public static String SERVICE_UNAVAILABLE_TIME = "service unavailable at that time";
+    public static String SERVICE_NOT_PRESENT = "service not present at facility";
+    public static String NON_PAYMENT = "non-payment";
 
     public enum MAIN {
         MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
@@ -165,5 +167,8 @@ public class MessageUtils {
         YES, NO, GO_BACK
     }
 
+    public enum REASON_CODE {
+        SERVICE_UNAVAILABLE_TIME, SERVICE_NOT_PRESENT, NON_PAYMENT
+    }
 }
 

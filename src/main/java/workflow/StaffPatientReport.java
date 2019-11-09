@@ -4,6 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import entities.ReportRefererral;
 
 public class StaffPatientReport extends IScreen {
 
@@ -47,6 +48,9 @@ public class StaffPatientReport extends IScreen {
                     case REPORT_TREATMENT:
                         System.out.println(MessageUtils.PATIENT_REPORT_TREATMENT + MessageUtils.GLOBAL_DELIMITER);
                         String treatment = CommandLineUtils.ReadInput();
+                        ReportRefererral rep = new ReportRefererral();
+                        rep.setTreatment(treatment);
+                        invalidOption = true;
                         break;
                     case REPORT_NEGATIVE_EXPERIENCE:
                         scr = new NegativeExperience();

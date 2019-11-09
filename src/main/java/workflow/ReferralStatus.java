@@ -4,6 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import entities.ReportRefererral;
 
 public class ReferralStatus extends IScreen {
 
@@ -31,14 +32,19 @@ public class ReferralStatus extends IScreen {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_REFERRAL_STATUS options = MessageUtils.PATIENT_REFERRAL_STATUS.values()[option];
                 IScreen scr;
+                ReportRefererral rep = new ReportRefererral();
                 switch (options) {
                     case MEDICAL_FACILITY_ID:
                         System.out.println(MessageUtils.ENTER_FACILITY_ID + MessageUtils.GLOBAL_DELIMITER);
-                        String facility_id = CommandLineUtils.ReadInput();
+                        String input = CommandLineUtils.ReadInput();
+                        int facility_id = Integer.parseInt(input);
+                        rep.setFacility_id(facility_id);
                         break;
                     case PATIENT_REFERRER_ID:
                         System.out.println(MessageUtils.ENTER_REFERRER_ID + MessageUtils.GLOBAL_DELIMITER);
-                        String referrer_id = CommandLineUtils.ReadInput();
+                        String refer = CommandLineUtils.ReadInput();
+                        int referrer_id = Integer.parseInt(refer);
+                        rep.setFacility_id(referrer_id);
                         break;
                     case ADD_REASON:
                         scr = new ReferralReason();
