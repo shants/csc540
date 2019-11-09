@@ -126,4 +126,38 @@ public class VisitCRUD {
 
         return false;
     }
+
+    public static boolean insertCheckInInfo() {
+        int visit_id = -1;
+        Integer pid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.PATIENT_ID);
+        if (pid == null){
+            return false;
+        }
+
+        Integer fid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
+        if (fid == null){
+            return false;
+        }
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String visit_table = "VISIT_" + fid.toString();
+        String query = "INSERT into " + visit_table + " (PATIENT_ID, START_TIME) " +
+                "values( ? , ? )";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query, new String[]{"VISIT_ID"});
+            ps.setInt(1, fid);
+            ps.setTimestamp(2,  new java.sql.Timestamp(System.currentTimeMillis()));
+
+            boolean row_affected  = ps.execute();
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+                visit_id = rs.getInt(1);
+                ViewerContext.getInstance().addValue(visit_id, ViewerContext.IDENTIFIER_TYPES.VISIT_ID);
+        } catch (SQLException e) {
+            System.out.println("Error occurred while inserting for check_in " +e.getMessage());
+        }
+
+        return false;
+    }
+
 }

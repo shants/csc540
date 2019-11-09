@@ -87,6 +87,7 @@ public class ViewerContext {
         this.patientToCheckout = patientToCheckout;
     }
 
-
     public void addSymptom(PatientSymptom ps) { symptomList.add(ps);}
+
+    public ArrayList<PatientSymptom> getSymptoms() { return symptomList;}
 }

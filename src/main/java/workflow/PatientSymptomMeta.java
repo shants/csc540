@@ -35,6 +35,7 @@ public class PatientSymptomMeta extends IScreen {
         pSym.setIsRecurring(reoccuring);
         pSym.setSeverityValue(severity);
         pSym.setBodyPart(bodyPart);
+        //pSym.setVisitID(ViewerContext.getInstance().getPatientToCheckout().getVisit_id());
 
         ViewerContext.getInstance().addSymptom(pSym);
         return;
