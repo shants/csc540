@@ -4,6 +4,7 @@ import Utils.IScreen;
 import Utils.ViewerContext;
 import db_utils.PatientSymptomCRUD;
 import db_utils.SymptomCRUD;
+import db_utils.VisitCRUD;
 import entities.Symptom;
 
 import java.util.ArrayList;
@@ -17,17 +18,21 @@ public class PatientCheckIn extends  IScreen {
         int option;
         try {
             option = Integer.parseInt(opt);
-            while (option!= totalOptions){
-                if (option <= totalOptions){
-                    IScreen meta = new PatientSymptomMeta();
-                    meta.run();
-                }
-                if (option == totalOptions-1){
+            while (true){
+                if (option == totalOptions){
                     // all symptom meta data entered,
                     // save and go back
+                    VisitCRUD.insertCheckInInfo();
                     PatientSymptomCRUD.addPatientSymptoms();
                     ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                     return;
+                }
+                else if (option == totalOptions-1){
+                    // add for others
+                }
+                else if (option < totalOptions){
+                    IScreen meta = new PatientSymptomMeta();
+                    meta.run();
                 }
                 display();
                 opt = CommandLineUtils.ReadInput();
@@ -41,8 +46,6 @@ public class PatientCheckIn extends  IScreen {
     public void display(){
         this.symptomsList  = SymptomCRUD.read();
         int cSymptoms = symptomsList.size();
-        //System.out.println("loggin : PatientCheckIn");
-        //System.out.println(arr);
         for(int i=0; i < symptomsList.size(); i++){
             System.out.println(Integer.toString(i) + " "  + ((Symptom)symptomsList.get(i)).getSymptom_name());
         }
