@@ -34,13 +34,13 @@ public class StaffAddSeverityScale extends IScreen{
 
     public void run(){
 
+        ArrayList<String> scale_values= new ArrayList<>();
         boolean invalidOption;
         do {
             invalidOption = false;
             int option;
             display();
             String opt = CommandLineUtils.ReadInput();
-            ArrayList<String> scale_values= new ArrayList<>();
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.ADD_SEVERITY_SCALE options = MessageUtils.ADD_SEVERITY_SCALE.values()[option];

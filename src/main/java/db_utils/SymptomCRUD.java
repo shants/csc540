@@ -66,7 +66,6 @@ public class SymptomCRUD {
 
             ArrayDescriptor arrDesc = ArrayDescriptor.createDescriptor("SEV_SCALE_ARRAY", connection);
             Array sev_scale_list = new ARRAY(arrDesc, connection, scale_values);
-
             statement = connection.prepareCall(procedure_call);
             statement.setInt(1,symptom_severity.getFacilityID());
             statement.setInt(2,symptom_severity.getStaffID());
