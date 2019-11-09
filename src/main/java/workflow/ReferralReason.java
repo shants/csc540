@@ -28,7 +28,9 @@ public class ReferralReason extends IScreen {
                 //IScreen scr;
                 switch (options) {
                     case ADD_REASON:
-                        // ADD Reason
+                        System.out.println(MessageUtils.REFERRAL_CODE + MessageUtils.GLOBAL_DELIMITER);
+                        String cod = CommandLineUtils.ReadInput();
+                        int code = Integer.parseInt(cod);
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.ReferralStatus);

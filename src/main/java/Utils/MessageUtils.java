@@ -48,6 +48,7 @@ public class MessageUtils {
     public static String REPORT_REFERRAL_STATUS = "Report Referral Status";
     public static String REPORT_TREATMENT = "Report treatment";
     public static String REPORT_NEGATIVE_EXPERIENCE = "Report Negative Experience";
+    public static String REFERRAL_CODE = "Enter Referral Code";
     public static String STAFF_MENU_CHECKED_IN_PATIENT = "Checked in patient list";
     public static String STAFF_MENU_TREATED_PATIENT = "Treated patient list";
     public static String STAFF_MENU_ADD_SYMPTOMS = "Add Symptoms";

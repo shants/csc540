@@ -34,6 +34,8 @@ public class PatientRouting extends IScreen {
                         }
                         break;
                     case PATIENT_ROUTING_CHECK_OUT:
+                        IScreen scr = new StaffPatientReport();
+                        scr.run();
                         System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
                         break;
                     case PATIENT_ROUTING_GO_BACK:
