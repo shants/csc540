@@ -39,19 +39,23 @@ public class ReferralStatus extends IScreen {
                         String input = CommandLineUtils.ReadInput();
                         int facility_id = Integer.parseInt(input);
                         rep.setFacility_id(facility_id);
+                        invalidOption = true;
                         break;
                     case PATIENT_REFERRER_ID:
                         System.out.println(MessageUtils.ENTER_REFERRER_ID + MessageUtils.GLOBAL_DELIMITER);
                         String refer = CommandLineUtils.ReadInput();
                         int referrer_id = Integer.parseInt(refer);
                         rep.setFacility_id(referrer_id);
+                        invalidOption = true;
                         break;
                     case ADD_REASON:
                         scr = new ReferralReason();
                         scr.run();
+                        invalidOption = true;
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
+                        break;
                     default:
                         invalidOption = true;
                         break;

@@ -40,10 +40,12 @@ public class StaffPatientReport extends IScreen {
                     case REPORT_DISCHARGE_STATUS:
                         scr = new DischargeStatus();
                         scr.run();
+                        invalidOption = true;
                         break;
                     case REPORT_REFERRAL_STATUS:
                         scr = new ReferralStatus();
                         scr.run();
+                        invalidOption = true;
                         break;
                     case REPORT_TREATMENT:
                         System.out.println(MessageUtils.PATIENT_REPORT_TREATMENT + MessageUtils.GLOBAL_DELIMITER);
@@ -55,12 +57,15 @@ public class StaffPatientReport extends IScreen {
                     case REPORT_NEGATIVE_EXPERIENCE:
                         scr = new NegativeExperience();
                         scr.run();
+                        invalidOption = true;
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     case GLOBAL_SUBMIT:
-                        // Do Something
+                        // Write to DB
+                        scr = new StaffPatientReportConfirmation();
+                        scr.run();
                         break;
                     default:
                         invalidOption = true;
