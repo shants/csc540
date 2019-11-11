@@ -32,7 +32,7 @@ public class DischargeStatus extends IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_DISCHARGE_STATUS options = MessageUtils.PATIENT_DISCHARGE_STATUS.values()[option];
-                ReportRefererral rep = new ReportRefererral();
+                ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
                 String status;
                 switch (options) {
                     case PATIENT_SUCCESSFUL_TREATMENT:
@@ -54,6 +54,10 @@ public class DischargeStatus extends IScreen {
                         invalidOption = true;
                         break;
                 }
+                System.out.println(rep.getFacility_id());
+                System.out.println(rep.getDischarge_status());
+                System.out.println(rep.getVisit_id());
+                ViewerContext.getInstance().setPatientReport(rep);
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;

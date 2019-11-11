@@ -4,6 +4,8 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import entities.ReportRefererral;
+import db_utils.ReportCRUD;
 
 public class StaffPatientReportConfirmation extends IScreen {
     public void display(){
@@ -28,7 +30,10 @@ public class StaffPatientReportConfirmation extends IScreen {
                 MessageUtils.STAFF_PATIENT_REPORT_CONFIR options = MessageUtils.STAFF_PATIENT_REPORT_CONFIR.values()[option];
                 switch (options) {
                     case CONFIRM:
-                        // CONFIRM
+                        ReportCRUD reportCRUD = new ReportCRUD();
+                        reportCRUD.addPatientReport();
+                        //reportCRUD.reportReferral();
+                        //reportCRUD.addReferralReason();
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         invalidOption = false;
                         break;

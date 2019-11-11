@@ -1,8 +1,8 @@
 package entities;
 
 public class ReportRefererral {
-    private int report_id, facility_id, visit_id, reason_code, service_code, referrer_id;
-    private String discharge_status, reason, treatment;
+    private int report_id, facility_id, visit_id, reason_code, service_code, referrer_id, negative_experience_value, staff_id;
+    private String discharge_status, reason, treatment, negative_experience_text;
 
     public ReportRefererral(int visit_id, int facility_id, int referrer_id, int report_id, int reason_code,
                             int service_code, String discharge_status, String reason) {
@@ -17,6 +17,18 @@ public class ReportRefererral {
     }
 
     public ReportRefererral() {}
+
+    public int getStaff_id() { return this.staff_id; }
+
+    public void setStaff_id(int id) { this.staff_id = id; }
+
+    public int getNegative_experience_value() { return this.negative_experience_value; }
+
+    public void setNegative_experience_value( int value) { this.negative_experience_value = value; }
+
+    public String getNegative_experience_text() { return this.negative_experience_text; }
+
+    public void setNegative_experience_text(String text) { this.negative_experience_text = text; }
 
     public int getReport_id() { return this.report_id; }
 

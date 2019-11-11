@@ -5,6 +5,7 @@ import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
 import entities.ReportRefererral;
+import entities.Visit;
 
 public class StaffPatientReport extends IScreen {
 
@@ -25,12 +26,29 @@ public class StaffPatientReport extends IScreen {
         System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
 
+    public void getPatientInformation() {
+        Visit visit = ViewerContext.getInstance().getPatientToCheckout();
+        ReportRefererral rep = new ReportRefererral();
+        rep.setFacility_id(visit.getFacilityID());
+        rep.setVisit_id(visit.getVisit_id());
+        //rep.setNegative_experience_value(1);
+        //rep.setNegative_experience_text("neg");
+        //rep.setTreatment("some");
+        //rep.setDischarge_status("Deceased");
+        //rep.setReason_code(1);
+        //rep.setReason("reason");
+        //rep.setService_code(1);
+        //rep.setStaff_id(1);
+        ViewerContext.getInstance().setPatientReport(rep);
+    }
+
     public void run() {
         boolean invalidOption, goBack;
         do {
             invalidOption = goBack = false;
             int option;
             display();
+            getPatientInformation();
             String opt = CommandLineUtils.ReadInput();
             try {
                 option = Integer.parseInt(opt);
@@ -50,8 +68,9 @@ public class StaffPatientReport extends IScreen {
                     case REPORT_TREATMENT:
                         System.out.println(MessageUtils.PATIENT_REPORT_TREATMENT + MessageUtils.GLOBAL_DELIMITER);
                         String treatment = CommandLineUtils.ReadInput();
-                        ReportRefererral rep = new ReportRefererral();
+                        ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
                         rep.setTreatment(treatment);
+                        ViewerContext.getInstance().setPatientReport(rep);
                         invalidOption = true;
                         break;
                     case REPORT_NEGATIVE_EXPERIENCE:
@@ -63,7 +82,6 @@ public class StaffPatientReport extends IScreen {
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     case GLOBAL_SUBMIT:
-                        // Write to DB
                         scr = new StaffPatientReportConfirmation();
                         scr.run();
                         break;

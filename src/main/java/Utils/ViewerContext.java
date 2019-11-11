@@ -1,6 +1,7 @@
 package Utils;
 
 import entities.PatientSymptom;
+import entities.ReportRefererral;
 import entities.Visit;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class ViewerContext {
     private HashMap<IDENTIFIER_NAMES, String> Names = new HashMap<>();
     private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
     private Visit patientToCheckout;
+    private ReportRefererral patientReport;
 
     public enum IDENTIFIER_TYPES {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
@@ -90,4 +92,8 @@ public class ViewerContext {
     public void addSymptom(PatientSymptom ps) { symptomList.add(ps);}
 
     public ArrayList<PatientSymptom> getSymptoms() { return symptomList;}
+
+    public void setPatientReport(ReportRefererral rep) { this.patientReport = rep; }
+
+    public ReportRefererral getPatientReport() { return patientReport; }
 }

@@ -52,13 +52,14 @@ public class ReferralReason extends IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.SUBMIT_REASON options = MessageUtils.SUBMIT_REASON.values()[option];
+                ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
                 switch (options) {
                     case ADD_REASON:
                         display_reason();
                         String code = CommandLineUtils.ReadInput();
                         int reason_code = Integer.parseInt(code);
                         String reason = getReasonFromCode(reason_code);
-                        ReportRefererral rep = new ReportRefererral();
+                        rep.setReason_code(reason_code);
                         rep.setReason(reason);
                         break;
                     case GLOBAL_GO_BACK:
@@ -68,6 +69,7 @@ public class ReferralReason extends IScreen {
                         invalidOption = true;
                         break;
                 }
+                ViewerContext.getInstance().setPatientReport(rep);
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
