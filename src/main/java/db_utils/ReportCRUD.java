@@ -21,22 +21,22 @@ public class ReportCRUD {
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL_" + fid.toString();
-        String query = "INSERT into " + report_table + " (report_id, staff_id, " +
+        String query = "INSERT into " + report_table + " (REPORT_ID, STAFF_ID)" +
                 "values( ? , ? )";
 
         try {
-            PreparedStatement ps = connection.prepareStatement(query, new String[]{"REPORT_ID"});
+            PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1,  rep.getReport_id());
             ps.setInt(2, rep.getStaff_id());
 
             boolean row_affected  = ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+            //ResultSet rs = ps.getGeneratedKeys();
             //if(rs.next())
               //  reason_id = rs.getInt(1);
             //rep.setReport_id(reason_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
-            System.out.println("Error occurred while inserting for check_in " +e.getMessage());
+            System.out.println("Error occurred while inserting for report referral " +e.getMessage());
         }
 
         return true;
@@ -54,24 +54,25 @@ public class ReportCRUD {
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL_REASON_" + fid.toString();
-        String query = "INSERT into " + report_table + " (report_id, reason_code, " +
-                "reason_description, service_code, " + "values( ? , ? , ? , ? )";
+        String query = "INSERT into " + report_table + " (REASON_ID, REPORT_ID, REASON_CODE, " +
+                "REASON_DESCRIPTION, SERVICE_CODE)" + "values( ? , ? , ? , ? , ?)";
 
         try {
-            PreparedStatement ps = connection.prepareStatement(query, new String[]{"REPORT_ID"});
-            ps.setInt(1,  rep.getReport_id());
-            ps.setInt(2, rep.getReason_code());
-            ps.setString(3, rep.getReason());
-            ps.setInt(4, rep.getService_code());
+            PreparedStatement ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
+            ps.setInt(1, 1);
+            ps.setInt(2,  rep.getReport_id());
+            ps.setInt(3, rep.getReason_code());
+            ps.setString(4, rep.getReason());
+            ps.setInt(5, rep.getService_code());
 
             boolean row_affected  = ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
-            if(rs.next())
-                reason_id = rs.getInt(1);
+            //ResultSet rs = ps.getGeneratedKeys();
+            //if(rs.next())
+                //reason_id = rs.getInt(1);
             //rep.setReport_id(reason_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
-            System.out.println("Error occurred while inserting for check_in " +e.getMessage());
+            System.out.println("Error occurred while inserting for referral reason " +e.getMessage());
         }
 
         return true;
@@ -90,7 +91,7 @@ public class ReportCRUD {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_" + fid.toString();
         String query = "INSERT into " + report_table + " (NEG_EXP_ID, NEGATIVE_EXPERIENCE_TEXT, " +
-                "TREATMENT, VISIT_ID, " + "DISCHARGE_STATUS) " + "values( ? , ? , ? , ? , ? )";
+                "TREATMENT, VISIT_ID, DISCHARGE_STATUS) " + "values( ? , ? , ? , ? , ? )";
 
         try {
             PreparedStatement ps = connection.prepareStatement(query, new String[]{"REPORT_ID"});
@@ -107,7 +108,7 @@ public class ReportCRUD {
             rep.setReport_id(report_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
-            System.out.println("Error occurred while inserting for check_in " +e.getMessage());
+            System.out.println("Error occurred while inserting for add report for patient " +e.getMessage());
         }
 
         return true;

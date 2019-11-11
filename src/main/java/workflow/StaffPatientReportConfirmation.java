@@ -32,8 +32,8 @@ public class StaffPatientReportConfirmation extends IScreen {
                     case CONFIRM:
                         ReportCRUD reportCRUD = new ReportCRUD();
                         reportCRUD.addPatientReport();
-                        //reportCRUD.reportReferral();
-                        //reportCRUD.addReferralReason();
+                        reportCRUD.reportReferral();
+                        reportCRUD.addReferralReason();
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         invalidOption = false;
                         break;

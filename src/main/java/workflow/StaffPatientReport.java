@@ -31,14 +31,15 @@ public class StaffPatientReport extends IScreen {
         ReportRefererral rep = new ReportRefererral();
         rep.setFacility_id(visit.getFacilityID());
         rep.setVisit_id(visit.getVisit_id());
-        //rep.setNegative_experience_value(1);
-        //rep.setNegative_experience_text("neg");
-        //rep.setTreatment("some");
-        //rep.setDischarge_status("Deceased");
-        //rep.setReason_code(1);
-        //rep.setReason("reason");
-        //rep.setService_code(1);
-        //rep.setStaff_id(1);
+        rep.setNegative_experience_value(1);
+        rep.setNegative_experience_text("neg");
+        rep.setTreatment("some");
+        rep.setDischarge_status("Deceased");
+        rep.setReason_code(1);
+        rep.setReason("reason");
+        rep.setService_code(1);
+        rep.setStaff_id(1);
+        rep.setReport_id(1);
         ViewerContext.getInstance().setPatientReport(rep);
     }
 
