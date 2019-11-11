@@ -4,6 +4,7 @@ public class Symptom {
     private String symptom_code;
     private String symptom_name;
     private BodyPart bodyPart;
+    private String severityValue;
 
     public BodyPart getBodyPart() {
         return bodyPart;
@@ -27,5 +28,13 @@ public class Symptom {
 
     public void setSymptom_name(String symptom_name) {
         this.symptom_name = symptom_name.toUpperCase();
+    }
+
+    public String getSeverityValue() {
+        return severityValue;
+    }
+
+    public void setSeverityValue(String severityValue) {
+        this.severityValue = severityValue;
     }
 }

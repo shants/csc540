@@ -3,6 +3,7 @@ package db_utils;
 import Utils.ViewerContext;
 import config.DatabaseConnection;
 import entities.Facility;
+import entities.Symptom;
 import entities.Visit;
 
 import java.sql.*;
@@ -57,7 +58,7 @@ public class VisitCRUD {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String query = "UPDATE VISIT_"+visit.getFacilityID() + " SET " +
                 "END_TIME = to_timestamp(?,'YYYY/MM/DD HH24:MI'), BP_LOW = ?, BP_HIGH = ?, "+
-                " BODY_TEMPERATURE = ? WHERE VISIT_ID = ?";
+                " BODY_TEMPERATURE = ?, PRIORITY_ID = ? WHERE VISIT_ID = ?";
         PreparedStatement statement;
         try {
             statement = connection.prepareStatement(query);
@@ -65,7 +66,8 @@ public class VisitCRUD {
             statement.setFloat(2,visit.getBp_low());
             statement.setFloat(3,visit.getBp_high());
             statement.setFloat(4,visit.getBody_temp());
-            statement.setInt(5,visit.getVisit_id());
+            statement.setInt(5, visit.getPriority_id());
+            statement.setInt(6,visit.getVisit_id());
             statement.executeUpdate();
             System.out.println("Saved vitals. Checkin complete.");
         } catch (SQLException e) {
@@ -160,4 +162,26 @@ public class VisitCRUD {
         return false;
     }
 
+    public static ArrayList<Symptom> getPatientSymptoms(Visit visit) {
+        ArrayList<Symptom> results = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String visit_table = "PATIENT_SYMPTOMS_" + visit.getFacilityID();
+        String query = "SELECT symptom.symptom_code, symptom.symptom_name, severity_value from " + visit_table + " INNER JOIN SYMPTOM on "+visit_table+
+                    ".symptom_code = SYMPTOM.symptom_code where VISIT_ID = ?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, visit.getVisit_id());
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Symptom symptom = new Symptom();
+                symptom.setSymptom_code(rs.getString("SYMPTOM_CODE"));
+                symptom.setSymptom_name(rs.getString("SYMPTOM_NAME"));
+                symptom.setSeverityValue(rs.getString("SEVERITY_VALUE"));
+                results.add(symptom);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error occurred while fetching symptoms" +e.getMessage());
+        }
+        return results;
+    }
 }

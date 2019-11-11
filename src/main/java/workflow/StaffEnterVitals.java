@@ -4,9 +4,9 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import db_utils.AssessmentRuleCRUD;
 import db_utils.VisitCRUD;
-import entities.Facility;
-import entities.Visit;
+import entities.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,11 +45,53 @@ public class StaffEnterVitals extends IScreen {
             } while (isInvalid);
             Visit visit = getVitalsPrompt(patients.get(option));
             visit.setFacilityID(facility.getId());
+            ArrayList<Symptom> symptoms = VisitCRUD.getPatientSymptoms(visit);
+            ArrayList<AssessmentRule> rules = AssessmentRuleCRUD.getRules(visit, symptoms);
+            visit.setPriority_id(processPriority(symptoms, rules));
             VisitCRUD.completeVitalsUpdate(visit);
         }
         else {
             System.out.println("No patients available at this time.");
         }
+    }
+
+    private int processPriority(ArrayList<Symptom> symptoms, ArrayList<AssessmentRule> rules) {
+        System.out.println("Below mentioned are this patient's symptoms and their severity:");
+        int idx = 1;
+        for (Symptom symptom: symptoms) {
+            System.out.println(idx + MessageUtils.GLOBAL_DELIMITER + symptom.getSymptom_name() + "," +
+                    "Severity: " + symptom.getSeverityValue());
+        }
+        System.out.println("These are the corresponding rules defined for these symptoms:");
+        for (AssessmentRule rule: rules) {
+            System.out.println(rule.getSymptom().getSymptom_name() +
+                    MessageUtils.GLOBAL_DELIMITER + rule.getRule() + MessageUtils.GLOBAL_HYPHEN
+                    + " Priority" + MessageUtils.GLOBAL_DELIMITER + rule.getPriority());
+        }
+        return getPriorityFromUser();
+    }
+
+    private int getPriorityFromUser() {
+        boolean invalid;
+        int option = 1;
+        do {
+            invalid = false;
+            System.out.println("Select case priority to assign to this patient from below");
+            System.out.println(MessageUtils.PRIORITY.HIGH.ordinal() + MessageUtils.GLOBAL_DELIMITER + "HIGH");
+            System.out.println(MessageUtils.PRIORITY.NORMAL.ordinal() + MessageUtils.GLOBAL_DELIMITER + "NORMAL");
+            System.out.println(MessageUtils.PRIORITY.QUARANTINE.ordinal() + MessageUtils.GLOBAL_DELIMITER + "QUARANTINE");
+
+            String opt = CommandLineUtils.ReadInput();
+            try {
+                option = Integer.parseInt(opt);
+                MessageUtils.PRIORITY options = MessageUtils.PRIORITY.values()[option];
+                System.out.println("Assigned Priority: " + options.toString());
+                } catch (Exception e) {
+                    System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                    invalid = true;
+                }
+            }while(invalid);
+        return option + 1;
     }
 
     public  Visit getVitalsPrompt(Visit visit) {
@@ -79,7 +121,6 @@ public class StaffEnterVitals extends IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.STAFF_ENTER_VITALS options = MessageUtils.STAFF_ENTER_VITALS.values()[option];
-                IScreen scr;
                 switch (options) {
                     case STAFF_ENTER_VITALS_RECORD:
                         enterVitals();
@@ -91,7 +132,7 @@ public class StaffEnterVitals extends IScreen {
                         break;
                 }
             } catch (Exception e) {
-                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
+                System.out.println(MessageUtils.GLOBAL_OPTION_ERROR + e.getMessage());
                 invalidOption = true;
             }
         } while (invalidOption);

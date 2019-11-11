@@ -170,5 +170,9 @@ public class MessageUtils {
     public enum REASON_CODE {
         SERVICE_UNAVAILABLE_TIME, SERVICE_NOT_PRESENT, NON_PAYMENT
     }
+
+    public enum PRIORITY {
+        HIGH, NORMAL, QUARANTINE
+    }
 }
 
