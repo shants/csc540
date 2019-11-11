@@ -9,13 +9,12 @@ import db_utils.ReportCRUD;
 
 public class StaffPatientReportConfirmation extends IScreen {
     public void display(){
-
-        //Display the report and
-        //ask the user for
-        //confirmation
-
-        System.out.println(MessageUtils.STAFF_PATIENT_REPORT_CONFIRM);
-        System.out.println(MessageUtils.GLOBAL_GO_BACK);
+        System.out.println(MessageUtils.STAFF_PATIENT_REPORT_CONFIR.CONFIRM.ordinal() + MessageUtils.GLOBAL_DELIMITER +
+                MessageUtils.STAFF_PATIENT_REPORT_CONFIRM);
+        System.out.println(MessageUtils.STAFF_PATIENT_REPORT_CONFIR.GO_BACK.ordinal() + MessageUtils.GLOBAL_DELIMITER +
+                MessageUtils.GLOBAL_GO_BACK);
+        System.out.println(MessageUtils.GLOBAL_NEWLINE);
+        System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
     }
     public void run(){
 
@@ -30,10 +29,9 @@ public class StaffPatientReportConfirmation extends IScreen {
                 MessageUtils.STAFF_PATIENT_REPORT_CONFIR options = MessageUtils.STAFF_PATIENT_REPORT_CONFIR.values()[option];
                 switch (options) {
                     case CONFIRM:
-                        ReportCRUD reportCRUD = new ReportCRUD();
-                        reportCRUD.addPatientReport();
-                        reportCRUD.reportReferral();
-                        reportCRUD.addReferralReason();
+                        ReportCRUD.addPatientReport();
+                        ReportCRUD.reportReferral();
+                        ReportCRUD.addReferralReason();
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         invalidOption = false;
                         break;
@@ -47,5 +45,6 @@ public class StaffPatientReportConfirmation extends IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);    }
+        } while (invalidOption);
+    }
 }
