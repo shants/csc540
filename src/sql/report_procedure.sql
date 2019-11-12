@@ -53,7 +53,7 @@ EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE report_referral_reason_'|| to_char(facility_id) || '_seq START WITH 1';
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE OR REPLACE TRIGGER report_referral_reason_'|| to_char(facility_id) || '_trigger
-BEFORE INSERT ON patient_'|| to_char(facility_id) || '
+BEFORE INSERT ON report_referral_reason_'|| to_char(facility_id) || '
 FOR EACH ROW
 BEGIN
   SELECT report_referral_reason_'|| to_char(facility_id) || '_seq.NEXTVAL

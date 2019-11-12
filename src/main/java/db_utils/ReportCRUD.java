@@ -54,22 +54,22 @@ public class ReportCRUD {
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL_REASON_" + fid.toString();
-        String query = "INSERT into " + report_table + " (REASON_ID, REPORT_ID, REASON_CODE, " +
-                "REASON_DESCRIPTION, SERVICE_CODE)" + "values( ? , ? , ? , ? , ?)";
+        String query = "INSERT into " + report_table + " (REPORT_ID, REASON_CODE, " +
+                "REASON_DESCRIPTION, SERVICE_CODE)" + "values( ? , ? , ? , ?)";
 
         try {
             PreparedStatement ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
-            ps.setInt(1, 1);
-            ps.setInt(2,  rep.getReport_id());
-            ps.setInt(3, rep.getReason_code());
-            ps.setString(4, rep.getReason());
-            ps.setInt(5, rep.getService_code());
+            //ps.setInt(1, 1);
+            ps.setInt(1,  rep.getReport_id());
+            ps.setInt(2, rep.getReason_code());
+            ps.setString(3, rep.getReason());
+            ps.setInt(4, rep.getService_code());
 
             boolean row_affected  = ps.execute();
-            //ResultSet rs = ps.getGeneratedKeys();
-            //if(rs.next())
-                //reason_id = rs.getInt(1);
-            //rep.setReport_id(reason_id);
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+                reason_id = rs.getInt(1);
+            rep.setReason_id(reason_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
             System.out.println("Error occurred while inserting for referral reason " +e.getMessage());
