@@ -50,13 +50,13 @@ CONSTRAINT report_referral_reason_'|| to_char(facility_id) || '_key PRIMARY KEY 
 CONSTRAINT fk_report_ref_res_rep_id_'|| to_char(facility_id) || ' FOREIGN KEY (report_id ) REFERENCES report_'|| to_char(facility_id) ||'(report_id))';
 
 EXECUTE IMMEDIATE new_query;
-new_query := 'CREATE SEQUENCE report_referral_reason_'|| to_char(facility_id) || '_seq START WITH 1';
+new_query := 'CREATE SEQUENCE rep_refer_rea_'|| to_char(facility_id) || '_seq START WITH 1';
 EXECUTE IMMEDIATE new_query;
-new_query := 'CREATE OR REPLACE TRIGGER report_referral_reason_'|| to_char(facility_id) || '_trigger
+new_query := 'CREATE OR REPLACE TRIGGER rep_refer_rea_'|| to_char(facility_id) || '_trigger
 BEFORE INSERT ON report_referral_reason_'|| to_char(facility_id) || '
 FOR EACH ROW
 BEGIN
-  SELECT report_referral_reason_'|| to_char(facility_id) || '_seq.NEXTVAL
+  SELECT rep_refer_rea_'|| to_char(facility_id) || '_seq.NEXTVAL
   INTO   :new.reason_id
   FROM   dual;
 END;';

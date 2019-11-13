@@ -8,6 +8,8 @@ INSERT INTO STATE(state_name) VALUES('LONDON');
 INSERT INTO COUNTRY(country_name) VALUES('UK');
 
 execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS HOSPITAL','PRIMARY', 200);
+execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS2 HOSPITAL','PRIMARY', 50);
+execute create_new_facility('BAKER STREET','LONDON', 'LONDON', 'UK', '221B', 'SHANTS3 HOSPITAL','PRIMARY', 40);
 
 INSERT INTO staff_department_type(type_name) values ('MEDICAL');
 INSERT INTO staff_department_type(type_name) values ('NONMEDICAL');

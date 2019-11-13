@@ -11,7 +11,7 @@ symptom_code VARCHAR2(20) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 CONSTRAINT symptom_severity_'||to_char(facility_id)||'_key PRIMARY KEY (symptom_severity_id),
 CONSTRAINT fk_severity_staff_id_'|| to_char(facility_id) || ' FOREIGN KEY (staff_id) REFERENCES staff_'|| to_char(facility_id) ||' (staff_id),
-CONSTRAINT fk_severity_symptom_code FOREIGN KEY(symptom_code) REFERENCES symptom (symptom_code))';
+CONSTRAINT fk_severity_symptom_code_'|| to_char(facility_id) || ' FOREIGN KEY(symptom_code) REFERENCES symptom (symptom_code))';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE sym_sev_'|| to_char(facility_id) || '_seq START WITH 1';

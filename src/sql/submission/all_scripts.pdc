@@ -1,0 +1,4 @@
+-- pdc file
+@delete_all.sql;
+@schema.sql;
+@project_data.sql;
