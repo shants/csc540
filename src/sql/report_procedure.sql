@@ -8,14 +8,14 @@ new_query varchar2(5000);
 BEGIN
 new_query := 'CREATE TABLE report(
 report_id NUMBER(10) NOT NULL,
-neg_exp_id NUMBER(10) NOT NULL,
+neg_exp_id NUMBER(10),
 negative_experience_text VARCHAR2(100) NOT NULL,
 treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,
 CONSTRAINT report_id_key PRIMARY KEY (report_id),
 CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id),
-CONSTRAINT fk_report_neg_exp FOREIGN KEY (neg_exp_id) REFERENCES negative_experience(neg_exp_id))';
+)';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE report_seq START WITH 1';
