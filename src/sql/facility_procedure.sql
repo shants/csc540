@@ -45,16 +45,9 @@ INSERT INTO FACILITY(facility_name,capacity,classification_id,facility_address_i
 VALUES(v_name, v_capacity, v_classification_id, v_facility_address_id) returning facility_id into v_facility_id;
 DBMS_OUTPUT.PUT_LINE('Facility_id:' || to_char(v_facility_id));
 
-create_new_patient_tables(v_facility_id);
-create_new_staff_tables(v_facility_id);
-create_new_visit_tables(v_facility_id);
-new_symptoms_table(v_facility_id);
-new_patient_symptoms(v_facility_id);
-create_facility_service_dept(v_facility_id);
-create_staff_serv_dept(v_facility_id);
-new_serv_dept_spec(v_facility_id);
-create_new_service(v_facility_id);
-create_new_report(v_facility_id);
-new_rules_tables(v_facility_id);
 end create_new_facility;
 /
+
+/*
+exec create_new_facility('Baker Street','London', 'London', 'UK', '221B','SHANTS HOSPITAL', 'PRIMARY', 300)
+*/

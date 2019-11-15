@@ -1,7 +1,6 @@
 /* create new patient_<facility_id> table and patient_address_<facility_id> */
 
 CREATE OR REPLACE PROCEDURE create_new_patient_tables
-(facility_id number)
 AUTHID CURRENT_USER IS
 new_query varchar2(5000);
 BEGIN
@@ -39,7 +38,8 @@ new_query := 'CREATE TABLE patient
                     phone_number NUMBER(10) NOT NULL,
                     patient_address_id NUMBER(30) NOT NULL,
                     CONSTRAINT patient_key PRIMARY KEY (patient_id),
-                    CONSTRAINT fk_pt_pa FOREIGN KEY (patient_address_id) REFERENCES patient_address (patient_address_id))';
+                    CONSTRAINT fk_pt_pa FOREIGN KEY (patient_address_id) REFERENCES patient_address (patient_address_id),
+                    CONSTRAINT fk_pt_fa FOREIGN KEY (facility_id) REFERENCES facility (facility_id))';
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE patient_seq START WITH 1';
 EXECUTE IMMEDIATE new_query;
@@ -93,14 +93,14 @@ execute immediate new_query using v_country_name,v_country_name;
 SELECT country_id into v_country_id from COUNTRY where country_name = v_country_name;
 DBMS_OUTPUT.PUT_LINE('Country_id:' || to_char(v_country_id));
 
-new_query := 'INSERT INTO PATIENT_ADDRESS_' || to_char(v_facility_id) ||' (street_num,street_id,city_id,state_id,country_id)
+new_query := 'INSERT INTO PATIENT_ADDRESS(street_num,street_id,city_id,state_id,country_id)
 VALUES(:b1, :b2, :b3, :b4, :b5) returning patient_address_id into :b6';
 execute immediate new_query using v_street_number, v_street_id, v_city_id, v_state_id, v_country_id returning into v_patient_address_id;
 DBMS_OUTPUT.PUT_LINE('Patient_address_id:' || to_char(v_patient_address_id));
 
-new_query := 'INSERT INTO PATIENT_' || to_char(v_facility_id) ||' (first_name,last_name,date_of_birth,phone_number,patient_address_id)
-VALUES(:b1, :b2, :b3, :b4, :b5) returning patient_id into :b6';
-execute immediate new_query using v_first_name, v_last_name, to_date(v_date_of_birth, 'yyyy/mm/dd'), v_phone_number, v_patient_address_id returning into v_patient_id;
+new_query := 'INSERT INTO PATIENT(first_name,last_name,date_of_birth,phone_number,patient_address_id, facility_id)
+VALUES(:b1, :b2, :b3, :b4, :b5,:b6) returning patient_id into :b7';
+execute immediate new_query using v_first_name, v_last_name, to_date(v_date_of_birth, 'yyyy/mm/dd'), v_phone_number, v_patient_address_id, v_facility_id returning into v_patient_id;
 DBMS_OUTPUT.PUT_LINE('Patient_id:' || to_char(v_patient_id));
 
 end sign_up_new_patient;

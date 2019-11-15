@@ -3,14 +3,14 @@
 @tables.sql;
 @patient_procedure.sql;
 @staff_procedure.sql;
-@visit_procedure.sql;
-@facilities_service_dept.sql;
 @staff_serv_dept.sql;
+@facilities_service_dept.sql;
 @service_dept_specification.sql;
+@visit_procedure.sql;
 @service.sql;
 @facility_procedure.sql;
 @symptoms.sql;
 @patient_symptoms.sql;
 @rules_procedure.sql;
 @report_procedure.sql;
-@dummy_insertions.sql;
+@dummy_insertion2.sql;
