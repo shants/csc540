@@ -30,6 +30,7 @@ public class PatientRouting extends IScreen {
                                 scr.run();
                         }
                         else {
+                            System.out.println(MessageUtils.GLOBAL_ALREADY_CHECKEDIN);
                             invalidOption = true;
                         }
                         break;

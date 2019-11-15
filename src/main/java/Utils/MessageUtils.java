@@ -25,6 +25,7 @@ public class MessageUtils {
     public static String GLOBAL_GO_BACK ="Go Back";
     public static String GLOBAL_SUBMIT = "Submit";
     public static String GLOBAL_EXIT = "Exit";
+    public static String GLOBAL_ALREADY_CHECKEDIN = "Patient is already Checked-In";
     public static String HOME_DEMO_QUERIES = "Demo Queries";
     public static String HOME_SIGN_IN = "Sign In";
     public static String HOME_SIGN_UP = "Sign Up";
