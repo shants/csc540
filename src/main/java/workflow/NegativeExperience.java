@@ -55,9 +55,8 @@ public class NegativeExperience extends IScreen {
         String id = CommandLineUtils.ReadInput();
         System.out.println("\n Enter description");
         String description = CommandLineUtils.ReadInput();
-        ViewerContext.getInstance().setNegExperienceDesc(new NegExpDescription(Integer.parseInt(id),
-                description));
-        // TODO: add neg exp to db
+        ViewerContext.getInstance().getPatientReport().setNegative_experience_text(description);
+        ViewerContext.getInstance().getPatientReport().setNegative_experience_value(Integer.parseInt(id));
 
     }
 
