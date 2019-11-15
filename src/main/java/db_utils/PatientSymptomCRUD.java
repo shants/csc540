@@ -16,9 +16,6 @@ public class PatientSymptomCRUD {
         // add patient symptoms
         ArrayList<PatientSymptom> arr =  ViewerContext.getInstance().getSymptoms();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-
-        Integer visitId = -1;
-
         String sql = "insert into PATIENT_SYMPTOMS (VISIT_ID," +
                 "SYMPTOM_CODE," +
                 "SEVERITY_VALUE," +
@@ -36,10 +33,8 @@ public class PatientSymptomCRUD {
                 ps.setString(5, sym.getIsRecurring());
                 ps.setInt(6, sym.getDuration());
                 ps.addBatch();
-
             }
             ps.executeBatch();
-
         }catch ( SQLException e){
             e.printStackTrace();
         }

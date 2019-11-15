@@ -23,7 +23,6 @@ public class NegativeExperienceCRUD {
                 m.setExpName(rs.getString("EXP_NAME"));
                 lstNegativeExp.add(m);
             }
-
         } catch (
                 SQLException e) {
             e.printStackTrace();

@@ -40,7 +40,6 @@ public class SymptomCRUD {
         String procedure_call = "{call add_new_symptom(?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
-            //statement.setInt(1,symptom_severity.getFacilityID());
             statement.setInt(1,symptom_severity.getStaffID());
             statement.setString(2,symptom.getSymptom_name());
             statement.setString(3, symptom.getBodyPart().getBody_part());
@@ -73,7 +72,7 @@ public class SymptomCRUD {
 
             System.out.println("New Severity Scale added.");
         } catch (SQLException e) {
-            System.out.println("Unable to add a new severityscale:"+e.getMessage());
+            System.out.println("Unable to add a new severity scale:"+e.getMessage());
         }
 
     }

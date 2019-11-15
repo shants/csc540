@@ -34,7 +34,7 @@ public class PatientCRUD
     public static void signIn(Patient patient, Address address) {
         int patient_id;
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String patient_table = "PATIENT" ;
+        String patient_table = "PATIENT";
         String patient_address_table = "PATIENT_ADDRESS";
         String query = "SELECT PATIENT_ID from (SELECT * from " + patient_table +
                     " inner join " + patient_address_table + " on " + patient_table +

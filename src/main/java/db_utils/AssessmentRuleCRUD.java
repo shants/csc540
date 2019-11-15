@@ -15,8 +15,8 @@ public class AssessmentRuleCRUD {
     public static ArrayList<AssessmentRule> getRules(Visit visit, ArrayList<Symptom> symptoms) {
         ArrayList<AssessmentRule> rules = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String rules_symptom_table = "RULES_SYMPTOMS_" + visit.getFacilityID();
-        String asses_rules_table = "ASSES_RULES_" + visit.getFacilityID();
+        String rules_symptom_table = "RULES_SYMPTOMS";
+        String asses_rules_table = "ASSES_RULES";
         StringBuilder query = new StringBuilder("SELECT symptom.symptom_code, symptom.symptom_name, a.asses_rule, "+
                 " type from (SELECT symptom_code, asses_rule, priority_id from " + asses_rules_table +
                 " inner join " + rules_symptom_table + " on " + asses_rules_table + ".rule_id = " + rules_symptom_table +

@@ -14,10 +14,10 @@ public class VisitCRUD {
     public static ArrayList<Visit> getPatientsToTreat(Facility facility) {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "VISIT_" + facility.getId();
-        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where END_TIME IS NOT NULL and IS_TREATED IS NULL";
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from VISIT where facility_id = ? and END_TIME IS NOT NULL and IS_TREATED IS NULL";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, facility.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Visit visit = new Visit();
@@ -36,10 +36,10 @@ public class VisitCRUD {
     public static ArrayList<Visit> getCheckedInPatient(Facility facility) {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "VISIT_" + facility.getId();
-        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME from " + visit_table + " where END_TIME IS NULL";
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME from VISIT where END_TIME IS NULL and facility_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, facility.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Visit visit = new Visit();
@@ -56,9 +56,9 @@ public class VisitCRUD {
 
     public static void completeVitalsUpdate(Visit visit) {
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String query = "UPDATE VISIT_"+visit.getFacilityID() + " SET " +
+        String query = "UPDATE VISIT SET " +
                 "END_TIME = to_timestamp(?,'YYYY/MM/DD HH24:MI'), BP_LOW = ?, BP_HIGH = ?, "+
-                " BODY_TEMPERATURE = ?, PRIORITY_ID = ? WHERE VISIT_ID = ?";
+                " BODY_TEMPERATURE = ?, PRIORITY_ID = ? WHERE VISIT_ID = ? and facility_id = ?";
         PreparedStatement statement;
         try {
             statement = connection.prepareStatement(query);
@@ -68,6 +68,7 @@ public class VisitCRUD {
             statement.setFloat(4,visit.getBody_temp());
             statement.setInt(5, visit.getPriority_id());
             statement.setInt(6,visit.getVisit_id());
+            statement.setInt(7, visit.getFacilityID());
             statement.executeUpdate();
             System.out.println("Saved vitals. Checkin complete.");
         } catch (SQLException e) {
@@ -78,10 +79,11 @@ public class VisitCRUD {
     public static ArrayList<Visit> getTreatedPatientsToCheckout(Facility facility) {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "VISIT_" + facility.getId();
-        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where IS_TREATED = 'Y'";
+        String visit_table = "VISIT";
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where IS_TREATED = 'Y' and facility_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, facility.getId());
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Visit visit = new Visit();
@@ -109,11 +111,13 @@ public class VisitCRUD {
         }
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "VISIT_" + fid.toString();
+        String visit_table = "VISIT";
         String query = "SELECT count(*) from " + visit_table + " where IS_TREATED is null " +
-                "and END_TIME is null and PATIENT_ID = " + pid.toString();
+                "and END_TIME is null and PATIENT_ID = ? and facility_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, pid);
+            statement.setInt(2, fid);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 // if in the loop atleast 1 entry exists => pateint already checked in
@@ -129,26 +133,27 @@ public class VisitCRUD {
         return false;
     }
 
-    public static boolean insertCheckInInfo() {
+    public static void insertCheckInInfo() {
         int visit_id = -1;
         Integer pid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.PATIENT_ID);
         if (pid == null){
-            return false;
+            return;
         }
 
         Integer fid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
         if (fid == null){
-            return false;
+            return;
         }
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "VISIT_" + fid.toString();
-        String query = "INSERT into " + visit_table + " (PATIENT_ID, START_TIME) " +
-                "values( ? , ? )";
+        String visit_table = "VISIT";
+        String query = "INSERT into " + visit_table + " (FACILITY_ID, PATIENT_ID, START_TIME) " +
+                "values(?, ? , ? )";
         try {
             PreparedStatement ps = connection.prepareStatement(query, new String[]{"VISIT_ID"});
             ps.setInt(1, fid);
-            ps.setTimestamp(2,  new java.sql.Timestamp(System.currentTimeMillis()));
+            ps.setInt(2, pid);
+            ps.setTimestamp(3,  new java.sql.Timestamp(System.currentTimeMillis()));
 
             boolean row_affected  = ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
@@ -158,14 +163,12 @@ public class VisitCRUD {
         } catch (SQLException e) {
             System.out.println("Error occurred while inserting for check_in " +e.getMessage());
         }
-
-        return false;
     }
 
     public static ArrayList<Symptom> getPatientSymptoms(Visit visit) {
         ArrayList<Symptom> results = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String visit_table = "PATIENT_SYMPTOMS_" + visit.getFacilityID();
+        String visit_table = "PATIENT_SYMPTOMS";
         String query = "SELECT symptom.symptom_code, symptom.symptom_name, severity_value from " + visit_table + " INNER JOIN SYMPTOM on "+visit_table+
                     ".symptom_code = SYMPTOM.symptom_code where VISIT_ID = ?";
         try {

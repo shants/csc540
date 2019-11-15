@@ -41,6 +41,7 @@ public class StaffTreatPatient extends IScreen {
             Visit visit = patients.get(option);
             visit.setFacilityID(facility.getId());
             treatPatient(visit);
+            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
         }
         else {
             System.out.println("No patients available at this time.");
