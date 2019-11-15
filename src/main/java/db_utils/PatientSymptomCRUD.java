@@ -16,15 +16,10 @@ public class PatientSymptomCRUD {
         // add patient symptoms
         ArrayList<PatientSymptom> arr =  ViewerContext.getInstance().getSymptoms();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        Integer fid = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.FACILITY_ID);
-        if (fid == null){
-            return false;
-        }
 
-        // how to get visit_id
         Integer visitId = -1;
 
-        String sql = "insert into PATIENT_SYMPTOMS_" + Integer.toString(fid) + " (VISIT_ID," +
+        String sql = "insert into PATIENT_SYMPTOMS (VISIT_ID," +
                 "SYMPTOM_CODE," +
                 "SEVERITY_VALUE," +
                 "POST_EVENT," +
