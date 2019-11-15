@@ -13,4 +13,4 @@
 @patient_symptoms.sql;
 @rules_procedure.sql;
 @report_procedure.sql;
-@dummy_insertion2.sql;
+@dummy_insertions.sql;
