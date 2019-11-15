@@ -34,10 +34,10 @@ public class PatientCRUD
     public static void signIn(Patient patient, Address address) {
         int patient_id;
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String patient_table = "PATIENT_" + patient.getFacilityId();
-        String patient_address_table = "PATIENT_ADDRESS_" + patient.getFacilityId();
+        String patient_table = "PATIENT" ;
+        String patient_address_table = "PATIENT_ADDRESS";
         String query = "SELECT PATIENT_ID from (SELECT * from " + patient_table +
-                    " inner join " + patient_address_table+ " on " + patient_table +
+                    " inner join " + patient_address_table + " on " + patient_table +
                     ".patient_address_id = " + patient_address_table + ".patient_address_id) tbl inner join city " +
                     " on tbl.city_id = city.city_id where LAST_NAME = ? and CITY_NAME = ? and DATE_OF_BIRTH = to_date(?, 'yyyy/mm/dd')";
         try {
