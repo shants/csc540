@@ -76,4 +76,25 @@ public class SymptomCRUD {
         }
 
     }
+
+    public static Symptom getSymptonCodeForGeneric() {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        Symptom m = null;
+
+        try {
+            String sql = "select * from symptom where symptom_name = 'GENERIC'";
+            PreparedStatement stmt1   = connection.prepareStatement(sql);
+            ResultSet rs1 = stmt1.executeQuery();
+            while (rs1.next()) {
+                m = new Symptom();
+                m.setSymptom_name(rs1.getString("SYMPTOM_NAME"));
+                m.setSymptom_code(rs1.getString("SYMPTOM_CODE"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return m;
+    }
+
 }
