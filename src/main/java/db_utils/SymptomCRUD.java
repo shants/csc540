@@ -16,7 +16,7 @@ public class SymptomCRUD {
 
         ArrayList<Symptom> lstSymptom = new ArrayList<>();
         try {
-            String sql = "select * from symptom";
+            String sql = "select * from symptom where symptom_name <> 'GENERIC' ";
             PreparedStatement stmt1   = connection.prepareStatement(sql);
             ResultSet rs1 = stmt1.executeQuery();
             while (rs1.next()) {
