@@ -32,20 +32,19 @@ public class ReferralStatus extends IScreen {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_REFERRAL_STATUS options = MessageUtils.PATIENT_REFERRAL_STATUS.values()[option];
                 IScreen scr;
-                ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
                 switch (options) {
                     case MEDICAL_FACILITY_ID:
                         System.out.println(MessageUtils.ENTER_FACILITY_ID + MessageUtils.GLOBAL_DELIMITER);
                         String input = CommandLineUtils.ReadInput();
                         int facility_id = Integer.parseInt(input);
-                        rep.setFacility_id(facility_id);
+                        ViewerContext.getInstance().getPatientReport().setFacility_id(facility_id);
                         invalidOption = true;
                         break;
                     case PATIENT_REFERRER_ID:
                         System.out.println(MessageUtils.ENTER_REFERRER_ID + MessageUtils.GLOBAL_DELIMITER);
                         String refer = CommandLineUtils.ReadInput();
                         int referrer_id = Integer.parseInt(refer);
-                        rep.setReferrer_id(referrer_id);
+                        ViewerContext.getInstance().getPatientReport().setReferrer_id(referrer_id);
                         invalidOption = true;
                         break;
                     case ADD_REASON:
@@ -64,7 +63,6 @@ public class ReferralStatus extends IScreen {
                     goBack = true;
                     ViewerContext.getInstance().resetGoToPage();
                 }
-                ViewerContext.getInstance().setPatientReport(rep);
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;

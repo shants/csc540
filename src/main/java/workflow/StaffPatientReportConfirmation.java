@@ -30,8 +30,10 @@ public class StaffPatientReportConfirmation extends IScreen {
                 switch (options) {
                     case CONFIRM:
                         ReportCRUD.addPatientReport();
-                        ReportCRUD.reportReferral();
-                        ReportCRUD.addReferralReason();
+                        if (ViewerContext.getInstance().getPatientReport().getDischarge_status_code() == 2) {
+                            ReportCRUD.reportReferral();
+                            ReportCRUD.addReferralReason();
+                        }
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         invalidOption = false;
                         break;

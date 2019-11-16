@@ -1,7 +1,8 @@
 package entities;
 
 public class ReportRefererral {
-    private int report_id, facility_id, visit_id, reason_code, service_code, referrer_id, negative_experience_value, staff_id, reason_id;
+    private int report_id, facility_id, visit_id, reason_code, service_code, referrer_id, negative_experience_value,
+            staff_id, reason_id, discharge_status_code;
     private String discharge_status, reason, treatment, negative_experience_text;
 
     public ReportRefererral(int visit_id, int facility_id, int referrer_id, int report_id, int reason_code,
@@ -17,6 +18,10 @@ public class ReportRefererral {
     }
 
     public ReportRefererral() {}
+
+    public int getDischarge_status_code() { return this.discharge_status_code; }
+
+    public void setDischarge_status_code( int code) { this.discharge_status_code = code; }
 
     public int getReason_id() { return this.reason_id; }
 

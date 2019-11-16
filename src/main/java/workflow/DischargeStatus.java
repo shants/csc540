@@ -32,20 +32,22 @@ public class DischargeStatus extends IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.PATIENT_DISCHARGE_STATUS options = MessageUtils.PATIENT_DISCHARGE_STATUS.values()[option];
-                ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
                 String status;
                 switch (options) {
                     case PATIENT_SUCCESSFUL_TREATMENT:
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status_code(0);
                         status = MessageUtils.PATIENT_SUCCESSFUL_TREATMENT;
-                        rep.setDischarge_status(status);
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case PATIENT_DECEASED:
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status_code(1);
                         status = MessageUtils.PATIENT_DECEASED;
-                        rep.setDischarge_status(status);
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case PATIENT_REFERRED:
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status_code(2);
                         status = MessageUtils.PATIENT_REFERRED;
-                        rep.setDischarge_status(status);
+                        ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);
@@ -54,10 +56,6 @@ public class DischargeStatus extends IScreen {
                         invalidOption = true;
                         break;
                 }
-                System.out.println(rep.getFacility_id());
-                System.out.println(rep.getDischarge_status());
-                System.out.println(rep.getVisit_id());
-                ViewerContext.getInstance().setPatientReport(rep);
             } catch (Exception e) {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
