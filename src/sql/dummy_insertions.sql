@@ -55,6 +55,7 @@ insert into symptom(SYMPTOM_NAME) values('COUGH');
 insert into symptom(SYMPTOM_NAME) values('FEVER');
 insert into symptom(SYMPTOM_NAME) values('HEADACHE');
 insert into symptom(SYMPTOM_NAME) values('HEART ATTACK');
+insert into symptom(SYMPTOM_NAME) values('GENERIC');
 
 insert into body_part(name) values('NECK');
 insert into body_part(name) values('HEAD');
@@ -92,6 +93,8 @@ insert into symptom_body_part(symptom_code, body_part_code) values('SYM1','BP1')
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM3','BP2');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM4','BP6');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM5','BP4');
+
 
 insert into symptom_severity(type, symptom_code, staff_id) values('RANGE', 'SYM1', 1);
 insert into symptom_severity(type, symptom_code, staff_id) values('ENUM', 'SYM2', 1);
