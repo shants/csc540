@@ -14,8 +14,10 @@ import static Utils.CommandLineUtils.ReadInput;
 
 public class NegativeExperience extends IScreen {
     public void display(){
-        System.out.println(MessageUtils.NEGATIVE_EXP_CODE);
-        System.out.println(MessageUtils.GLOBAL_GO_BACK);
+        System.out.println(MessageUtils.NEGATIVE_EXP.NEGATIVE_EXP_CODE.ordinal() +
+                MessageUtils.GLOBAL_DELIMITER + MessageUtils.NEGATIVE_EXP_CODE);
+        System.out.println(MessageUtils.NEGATIVE_EXP.GO_BACK.ordinal() +
+                MessageUtils.GLOBAL_DELIMITER + MessageUtils.GLOBAL_GO_BACK);
     }
     public void run(){
 
