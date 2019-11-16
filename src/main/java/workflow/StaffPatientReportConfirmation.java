@@ -4,6 +4,7 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import db_utils.VisitCRUD;
 import entities.ReportRefererral;
 import db_utils.ReportCRUD;
 
@@ -30,6 +31,7 @@ public class StaffPatientReportConfirmation extends IScreen {
                 switch (options) {
                     case CONFIRM:
                         ReportCRUD.addPatientReport();
+                        VisitCRUD.checkoutPatient();
                         if (ViewerContext.getInstance().getPatientReport().getDischarge_status_code() == 2) {
                             ReportCRUD.reportReferral();
                             ReportCRUD.addReferralReason();

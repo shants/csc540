@@ -80,7 +80,7 @@ public class VisitCRUD {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String visit_table = "VISIT";
-        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where IS_TREATED = 'Y' and facility_id = ?";
+        String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from " + visit_table + " where IS_TREATED = 'Y' and facility_id = ? and DISCHARGE_DATE IS NULL";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, facility.getId());
@@ -187,5 +187,20 @@ public class VisitCRUD {
             System.out.println("Error occurred while fetching symptoms" +e.getMessage());
         }
         return results;
+    }
+
+    public static void checkoutPatient() {
+        int visit_id = ViewerContext.getInstance().getPatientToCheckout().getVisit_id();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "UPDATE VISIT SET DISCHARGE_DATE = ? WHERE VISIT_ID = ?";
+        PreparedStatement statement;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setTimestamp(1, new java.sql.Timestamp(System.currentTimeMillis()));
+            statement.setInt(2, visit_id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Unable to update discharge date:"+e.getMessage());
+        }
     }
 }

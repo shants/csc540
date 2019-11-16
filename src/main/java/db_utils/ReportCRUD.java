@@ -15,7 +15,7 @@ public class ReportCRUD {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL";
         String query = "INSERT into " + report_table + " (REPORT_ID, STAFF_ID, FACILITY_ID)" +
-                "values( ? , ? )";
+                "values( ? , ?, ? )";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1,  rep.getReport_id());
