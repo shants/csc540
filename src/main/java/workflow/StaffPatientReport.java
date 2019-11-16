@@ -41,6 +41,7 @@ public class StaffPatientReport extends IScreen {
     public void run() {
         boolean invalidOption, goBack;
         getPatientInformation();
+        int discharge_status = 0, treat = 0;
         do {
             invalidOption = goBack = false;
             int option;
@@ -54,6 +55,7 @@ public class StaffPatientReport extends IScreen {
                     case REPORT_DISCHARGE_STATUS:
                         scr = new DischargeStatus();
                         scr.run();
+                        discharge_status = 1;
                         invalidOption = true;
                         break;
                     case REPORT_REFERRAL_STATUS:
@@ -65,6 +67,7 @@ public class StaffPatientReport extends IScreen {
                         System.out.println(MessageUtils.PATIENT_REPORT_TREATMENT + MessageUtils.GLOBAL_DELIMITER);
                         String treatment = CommandLineUtils.ReadInput();
                         ViewerContext.getInstance().getPatientReport().setTreatment(treatment);
+                        treat = 1;
                         invalidOption = true;
                         break;
                     case REPORT_NEGATIVE_EXPERIENCE:
@@ -76,6 +79,11 @@ public class StaffPatientReport extends IScreen {
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     case GLOBAL_SUBMIT:
+                        if (treat == 0  || discharge_status == 0) {
+                            System.out.println("Please Enter Discharge Status and Treatment before submitting the report \n");
+                            invalidOption = true;
+                            break;
+                        }
                         scr = new StaffPatientReportConfirmation();
                         scr.run();
                         break;
