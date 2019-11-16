@@ -1,5 +1,6 @@
 package Utils;
 
+import config.DatabaseConnection;
 import entities.*;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class ViewerContext {
     }
 
     public static void destroyInstance() {
+        DatabaseConnection.getInstance().destroyConnection();
         vcSingletonInstance = null;
     }
 

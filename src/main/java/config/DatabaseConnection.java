@@ -18,7 +18,6 @@ public class DatabaseConnection
         return instance;
     }
 
-
     public java.sql.Connection getConnection(){
         return connection;
     }
