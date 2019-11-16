@@ -153,7 +153,7 @@ insert into asses_rules(rule_id, asses_rule, priority_id) values(2,'Value is MID
 insert into asses_rules(rule_id, asses_rule, priority_id) values(2,'Value is HIGH', 1);
 insert into asses_rules(rule_id, asses_rule, priority_id) values(3,'Value is HIGH', 1);
 
-insert into report(neg_exp_id, neg_exp_text, treatment, visit_id, discharge_status) values(1, 'demo neg exp text', 'demo treatment', 2, 'referred');
+insert into report(neg_exp_id, negative_experience_text, treatment, visit_id, discharge_status) values(1, 'demo neg exp text', 'demo treatment', 2, 'referred');
 insert into report_referral(facility_id, report_id, staff_id) values(2,1,1);
 insert into report_referral_reason(report_id, reason_code, reason_description, service_code) values(1, 1, 'SERVICE UNAVAILABLE', 'SR3');
 

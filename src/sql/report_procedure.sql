@@ -14,7 +14,7 @@ treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,
 CONSTRAINT report_id_key PRIMARY KEY (report_id),
-CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id),
+CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id)
 )';
 
 EXECUTE IMMEDIATE new_query;
