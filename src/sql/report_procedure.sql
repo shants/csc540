@@ -31,9 +31,11 @@ END;';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE TABLE report_referral(
+facility_id NUMBER(10) NOT NULL,
 report_id NUMBER(10) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 CONSTRAINT report_referral_key PRIMARY KEY (report_id,staff_id),
+CONSTRAINT fk_report_ref_fac_id FOREIGN KEY (facility_id) REFERENCES facility(facility_id),
 CONSTRAINT fk_report_ref_rep_id FOREIGN KEY (report_id ) REFERENCES report(report_id),
 CONSTRAINT fk_report_ref_staff_id FOREIGN KEY(staff_id) REFERENCES staff(staff_id))';
 

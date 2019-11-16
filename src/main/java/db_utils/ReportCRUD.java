@@ -14,12 +14,13 @@ public class ReportCRUD {
         ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL";
-        String query = "INSERT into " + report_table + " (REPORT_ID, STAFF_ID)" +
+        String query = "INSERT into " + report_table + " (REPORT_ID, STAFF_ID, FACILITY_ID)" +
                 "values( ? , ? )";
         try {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1,  rep.getReport_id());
             ps.setInt(2, rep.getStaff_id());
+            ps.setInt(3, rep.getFacility_id());
             ps.execute();
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
@@ -30,12 +31,6 @@ public class ReportCRUD {
     public static void addReferralReason() {
         int reason_id = -1;
         ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
-
-        Integer fid = rep.getFacility_id();
-        if (fid == null){
-            return;
-        }
-
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL_REASON";
         String query = "INSERT into " + report_table + " (REPORT_ID, REASON_CODE, " +

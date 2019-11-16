@@ -28,7 +28,6 @@ public class StaffPatientReport extends IScreen {
 
     public void getPatientInformation() {
         ReportRefererral rep = new ReportRefererral();
-        rep.setFacility_id(ViewerContext.getInstance().getPatientToCheckout().getFacilityID());
         rep.setVisit_id(ViewerContext.getInstance().getPatientToCheckout().getVisit_id());
         rep.setService_code(1);
         rep.setStaff_id(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
