@@ -45,7 +45,7 @@ reason_id NUMBER(10) NOT NULL,
 report_id NUMBER(10) NOT NULL,
 reason_code NUMBER(10) NOT NULL,
 reason_description VARCHAR2(100) NOT NULL,
-service_code NUMBER(10) NOT NULL,
+service_code VARCHAR2(20) NOT NULL,
 CONSTRAINT report_referral_reason_key PRIMARY KEY (report_id,reason_id),
 CONSTRAINT fk_report_ref_res_rep_id FOREIGN KEY (report_id) REFERENCES report(report_id))';
 
