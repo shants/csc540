@@ -67,6 +67,7 @@ public class SignUp extends IScreen {
                         }
                         patient.setFacilityId(facility_id);
                         PatientCRUD.signUp(patient,address);
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
                         break;
                     case PATIENT_SIGNUP_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);

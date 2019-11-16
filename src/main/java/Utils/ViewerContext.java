@@ -13,6 +13,7 @@ public class ViewerContext {
     private HashMap<IDENTIFIER_TYPES, Integer> identifiers = new HashMap<>();
     private HashMap<IDENTIFIER_NAMES, String> Names = new HashMap<>();
     private ArrayList<PatientSymptom> symptomList = new ArrayList<>();
+    private ArrayList<Symptom> symptomsForCheckin = new ArrayList<>();
     private Visit patientToCheckout;
     private ReportRefererral patientReport;
     private NegExpDescription negExperienceDesc;
@@ -28,6 +29,15 @@ public class ViewerContext {
     public enum IDENTIFIER_TYPES {
         PATIENT_ID, STAFF_ID, FACILITY_ID, VISIT_ID
     }
+
+    public ArrayList<Symptom> getSymptomsForCheckin() {
+        return this.symptomsForCheckin;
+    }
+
+    public void addSymptomForCheckin(Symptom symptom){
+        this.symptomsForCheckin.add(symptom);
+    }
+
 
     public enum IDENTIFIER_NAMES{
         SYMPTOM_NAME

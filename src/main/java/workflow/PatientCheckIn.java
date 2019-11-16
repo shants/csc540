@@ -31,6 +31,7 @@ public class PatientCheckIn extends  IScreen {
                     // add for others
                 }
                 else if (option < totalOptions){
+                    ViewerContext.getInstance().addSymptomForCheckin(symptomsList.get(option));
                     IScreen meta = new PatientSymptomMeta();
                     meta.run();
                 }

@@ -15,6 +15,7 @@ public class PatientSymptomCRUD {
     public static boolean addPatientSymptoms(){
         // add patient symptoms
         ArrayList<PatientSymptom> arr =  ViewerContext.getInstance().getSymptoms();
+        ArrayList<Symptom> syms = ViewerContext.getInstance().getSymptomsForCheckin();
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "insert into PATIENT_SYMPTOMS (VISIT_ID," +
                 "SYMPTOM_CODE," +
@@ -25,13 +26,13 @@ public class PatientSymptomCRUD {
         try {
             int visit_id = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.VISIT_ID);
             PreparedStatement ps = connection.prepareStatement(sql);
-            for (PatientSymptom sym : arr) {
+            for (int x = 0; x< arr.size(); x ++) {
                 ps.setInt(1, visit_id);
-                ps.setString(2, sym.getSymptom().getSymptom_code());
-                ps.setString(3, sym.getSeverityValue());
-                ps.setString(4, sym.getPostEvent());
-                ps.setString(5, sym.getIsRecurring());
-                ps.setInt(6, sym.getDuration());
+                ps.setString(2, syms.get(x).getSymptom_code());
+                ps.setString(3, arr.get(x).getSeverityValue());
+                ps.setString(4, arr.get(x).getPostEvent());
+                ps.setString(5, arr.get(x).getIsRecurring());
+                ps.setInt(6, arr.get(x).getDuration());
                 ps.addBatch();
             }
             ps.executeBatch();

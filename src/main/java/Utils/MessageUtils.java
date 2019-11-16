@@ -76,7 +76,7 @@ public class MessageUtils {
     public static String GLOBAL_NO = "No";
     public static String PATIENT_SYM_META_BP = "Enter Body Part ( NA if not applicable )";
     public static String PATIENT_SYM_META_DUR = "Duration ( 0 if NA)";
-    public static String PATIENT_SYM_META_REOCCUR = "ReOccuring Yes / No";
+    public static String PATIENT_SYM_META_REOCCUR = "Reoccuring y/n";
     public static String PATIENT_SYM_META_SEV = "Severity NA if not applicable";
     public static String PATIENT_SYM_META_CAUSE = "Cause ( incident ) NA if not applicable";
     public static String MAIN_PATIENT = "Visiting as a Patient";

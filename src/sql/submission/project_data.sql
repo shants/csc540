@@ -16,6 +16,7 @@ insert into symptom(SYMPTOM_NAME) values('PHYSICAL EXAM');
 insert into symptom(SYMPTOM_NAME) values('LIGHTHEADEDNESS');
 insert into symptom(SYMPTOM_NAME) values('BLURRED VISION');
 insert into symptom(SYMPTOM_NAME) values('BLEEDING');
+insert into symptom(SYMPTOM_NAME) values('GENERIC');
 
 insert into body_part(name) values('LEFT ARM');
 insert into body_part(name) values('RIGHT ARM');
@@ -24,10 +25,12 @@ insert into body_part(name) values('EYE');
 insert into body_part(name) values('HEART');
 insert into body_part(name) values('CHEST');
 insert into body_part(name) values('HEAD');
+insert into body_part(name) values('BODY');
 
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM5','BP7');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM6','BP4');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM8','BP8');
 
 execute create_new_facility('WOLF VILLAGE WAY','RALEIGH', 'NC', 'US', '2650', 'WOLF HOSPITAL','TERTIARY', 300);
 execute create_new_facility('SACRAMENTO','SANTA CRUZ', 'CA', 'US', '2500', 'CALIFORNIA HEALTHCARE','SECONDARY', 150);

@@ -121,7 +121,8 @@ public class VisitCRUD {
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 // if in the loop atleast 1 entry exists => pateint already checked in
-                if (rs.getInt("COUNT(*)")==0){
+                int value = rs.getInt("COUNT(*)");
+                if (value==0){
                     return false;
                 }
                 return true;
