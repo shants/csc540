@@ -9,7 +9,7 @@ BEGIN
 new_query := 'CREATE TABLE report(
 report_id NUMBER(10) NOT NULL,
 neg_exp_id NUMBER(10),
-negative_experience_text VARCHAR2(100) NOT NULL,
+negative_experience_text VARCHAR2(100),
 treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,

@@ -4,6 +4,9 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import db_utils.DummyQueriesCRUD;
+
+import java.util.ArrayList;
 
 public class DummyQueries extends Utils.IScreen {
     public void display() {
@@ -39,6 +42,7 @@ public class DummyQueries extends Utils.IScreen {
                 IScreen scr;
                 switch (options) {
                     case D1:
+                        d1();
                         break;
                     case D2:
                         break;
@@ -62,5 +66,27 @@ public class DummyQueries extends Utils.IScreen {
                 invalidOption = true;
             }
         } while (invalidOption);
+    }
+
+    private void d1() {
+        ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query1();
+        prettyPrint(results);
+    }
+
+    private void prettyPrint(ArrayList<ArrayList<String>> results) {
+        for (int itr =0; itr < results.size(); itr++) {
+            for (String col: results.get(itr)) {
+                System.out.print(String.format("%25s",col) + " \t | ");
+            }
+            System.out.print("\n");
+            if (itr == 0) {
+                for (int s = 0; s < results.get(itr).size(); s++){
+                    for (int y = 0; y <35; y++) {
+                        System.out.print("-");
+                    }
+                }
+            }
+            System.out.print("\n");
+        }
     }
 }
