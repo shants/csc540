@@ -32,7 +32,6 @@ public class ReportCRUD {
         ReportRefererral rep = ViewerContext.getInstance().getPatientReport();
 
         Integer fid = rep.getFacility_id();
-        fid = 1;
         if (fid == null){
             return;
         }
