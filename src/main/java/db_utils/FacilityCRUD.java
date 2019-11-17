@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class FacilityCRUD {
     public static void createNewFacility(Facility facility, Address address) {
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        CallableStatement statement;
+        CallableStatement statement=null;
         String procedure_call = "{call create_new_facility(?,?,?,?,?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
@@ -29,16 +29,27 @@ public class FacilityCRUD {
             System.out.println("New facility created");
         } catch (SQLException e) {
             System.out.println("Unable to create new facility:"+e.getMessage());
+        } finally {
+            try {
+                statement.close();
+                DatabaseConnection.getInstance().destroyConnection();
+            }catch (Exception e){
+                System.out.println("Unable to close connetion :"+e.getMessage());
+            }
+
         }
+
     }
 
     public static ArrayList<Facility> readAll() {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "select  *  from facility";
         ArrayList<Facility> lstFacility = new ArrayList<>();
+        Statement stmt = null;
+        ResultSet rs = null;
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(sql);
             while (rs.next()){
                 Facility m = new Facility();
                 m.setName(rs.getString("FACILITY_NAME"));
@@ -48,6 +59,15 @@ public class FacilityCRUD {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                stmt.close();
+                DatabaseConnection.getInstance().destroyConnection();
+            }catch (Exception e){
+                System.out.println("Unable to close connetion :"+e.getMessage());
+            }
+
         }
         return lstFacility;
     }

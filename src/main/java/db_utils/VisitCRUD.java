@@ -6,6 +6,7 @@ import entities.Facility;
 import entities.Symptom;
 import entities.Visit;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -14,11 +15,13 @@ public class VisitCRUD {
     public static ArrayList<Visit> getPatientsToTreat(Facility facility) {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME, END_TIME from VISIT where facility_id = ? and END_TIME IS NOT NULL and IS_TREATED IS NULL";
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setInt(1, facility.getId());
-            ResultSet rs = statement.executeQuery();
+            rs = statement.executeQuery();
             while (rs.next()) {
                 Visit visit = new Visit();
                 visit.setPatient_id(rs.getInt("PATIENT_ID"));
@@ -29,6 +32,14 @@ public class VisitCRUD {
             }
         } catch (SQLException e) {
             System.out.println("Error occurred while fetching patients to treat:"+e.getMessage());
+        }finally {
+            try {
+                rs.close();
+                statement.close();
+                DatabaseConnection.getInstance().destroyConnection();
+            }catch (Exception e){
+                System.out.println("Unable to close connection" + e.getMessage());
+            }
         }
         return records;
     }
@@ -37,10 +48,12 @@ public class VisitCRUD {
         ArrayList<Visit> records = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String query = "SELECT PATIENT_ID, VISIT_ID, START_TIME from VISIT where END_TIME IS NULL and facility_id = ?";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setInt(1, facility.getId());
-            ResultSet rs = statement.executeQuery();
+            rs = statement.executeQuery();
             while (rs.next()) {
                 Visit visit = new Visit();
                 visit.setPatient_id(rs.getInt("PATIENT_ID"));
@@ -50,6 +63,14 @@ public class VisitCRUD {
             }
         } catch (SQLException e) {
             System.out.println("Error occurred while fetching checked-in patients :"+e.getMessage());
+        } finally {
+            try{
+                rs.close();
+                statement.close();
+                DatabaseConnection.getInstance().destroyConnection();
+            }catch (Exception e){
+                System.out.println("Unable to close connection" + e.getMessage());
+            }
         }
         return records;
     }
@@ -59,7 +80,7 @@ public class VisitCRUD {
         String query = "UPDATE VISIT SET " +
                 "END_TIME = to_timestamp(?,'YYYY/MM/DD HH24:MI'), BP_LOW = ?, BP_HIGH = ?, "+
                 " BODY_TEMPERATURE = ?, PRIORITY_ID = ? WHERE VISIT_ID = ? and facility_id = ?";
-        PreparedStatement statement;
+        PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(query);
             statement.setString(1, visit.getEnd_time());
@@ -73,6 +94,13 @@ public class VisitCRUD {
             System.out.println("Saved vitals. Checkin complete.");
         } catch (SQLException e) {
             System.out.println("Unable to complete entering vitals for patient:"+e.getMessage());
+        } finally {
+            try{
+                statement.close();
+                DatabaseConnection.getInstance().destroyConnection();
+            }catch (Exception e){
+                System.out.println("Unable to close connection " + e.getMessage());
+            }
         }
     }
 
