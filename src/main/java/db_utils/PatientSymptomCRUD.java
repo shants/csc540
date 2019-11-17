@@ -23,9 +23,10 @@ public class PatientSymptomCRUD {
                 "POST_EVENT," +
                 "IS_RECURRING," +
                 "DURATION) values (?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = null;
         try {
             int visit_id = ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.VISIT_ID);
-            PreparedStatement ps = connection.prepareStatement(sql);
+            ps = connection.prepareStatement(sql);
             for (int x = 0; x< arr.size(); x ++) {
                 ps.setInt(1, visit_id);
                 ps.setString(2, syms.get(x).getSymptom_code());
@@ -38,6 +39,8 @@ public class PatientSymptomCRUD {
             ps.executeBatch();
         }catch ( SQLException e){
             e.printStackTrace();
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(ps);
         }
         return true;
     }

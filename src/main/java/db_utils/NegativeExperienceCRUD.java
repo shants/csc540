@@ -14,9 +14,11 @@ public class NegativeExperienceCRUD {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String sql = "select  *  from negative_experience";
         ArrayList<NegExperience> lstNegativeExp = new ArrayList<>();
+        Statement stmt = null;
+        ResultSet rs = null;
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 NegExperience m = new NegExperience();
                 m.setNegExpId(rs.getInt("NEG_EXP_ID"));
@@ -26,6 +28,8 @@ public class NegativeExperienceCRUD {
         } catch (
                 SQLException e) {
             e.printStackTrace();
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt, rs);
         }
         return lstNegativeExp;
     }
