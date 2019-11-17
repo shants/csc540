@@ -71,6 +71,8 @@ public class StaffMenu extends IScreen {
                         scr.run();
                         break;
                     case STAFF_MENU_ADD_ASSESSMENT_RULE:
+                        scr = new StaffAddAssesmentRule();
+                        scr.run();
                         break;
                     case STAFF_MENU_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffSignIn);

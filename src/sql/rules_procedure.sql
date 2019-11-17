@@ -34,3 +34,23 @@ CONSTRAINT fk_ass_rules_priority FOREIGN KEY (priority_id) REFERENCES priority(p
 EXECUTE IMMEDIATE new_query;
 end new_rules_tables;
 /
+
+CREATE OR REPLACE PROCEDURE add_assesment_rules
+(ass_staff_id number, ass_rule varchar2,
+sym_code varchar2, ass_priority_id number)
+
+AUTHID CURRENT_USER IS
+new_query varchar2(5000);
+ass_rule_id number;
+
+BEGIN
+
+new_query := 'INSERT INTO RULES_SYMPTOMS(staff_id, symptom_code) SELECT :b1, :b2 FROM DUAL WHERE NOT EXISTS (SELECT * FROM RULES_SYMPTOMS WHERE STAFF_ID =:b3 AND SYMPTOM_CODE =:b4 )';
+execute immediate new_query using ass_staff_id, sym_code, ass_staff_id, sym_code;
+select rule_id into ass_rule_id from RULES_SYMPTOMS where symptom_code = sym_code and staff_id = ass_staff_id;
+
+new_query := 'INSERT INTO ASSES_RULES(rule_id, asses_rule, priority_id) VALUES(:b1, :b2, :b3)';
+execute immediate new_query using ass_rule_id, ass_rule, ass_priority_id;
+
+end add_assesment_rules;
+/

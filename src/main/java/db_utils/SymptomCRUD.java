@@ -51,6 +51,41 @@ public class SymptomCRUD {
         }
     }
 
+    public static ArrayList<String>read_symptom_severity(Symptom symptom, SymptomSeverity symptom_severity){
+
+        int severity_id=0;
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        ArrayList<String> lst_sev_values = new ArrayList<>();
+        try{
+            String sql = "SELECT symptom_severity_id FROM SYMPTOM_SEVERITY WHERE SYMPTOM_CODE =? AND STAFF_ID =?";
+            PreparedStatement stmt2 = connection.prepareStatement(sql);
+            stmt2.setString(1, symptom.getSymptom_code());
+            stmt2.setInt(2,symptom_severity.getStaffID());
+            ResultSet rs2 = stmt2.executeQuery();
+            while(rs2.next()){
+                severity_id = rs2.getInt("SYMPTOM_SEVERITY_ID");
+            }
+
+        }catch (SQLException e){
+            System.out.println("Unable to retrieve symptom severity id from symptom code:"+e.getMessage());
+        }
+        try{
+            String sql = "SELECT value from SEVERITY_SCALE where symptom_severity_id =?";
+            PreparedStatement stmt3 = connection.prepareStatement(sql);
+            stmt3.setInt(1, severity_id);
+            ResultSet rs3 = stmt3.executeQuery();
+            while(rs3.next()){
+                lst_sev_values.add(rs3.getString("VALUE"));
+            }
+
+        }catch (SQLException e){
+            System.out.println("Unable to retrieve symptom code from symptom name:"+e.getMessage());
+        }
+
+        return lst_sev_values;
+
+
+    }
     public static void add_new_severity_scale(ArrayList<String> s_values, Symptom symptom, SymptomSeverity symptom_severity){
 
         Connection connection = DatabaseConnection.getInstance().getConnection();

@@ -3,12 +3,10 @@ package db_utils;
 import config.DatabaseConnection;
 import entities.AssessmentRule;
 import entities.Symptom;
+import entities.SymptomSeverity;
 import entities.Visit;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class AssessmentRuleCRUD {
@@ -48,5 +46,23 @@ public class AssessmentRuleCRUD {
             System.out.println("Error occurred while fetching assessment rules" +e.getMessage());
         }
         return rules;
+    }
+
+    public static void AddRules(SymptomSeverity symptom_severity, AssessmentRule rule){
+
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        CallableStatement statement;
+        String procedure_call = "{call add_assesment_rules(?,?,?,?)}";
+        try {
+            statement = connection.prepareCall(procedure_call);
+            statement.setInt(1, symptom_severity.getStaffID());
+            statement.setString(2,rule.getRule());
+            statement.setString(3,rule.getSymptom().getSymptom_code());
+            statement.setInt(4,rule.getPriorityID());
+            statement.execute();
+            System.out.println("New Assesment rule Added.");
+        } catch (SQLException e) {
+            System.out.println("Unable to add a new Assesment rule:"+e.getMessage());
+        }
     }
 }

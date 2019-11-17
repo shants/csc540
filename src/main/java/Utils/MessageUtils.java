@@ -86,6 +86,9 @@ public class MessageUtils {
     public static String SERVICE_UNAVAILABLE_TIME = "service unavailable at that time";
     public static String SERVICE_NOT_PRESENT = "service not present at facility";
     public static String NON_PAYMENT = "non-payment";
+    public static String HIGH = "High";
+    public static String NORMAL = "Normal";
+    public static String QUARANTINE = "Quarantine";
 
     public enum MAIN {
         MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
