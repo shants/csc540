@@ -36,19 +36,6 @@ public class DatabaseConnection
         }
     }
 
-    public void finallyHandler(PreparedStatement statement, ResultSet rs){
-        try {
-            if (statement != null) {
-                statement.close();
-            }
-            if (rs != null){
-                rs.close();
-            }
-        }catch (Exception e){
-            System.out.println(MessageUtils.ERR_UNABLE_CONN_CLOSE + e.getMessage());
-        }
-        destroyConnection();
-    }
 
     public void finallyHandler(Statement statement, ResultSet rs){
         try {
@@ -61,7 +48,6 @@ public class DatabaseConnection
         }catch (Exception e){
             System.out.println(MessageUtils.ERR_UNABLE_CONN_CLOSE + e.getMessage());
         }
-        destroyConnection();
     }
 
     public void finallyHandler(Statement statement){
@@ -72,21 +58,8 @@ public class DatabaseConnection
         }catch (Exception e){
             System.out.println(MessageUtils.ERR_UNABLE_CONN_CLOSE + e.getMessage());
         }
-        destroyConnection();
-
     }
 
-    public void finallyHandler(PreparedStatement statement){
-        try {
-            if (statement != null) {
-                statement.close();
-            }
-        }catch (Exception e){
-            System.out.println(MessageUtils.ERR_UNABLE_CONN_CLOSE + e.getMessage());
-        }
-        destroyConnection();
-
-    }
 
     private DatabaseConnection(){
         try {
