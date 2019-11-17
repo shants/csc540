@@ -15,9 +15,10 @@ public class ReportCRUD {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String report_table = "REPORT_REFERRAL";
         String query = "INSERT into " + report_table + " (REPORT_ID, STAFF_ID, FACILITY_ID)" +
-                "values( ? , ? )";
+                "values( ? , ?, ? )";
+        PreparedStatement ps = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(query);
+            ps = connection.prepareStatement(query);
             ps.setInt(1,  rep.getReport_id());
             ps.setInt(2, rep.getStaff_id());
             ps.setInt(3, rep.getFacility_id());
@@ -25,6 +26,8 @@ public class ReportCRUD {
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
             System.out.println("Error occurred while inserting for report referral " +e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(ps);
         }
     }
 
@@ -35,21 +38,24 @@ public class ReportCRUD {
         String report_table = "REPORT_REFERRAL_REASON";
         String query = "INSERT into " + report_table + " (REPORT_ID, REASON_CODE, " +
                 "REASON_DESCRIPTION, SERVICE_CODE)" + "values( ? , ? , ? , ?)";
-
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
+            ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
             ps.setInt(1,  rep.getReport_id());
             ps.setInt(2, rep.getReason_code());
             ps.setString(3, rep.getReason());
             ps.setInt(4, rep.getService_code());
             ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+            rs = ps.getGeneratedKeys();
             if(rs.next())
                 reason_id = rs.getInt(1);
             rep.setReason_id(reason_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
             System.out.println("Error occurred while inserting for referral reason " +e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(ps, rs);
         }
     }
 
@@ -60,21 +66,25 @@ public class ReportCRUD {
         String report_table = "REPORT";
         String query = "INSERT into " + report_table + " (NEG_EXP_ID, NEGATIVE_EXPERIENCE_TEXT, " +
                 "TREATMENT, VISIT_ID, DISCHARGE_STATUS) " + "values( ? , ? , ? , ? , ? )";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = connection.prepareStatement(query, new String[]{"REPORT_ID"});
+            ps = connection.prepareStatement(query, new String[]{"REPORT_ID"});
             ps.setInt(1,  rep.getNegative_experience_value());
             ps.setString(2, rep.getNegative_experience_text());
             ps.setString(3, rep.getTreatment());
             ps.setInt(4, rep.getVisit_id());
             ps.setString(5, rep.getDischarge_status());
             ps.execute();
-            ResultSet rs = ps.getGeneratedKeys();
+            rs = ps.getGeneratedKeys();
             if(rs.next())
                 report_id = rs.getInt(1);
             rep.setReport_id(report_id);
             ViewerContext.getInstance().setPatientReport(rep);
         } catch (SQLException e) {
             System.out.println("Error occurred while inserting for add report for patient " +e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(ps, rs);
         }
     }
 }

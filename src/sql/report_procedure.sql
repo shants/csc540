@@ -9,12 +9,12 @@ BEGIN
 new_query := 'CREATE TABLE report(
 report_id NUMBER(10) NOT NULL,
 neg_exp_id NUMBER(10),
-negative_experience_text VARCHAR2(100) NOT NULL,
+negative_experience_text VARCHAR2(100),
 treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,
 CONSTRAINT report_id_key PRIMARY KEY (report_id),
-CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id),
+CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id)
 )';
 
 EXECUTE IMMEDIATE new_query;
@@ -45,7 +45,7 @@ reason_id NUMBER(10) NOT NULL,
 report_id NUMBER(10) NOT NULL,
 reason_code NUMBER(10) NOT NULL,
 reason_description VARCHAR2(100) NOT NULL,
-service_code NUMBER(10) NOT NULL,
+service_code VARCHAR2(20) NOT NULL,
 CONSTRAINT report_referral_reason_key PRIMARY KEY (report_id,reason_id),
 CONSTRAINT fk_report_ref_res_rep_id FOREIGN KEY (report_id) REFERENCES report(report_id))';
 

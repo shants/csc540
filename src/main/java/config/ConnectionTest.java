@@ -9,9 +9,7 @@ import java.sql.Statement;
 public class ConnectionTest {
     public static void main(String[] Args){
         System.out.println("Hello World");
-        //dummyQuery();
-        PatientRouting p = new PatientRouting();
-        p.run();
+        dummyQuery();
     }
 
     public static void dummyQuery(){

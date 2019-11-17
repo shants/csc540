@@ -55,6 +55,7 @@ insert into symptom(SYMPTOM_NAME) values('COUGH');
 insert into symptom(SYMPTOM_NAME) values('FEVER');
 insert into symptom(SYMPTOM_NAME) values('HEADACHE');
 insert into symptom(SYMPTOM_NAME) values('HEART ATTACK');
+insert into symptom(SYMPTOM_NAME) values('GENERIC');
 
 insert into body_part(name) values('NECK');
 insert into body_part(name) values('HEAD');
@@ -92,6 +93,8 @@ insert into symptom_body_part(symptom_code, body_part_code) values('SYM1','BP1')
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM2','BP3');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM3','BP2');
 insert into symptom_body_part(symptom_code, body_part_code) values('SYM4','BP6');
+insert into symptom_body_part(symptom_code, body_part_code) values('SYM5','BP4');
+
 
 insert into symptom_severity(type, symptom_code, staff_id) values('RANGE', 'SYM1', 1);
 insert into symptom_severity(type, symptom_code, staff_id) values('ENUM', 'SYM2', 1);
@@ -152,6 +155,10 @@ insert into asses_rules(rule_id, asses_rule, priority_id) values(1,'Value greate
 insert into asses_rules(rule_id, asses_rule, priority_id) values(2,'Value is MID', 2);
 insert into asses_rules(rule_id, asses_rule, priority_id) values(2,'Value is HIGH', 1);
 insert into asses_rules(rule_id, asses_rule, priority_id) values(3,'Value is HIGH', 1);
+
+insert into report(neg_exp_id, negative_experience_text, treatment, visit_id, discharge_status) values(1, 'demo neg exp text', 'demo treatment', 2, 'referred');
+insert into report_referral(facility_id, report_id, staff_id) values(2,1,1);
+insert into report_referral_reason(report_id, reason_code, reason_description, service_code) values(1, 1, 'SERVICE UNAVAILABLE', 'SR3');
 
 /* last statement always*/
 execute commit ;

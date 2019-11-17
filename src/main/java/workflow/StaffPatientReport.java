@@ -33,7 +33,6 @@ public class StaffPatientReport extends IScreen {
         rep.setStaff_id(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
         // Default negative experience
         rep.setNegative_experience_value(0);
-        rep.setNegative_experience_text("No Negative Experience");
         ViewerContext.getInstance().setPatientReport(rep);
     }
 

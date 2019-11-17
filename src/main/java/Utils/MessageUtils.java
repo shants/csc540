@@ -76,7 +76,7 @@ public class MessageUtils {
     public static String GLOBAL_NO = "No";
     public static String PATIENT_SYM_META_BP = "Enter Body Part ( NA if not applicable )";
     public static String PATIENT_SYM_META_DUR = "Duration ( 0 if NA)";
-    public static String PATIENT_SYM_META_REOCCUR = "ReOccuring Yes / No";
+    public static String PATIENT_SYM_META_REOCCUR = "Reoccuring y/n";
     public static String PATIENT_SYM_META_SEV = "Severity NA if not applicable";
     public static String PATIENT_SYM_META_CAUSE = "Cause ( incident ) NA if not applicable";
     public static String MAIN_PATIENT = "Visiting as a Patient";
@@ -89,9 +89,23 @@ public class MessageUtils {
     public static String HIGH = "High";
     public static String NORMAL = "Normal";
     public static String QUARANTINE = "Quarantine";
+    public static String DUMMY_QUERIES_1 = "Find all patients that were discharged but had negative experiences at any facility, list their names,\n" +
+            "facility, check-in date, discharge date and negative experiences";
+    public static String DUMMY_QUERIES_2 = "Find facilities that did not have a negative experience for a specific period";
+    public static String DUMMY_QUERIES_3 = "For each facility, find the facility that is sends the most referrals to";
+    public static String DUMMY_QUERIES_4 = "Find facilities that had no negative experience for patients with cardiac symptoms";
+    public static String DUMMY_QUERIES_5 = "Find the facility with the most number of negative experiences";
+    public static String DUMMY_QUERIES_6 = "Find each facility, list the patient encounters with the top five longest check-in phases (i.e. time from\n" +
+            "begin check-in to when treatment phase begins (list the name of patient, date, facility, duration and\n" +
+            "list of symptoms).";
+    public static String ERR_UNABLE_CONN_CLOSE = "Unable to Close Connection ";
 
     public enum MAIN {
         MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
+    }
+
+    public enum DUMMY_QUERIES {
+        D1, D2, D3, D4, D5, D6, Back
     }
 
     public enum PATIENT_ROUTING {

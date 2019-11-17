@@ -13,6 +13,8 @@ public class AssessmentRuleCRUD {
     public static ArrayList<AssessmentRule> getRules(Visit visit, ArrayList<Symptom> symptoms) {
         ArrayList<AssessmentRule> rules = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         String rules_symptom_table = "RULES_SYMPTOMS";
         String asses_rules_table = "ASSES_RULES";
         StringBuilder query = new StringBuilder("SELECT symptom.symptom_code, symptom.symptom_name, a.asses_rule, "+
@@ -27,11 +29,11 @@ public class AssessmentRuleCRUD {
         }
         query.append(")) a inner join symptom on a.symptom_code = symptom.symptom_code inner join priority using(priority_id)");
         try {
-            PreparedStatement statement = connection.prepareStatement(query.toString());
+            statement = connection.prepareStatement(query.toString());
             for (int x = 1; x <= symptoms.size(); x++) {
                 statement.setString(x, symptoms.get(x-1).getSymptom_code());
             }
-            ResultSet rs = statement.executeQuery();
+            rs = statement.executeQuery();
             while (rs.next()) {
                 AssessmentRule rule = new AssessmentRule();
                 rule.setPriority(rs.getString("TYPE"));
@@ -44,6 +46,8 @@ public class AssessmentRuleCRUD {
             }
         } catch (SQLException e) {
             System.out.println("Error occurred while fetching assessment rules" +e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement, rs);
         }
         return rules;
     }

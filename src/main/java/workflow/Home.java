@@ -44,6 +44,8 @@ public class Home extends IScreen {
                         scr.run();
                         break;
                     case HOME_DEMO_QUERIES:
+                        scr = new DummyQueries();
+                        scr.run();
                         break;
                     case HOME_EXIT:
                         return;

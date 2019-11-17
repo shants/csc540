@@ -29,8 +29,14 @@ public class PatientCheckIn extends  IScreen {
                 }
                 else if (option == totalOptions-1){
                     // add for others
+                    Symptom s = SymptomCRUD.getSymptonCodeForGeneric();
+                    ViewerContext.getInstance().addSymptomForCheckin(s);
+                    IScreen meta = new PatientSymptomMeta();
+                    meta.run();
+
                 }
                 else if (option < totalOptions){
+                    ViewerContext.getInstance().addSymptomForCheckin(symptomsList.get(option));
                     IScreen meta = new PatientSymptomMeta();
                     meta.run();
                 }
@@ -53,4 +59,5 @@ public class PatientCheckIn extends  IScreen {
         System.out.println(Integer.toString(cSymptoms+1) + " "  + ("Done"));
         totalOptions = cSymptoms+1;
     }
+
 }

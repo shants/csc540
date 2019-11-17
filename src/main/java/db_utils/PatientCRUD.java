@@ -10,7 +10,7 @@ public class PatientCRUD
 {
     public static void signUp(Patient patient, Address address) {
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        CallableStatement statement;
+        CallableStatement statement = null;
         String procedure_call = "{call sign_up_new_patient(?,?,?,?,?,?,?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
@@ -28,6 +28,8 @@ public class PatientCRUD
             System.out.println("New Patient signed up.");
         } catch (SQLException e) {
             System.out.println("Unable to sign up a new patient:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement);
         }
     }
 
@@ -40,12 +42,14 @@ public class PatientCRUD
                     " inner join " + patient_address_table + " on " + patient_table +
                     ".patient_address_id = " + patient_address_table + ".patient_address_id) tbl inner join city " +
                     " on tbl.city_id = city.city_id where LAST_NAME = ? and CITY_NAME = ? and DATE_OF_BIRTH = to_date(?, 'yyyy/mm/dd')";
+        PreparedStatement statement = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement statement = connection.prepareStatement(query);
+            statement = connection.prepareStatement(query);
             statement.setString(1,patient.getLastName());
             statement.setString(2,address.getCityName());
             statement.setString(3,patient.getDateOfBirth());
-            ResultSet rs = statement.executeQuery();
+            rs = statement.executeQuery();
             if (rs.next()) {
                 patient_id = rs.getInt("PATIENT_ID");
                 ViewerContext.getInstance().addValue(patient_id, ViewerContext.IDENTIFIER_TYPES.PATIENT_ID);
@@ -55,6 +59,8 @@ public class PatientCRUD
             }
         } catch (SQLException e) {
             System.out.println("Error occurred while signing in:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement, rs);
         }
     }
 }
