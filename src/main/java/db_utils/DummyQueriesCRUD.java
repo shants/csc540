@@ -26,9 +26,11 @@ public class DummyQueriesCRUD {
         header.add("Discharge Date");
         header.add("Negative Experience");
         results.add(header);
+        Statement stmt = null;
+        ResultSet rs = null;
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(query);
             while (rs.next()){
                 ArrayList<String> row = new ArrayList<>();
                 row.add(String.valueOf(rs.getInt("FACILITY_ID")));
@@ -41,6 +43,8 @@ public class DummyQueriesCRUD {
             }
         } catch (SQLException e) {
             System.out.println("Error while executing query 1: " + e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt, rs);
         }
         return results;
     }
