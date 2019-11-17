@@ -36,17 +36,17 @@ public class DischargeStatus extends IScreen {
                 switch (options) {
                     case PATIENT_SUCCESSFUL_TREATMENT:
                         ViewerContext.getInstance().getPatientReport().setDischarge_status_code(0);
-                        status = MessageUtils.PATIENT_SUCCESSFUL_TREATMENT;
+                        status = MessageUtils.REPORT_STATUS.TREATED.toString();
                         ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case PATIENT_DECEASED:
                         ViewerContext.getInstance().getPatientReport().setDischarge_status_code(1);
-                        status = MessageUtils.PATIENT_DECEASED;
+                        status = MessageUtils.REPORT_STATUS.DECEASED.toString();
                         ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case PATIENT_REFERRED:
                         ViewerContext.getInstance().getPatientReport().setDischarge_status_code(2);
-                        status = MessageUtils.PATIENT_REFERRED;
+                        status = MessageUtils.REPORT_STATUS.REFERRED.toString();
                         ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
                         break;
                     case GLOBAL_GO_BACK:

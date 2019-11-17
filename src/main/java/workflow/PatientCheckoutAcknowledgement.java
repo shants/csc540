@@ -20,7 +20,12 @@ public class PatientCheckoutAcknowledgement extends IScreen {
         System.out.println("=======================");
         System.out.println("DISCHARGE STATUS " + rep.getDischarge_status());
         /* TODO REFERRAL   STATUS */
-        //System.out.println("REFERAL   STATUS" + rep.);
+        if (rep.getDischarge_status() == MessageUtils.REPORT_STATUS.REFERRED.toString()){
+            System.out.println("REFERAL   STATUS");
+            System.out.println("REFERRED BY " + Integer.toString(rep.getStaff_id()));
+            
+        }
+
         System.out.println("TREATMENT GIVEN " + rep.getTreatment());
         System.out.println("NEGATIVE EXPERIENCE " + rep.getNegative_experience_value() +  rep.getNegative_experience_text());
 

@@ -165,6 +165,10 @@ public class MessageUtils {
         STAFF_SIGNIN_START, STAFF_SIGNIN_EXIT
     }
 
+    public enum REPORT_STATUS {
+        TREATED, DECEASED, REFERRED
+    }
+
     public enum SUBMIT_REASON {
         ADD_REASON, GLOBAL_GO_BACK
     }
