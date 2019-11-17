@@ -30,13 +30,7 @@ public class FacilityCRUD {
         } catch (SQLException e) {
             System.out.println("Unable to create new facility:"+e.getMessage());
         } finally {
-            try {
-                statement.close();
-                DatabaseConnection.getInstance().destroyConnection();
-            }catch (Exception e){
-                System.out.println("Unable to close connetion :"+e.getMessage());
-            }
-
+            DatabaseConnection.getInstance().finallyHandler(statement);
         }
 
     }
@@ -60,14 +54,7 @@ public class FacilityCRUD {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            try {
-                rs.close();
-                stmt.close();
-                DatabaseConnection.getInstance().destroyConnection();
-            }catch (Exception e){
-                System.out.println("Unable to close connetion :"+e.getMessage());
-            }
-
+            DatabaseConnection.getInstance().finallyHandler(stmt, rs);
         }
         return lstFacility;
     }

@@ -9,16 +9,20 @@ import java.util.ArrayList;
 import oracle.jdbc.*;
 import oracle.sql.*;
 
+import javax.xml.crypto.Data;
+
 
 public class SymptomCRUD {
     public static ArrayList<Symptom> read() {
         Connection connection = DatabaseConnection.getInstance().getConnection();
 
         ArrayList<Symptom> lstSymptom = new ArrayList<>();
+        PreparedStatement stmt1 = null;
+        ResultSet rs1 = null;
         try {
             String sql = "select * from symptom where symptom_name <> 'GENERIC' ";
-            PreparedStatement stmt1   = connection.prepareStatement(sql);
-            ResultSet rs1 = stmt1.executeQuery();
+            stmt1   = connection.prepareStatement(sql);
+            rs1 = stmt1.executeQuery();
             while (rs1.next()) {
                 Symptom m = new Symptom();
                 m.setSymptom_name(rs1.getString("SYMPTOM_NAME"));
@@ -27,7 +31,9 @@ public class SymptomCRUD {
             }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error in Reading Symptoms " + e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt1, rs1);
         }
         return lstSymptom;
     }
@@ -36,7 +42,7 @@ public class SymptomCRUD {
     public static void symptom_add(Symptom symptom, SymptomSeverity symptom_severity){
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        CallableStatement statement;
+        CallableStatement statement = null;
         String procedure_call = "{call add_new_symptom(?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
@@ -48,13 +54,15 @@ public class SymptomCRUD {
             System.out.println("New Symptom added.");
         } catch (SQLException e) {
             System.out.println("Unable to add a new symptom:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement);
         }
     }
 
     public static void add_new_severity_scale(ArrayList<String> s_values, Symptom symptom, SymptomSeverity symptom_severity){
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        CallableStatement statement;
+        CallableStatement statement = null;
         String[] scale_values = new String[s_values.size()];
         for(int i=0; i < s_values.size(); i++){
             scale_values[i] = s_values.get(i);
@@ -73,6 +81,8 @@ public class SymptomCRUD {
             System.out.println("New Severity Scale added.");
         } catch (SQLException e) {
             System.out.println("Unable to add a new severity scale:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement);
         }
 
     }
@@ -80,11 +90,12 @@ public class SymptomCRUD {
     public static Symptom getSymptonCodeForGeneric() {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         Symptom m = null;
-
+        PreparedStatement stmt1 = null;
+        ResultSet rs1 = null;
         try {
             String sql = "select * from symptom where symptom_name = 'GENERIC'";
-            PreparedStatement stmt1   = connection.prepareStatement(sql);
-            ResultSet rs1 = stmt1.executeQuery();
+            stmt1   = connection.prepareStatement(sql);
+            rs1 = stmt1.executeQuery();
             while (rs1.next()) {
                 m = new Symptom();
                 m.setSymptom_name(rs1.getString("SYMPTOM_NAME"));
@@ -93,6 +104,8 @@ public class SymptomCRUD {
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt1, rs1);
         }
         return m;
     }
