@@ -1,12 +1,8 @@
 package db_utils;
 
 import config.DatabaseConnection;
-import entities.Symptom;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -47,5 +43,53 @@ public class DummyQueriesCRUD {
             DatabaseConnection.getInstance().finallyHandler(stmt, rs);
         }
         return results;
+    }
+
+    public static ArrayList<String> query4() {
+        String query = "SELECT V.facility_id FROM visit V, patient_symptoms S " +
+                "WHERE V.visit_id IN (SELECT R.visit_id FROM report R WHERE R.neg_exp_id <> 0) " +
+                "AND V.visit_id = S.visit_id AND S.symptom_code in (select symptom_code from " +
+                "symptom_body_part where body_part_code = (select body_part_code from body_part where name = ?))";
+        ArrayList<String> results = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1,"HEART");
+            rs = statement.executeQuery();
+            results.add("FACILITY_ID");
+            while(rs.next()) {
+                results.add(String.valueOf(rs.getInt("FACILITY_ID")));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while executing query 4 :"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement, rs);
+        }
+        return  results;
+    }
+
+    public static ArrayList<String> query5() {
+        String query = "SELECT facility_id from ( SELECT COUNT(facility_id), facility_id from "+
+                " report inner join visit on report.visit_id = visit.visit_id where neg_exp_id <> 0 "+
+                " GROUP BY FACILITY_ID ORDER BY COUNT(facility_id) DESC ) where rownum <= 1";
+        ArrayList<String> results = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = connection.prepareStatement(query);
+            rs = statement.executeQuery();
+            results.add("FACILITY_ID");
+            while(rs.next()) {
+                results.add(String.valueOf(rs.getInt("FACILITY_ID")));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while executing query 5 :"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement, rs);
+        }
+        return  results;
     }
 }

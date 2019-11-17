@@ -49,8 +49,10 @@ public class DummyQueries extends Utils.IScreen {
                     case D3:
                         break;
                     case D4:
+                        d4();
                         break;
                     case D5:
+                        d5();
                         break;
                     case D6:
                         break;
@@ -70,10 +72,20 @@ public class DummyQueries extends Utils.IScreen {
 
     private void d1() {
         ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query1();
-        prettyPrint(results);
+        prettyPrintNColumnData(results);
     }
 
-    private void prettyPrint(ArrayList<ArrayList<String>> results) {
+    private void d4() {
+        ArrayList<String> results = DummyQueriesCRUD.query4();
+        prettyPrintOneColumnData(results);
+    }
+
+    private void d5() {
+        ArrayList<String> results = DummyQueriesCRUD.query5();
+        prettyPrintOneColumnData(results);
+    }
+
+    private void prettyPrintNColumnData(ArrayList<ArrayList<String>> results) {
         for (int itr =0; itr < results.size(); itr++) {
             for (String col: results.get(itr)) {
                 System.out.print(String.format("%25s",col) + " \t | ");
@@ -84,6 +96,19 @@ public class DummyQueries extends Utils.IScreen {
                     for (int y = 0; y <35; y++) {
                         System.out.print("-");
                     }
+                }
+            }
+            System.out.print("\n");
+        }
+    }
+
+    private void prettyPrintOneColumnData(ArrayList<String> results) {
+        for (int itr =0; itr < results.size(); itr++) {
+            System.out.print(String.format("%25s",results.get(itr)) + " \t | ");
+            System.out.print("\n");
+            if (itr == 0) {
+                for (int y = 0; y <35; y++) {
+                    System.out.print("-");
                 }
             }
             System.out.print("\n");
