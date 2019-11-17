@@ -95,6 +95,7 @@ public class MessageUtils {
     public static String DUMMY_QUERIES_6 = "Find each facility, list the patient encounters with the top five longest check-in phases (i.e. time from\n" +
             "begin check-in to when treatment phase begins (list the name of patient, date, facility, duration and\n" +
             "list of symptoms).";
+    public static String ERR_UNABLE_CONN_CLOSE = "Unable to Close Connection ";
 
     public enum MAIN {
         MAIN_PATIENT, MAIN_STAFF, MAIN_EXIT
