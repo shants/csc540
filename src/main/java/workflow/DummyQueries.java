@@ -1,7 +1,6 @@
 package workflow;
 
 import Utils.CommandLineUtils;
-import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
 import db_utils.DummyQueriesCRUD;
@@ -39,7 +38,6 @@ public class DummyQueries extends Utils.IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.DUMMY_QUERIES options = MessageUtils.DUMMY_QUERIES.values()[option];
-                IScreen scr;
                 switch (options) {
                     case D1:
                         d1();
@@ -56,6 +54,7 @@ public class DummyQueries extends Utils.IScreen {
                         d5();
                         break;
                     case D6:
+                        d6();
                         break;
                     case Back:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
@@ -89,6 +88,11 @@ public class DummyQueries extends Utils.IScreen {
     private void d5() {
         ArrayList<String> results = DummyQueriesCRUD.query5();
         prettyPrintOneColumnData(results);
+    }
+
+    private void d6() {
+        ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query6();
+        prettyPrintNColumnData(results);
     }
 
     private void prettyPrintNColumnData(ArrayList<ArrayList<String>> results) {
