@@ -148,9 +148,13 @@ public class DummyQueriesCRUD {
     public static ArrayList<ArrayList<String>> query6() {
         ArrayList<ArrayList<String>> results = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        String query = "select sorted_patients.facility_id, sorted_patients.visit_id, sorted_patients.patient_id, sorted_patients.apt_date, sorted_patients.duration, LISTAGG(ps.symptom_name, ', ') WITHIN GROUP (ORDER BY sorted_patients.visit_id) as symptoms from  " +
+        String query = "select sorted_patients.facility_id, sorted_patients.visit_id, sorted_patients.patient_id, "+
+                " sorted_patients.apt_date, sorted_patients.duration, LISTAGG(ps.symptom_name, ', ') "+
+                " WITHIN GROUP (ORDER BY sorted_patients.visit_id) as symptoms from  " +
                 "(  " +
-                "  select a.facility_id, visit_id, patient_id, to_char(cast(start_time as date),'MM-DD-YYYY') as apt_date, extract( day from diff )*24*60*60 + extract( hour from diff )*60*60 + extract( minute from diff )*60 + extract( second from diff ) as duration, rank from  " +
+                "  select a.facility_id, visit_id, patient_id, to_char(cast(start_time as date),'MM-DD-YYYY') as apt_date,"+
+                " extract( day from diff )*24*60*60 + extract( hour from diff )*60*60 + "+
+                " extract( minute from diff )*60 + extract( second from diff ) as duration, rank from  " +
                 "  (  " +
                 "    select facility_id from facility  " +
                 "  ) a  " +
