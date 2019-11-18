@@ -1,8 +1,40 @@
 package entities;
 
+import workflow.ReferralReason;
+
+import java.util.ArrayList;
+
 public class ReportRefererral {
-    private int report_id, facility_id, visit_id, reason_code, service_code, referrer_id, negative_experience_value,
-            staff_id, reason_id, discharge_status_code;
+    private int report_id;
+    private int facility_id;
+    private int visit_id;
+    private int reason_code;
+    private int service_code;
+    private int referrer_id;
+    private int negative_experience_value;
+    private int staff_id;
+    private int reason_id;
+    private int discharge_status_code;
+
+    private ArrayList<Referral_Reason> referralReasons = new ArrayList<>();
+
+    public ArrayList<Referral_Reason> getReferralReasons() {
+        return referralReasons;
+    }
+
+    public void setReferralReasons(ArrayList<Referral_Reason> referralReasons) {
+        this.referralReasons = referralReasons;
+    }
+
+    public int getReferral_status() {
+        return referral_status;
+    }
+
+    public void setReferral_status(int referral_status) {
+        this.referral_status = referral_status;
+    }
+
+    private int referral_status;
     private String discharge_status, reason, treatment, negative_experience_text;
 
     public ReportRefererral(int visit_id, int facility_id, int referrer_id, int report_id, int reason_code,

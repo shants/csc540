@@ -4,6 +4,8 @@ import Utils.CommandLineUtils;
 import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
+import db_utils.ServiceCRUD;
+import entities.Referral_Reason;
 import entities.ReportRefererral;
 
 public class ReferralReason extends IScreen {
@@ -31,10 +33,13 @@ public class ReferralReason extends IScreen {
         MessageUtils.REASON_CODE options = MessageUtils.REASON_CODE.values()[code];
         switch (options) {
             case SERVICE_UNAVAILABLE_TIME:
+                ServiceCRUD.selectService();
                 return MessageUtils.SERVICE_UNAVAILABLE_TIME;
             case SERVICE_NOT_PRESENT:
+                ServiceCRUD.selectService();
                 return MessageUtils.SERVICE_NOT_PRESENT;
             case NON_PAYMENT:
+                ViewerContext.getInstance().getPatientReport().setService_code(0);
                 return MessageUtils.NON_PAYMENT;
             default:
                 break;
@@ -44,6 +49,7 @@ public class ReferralReason extends IScreen {
 
     public void run() {
         boolean invalidOption;
+        int reason_count = 0;
         do {
             invalidOption = false;
             int option;
@@ -60,6 +66,15 @@ public class ReferralReason extends IScreen {
                         String reason = getReasonFromCode(reason_code);
                         ViewerContext.getInstance().getPatientReport().setReason_code(reason_code);
                         ViewerContext.getInstance().getPatientReport().setReason(reason);
+                        int service_code = ServiceCRUD.selectService();
+                        ViewerContext.getInstance().getPatientReport().setService_code(service_code);
+                        Referral_Reason ref = new Referral_Reason();
+                        ref.setReason_code(reason_code);
+                        ref.setReason_string(reason);
+                        ref.setService_code(service_code);
+                        ViewerContext.getInstance().getPatientReport().getReferralReasons().add(ref);
+                        reason_count+=1;
+                        invalidOption = true;
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.ReferralStatus);
@@ -72,6 +87,6 @@ public class ReferralReason extends IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption);
+        } while (invalidOption && reason_count<5);
     }
 }

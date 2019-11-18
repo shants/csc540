@@ -2,7 +2,9 @@ package db_utils;
 
 import Utils.ViewerContext;
 import config.DatabaseConnection;
+import entities.Referral_Reason;
 import entities.ReportRefererral;
+import entities.Service;
 
 import javax.swing.text.View;
 import java.sql.*;
@@ -40,22 +42,27 @@ public class ReportCRUD {
                 "REASON_DESCRIPTION, SERVICE_CODE)" + "values( ? , ? , ? , ?)";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        try {
-            ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
-            ps.setInt(1,  rep.getReport_id());
-            ps.setInt(2, rep.getReason_code());
-            ps.setString(3, rep.getReason());
-            ps.setInt(4, rep.getService_code());
-            ps.execute();
-            rs = ps.getGeneratedKeys();
-            if(rs.next())
-                reason_id = rs.getInt(1);
-            rep.setReason_id(reason_id);
-            ViewerContext.getInstance().setPatientReport(rep);
-        } catch (SQLException e) {
-            System.out.println("Error occurred while inserting for referral reason " +e.getMessage());
-        } finally {
-            DatabaseConnection.getInstance().finallyHandler(ps, rs);
+        ArrayList<Referral_Reason> referral_reasons = ViewerContext.getInstance().getPatientReport().getReferralReasons();
+        int entries = referral_reasons.size();
+        while (entries > 0) {
+            try {
+                ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
+                ps.setInt(1, rep.getReport_id());
+                ps.setInt(2, referral_reasons.get(entries).getReason_code());
+                ps.setString(3, referral_reasons.get(entries).getReason_string());
+                ps.setInt(4, referral_reasons.get(entries).getService_code());
+                ps.execute();
+                rs = ps.getGeneratedKeys();
+                if (rs.next())
+                    reason_id = rs.getInt(1);
+                rep.setReason_id(reason_id);
+                ViewerContext.getInstance().setPatientReport(rep);
+            } catch (SQLException e) {
+                System.out.println("Error occurred while inserting for referral reason " + e.getMessage());
+            } finally {
+                DatabaseConnection.getInstance().finallyHandler(ps, rs);
+            }
+            entries -=1;
         }
     }
 
