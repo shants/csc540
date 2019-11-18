@@ -149,4 +149,16 @@ insert into patient_symptoms(visit_id,symptom_code,severity_value,post_event,is_
 insert into negative_experience(exp_name) values('Misdiagnosis');
 insert into negative_experience(exp_name) values('Acquired infection during stay');
 
+insert into rules_symptoms(staff_id, symptom_code) values(1, 'SYM1');
+insert into rules_symptoms(staff_id, symptom_code) values(1, 'SYM3');
+insert into rules_symptoms(staff_id, symptom_code) values(1, 'SYM1');
+insert into rules_symptoms(staff_id, symptom_code) values(1, 'SYM5');
+insert into rules_symptoms(staff_id, symptom_code) values(1, 'SYM6');
+
+insert into asses_rules(rule_id, asses_rule, priority_id) values(1,'Severity greater than 7', 1);
+insert into asses_rules(rule_id, asses_rule, priority_id) values(2,'Severity is HIGH', 1);
+insert into asses_rules(rule_id, asses_rule, priority_id) values(3,'Severity less than 7', 2);
+insert into asses_rules(rule_id, asses_rule, priority_id) values(4,'Severity is Normal', 2);
+insert into asses_rules(rule_id, asses_rule, priority_id) values(5,'Severity is Normal', 2);
+
 execute commit ;
