@@ -47,6 +47,7 @@ public class DummyQueries extends Utils.IScreen {
                     case D2:
                         break;
                     case D3:
+                        d3();
                         break;
                     case D4:
                         d4();
@@ -72,6 +73,11 @@ public class DummyQueries extends Utils.IScreen {
 
     private void d1() {
         ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query1();
+        prettyPrintNColumnData(results);
+    }
+
+    private void d3() {
+        ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query3();
         prettyPrintNColumnData(results);
     }
 
