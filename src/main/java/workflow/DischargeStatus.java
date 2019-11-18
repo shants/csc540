@@ -48,6 +48,7 @@ public class DischargeStatus extends IScreen {
                         ViewerContext.getInstance().getPatientReport().setDischarge_status_code(2);
                         status = MessageUtils.REPORT_STATUS.REFERRED.toString();
                         ViewerContext.getInstance().getPatientReport().setDischarge_status(status);
+                        ViewerContext.getInstance().getPatientReport().setReferral_status(1);
                         break;
                     case GLOBAL_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffPatientReport);

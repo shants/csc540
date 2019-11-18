@@ -23,6 +23,7 @@ public class ReferralStatus extends IScreen {
 
     public void run() {
         boolean invalidOption, goBack;
+        ViewerContext.getInstance().getPatientReport().setFacility_id(0);
         do {
             invalidOption = goBack = false;
             int option;

@@ -21,6 +21,7 @@ public class MessageUtils {
     public static String GLOBAL_ENTER_OPTION = "Enter Option";
     public static String GLOBAL_LOGIN_MESSAGE = "Please login to continue";
     public static String GLOBAL_SELECT_FACILITY = "Select facility from below";
+    public static String GLOBAL_SELECT_SERVICE = "Select Service from below";
     public static String GLOBAL_OPTION_ERROR = "Please enter valid option";
     public static String GLOBAL_GO_BACK ="Go Back";
     public static String GLOBAL_SUBMIT = "Submit";
