@@ -17,6 +17,8 @@ public class ViewerContext {
     private Visit patientToCheckout;
     private ReportRefererral patientReport;
     private NegExpDescription negExperienceDesc;
+    private String symptomCode;
+
 
     public NegExpDescription getNegExperienceDesc() {
         return negExperienceDesc;
@@ -115,5 +117,13 @@ public class ViewerContext {
     public void setPatientReport(ReportRefererral rep) { this.patientReport = rep; }
 
     public ReportRefererral getPatientReport() { return patientReport; }
+
+    public String getSymptomCode() {
+        return symptomCode;
+    }
+
+    public void setSymptomCode(String symptomCode) {
+        this.symptomCode = symptomCode;
+    }
 
 }

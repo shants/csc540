@@ -127,7 +127,6 @@ public class DummyQueriesCRUD {
             DatabaseConnection.getInstance().finallyHandler(stmt, rs);
         }
         return results;
-
     }
     
     
@@ -177,5 +176,60 @@ public class DummyQueriesCRUD {
             DatabaseConnection.getInstance().finallyHandler(statement, rs);
         }
         return  results;
+    }
+    
+    public static ArrayList<ArrayList<String>> query6() {
+        ArrayList<ArrayList<String>> results = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "select sorted_patients.facility_id, sorted_patients.visit_id, sorted_patients.patient_id, "+
+                " sorted_patients.apt_date, sorted_patients.duration, LISTAGG(ps.symptom_name, ', ') "+
+                " WITHIN GROUP (ORDER BY sorted_patients.visit_id) as symptoms from  " +
+                "(  " +
+                "  select a.facility_id, visit_id, patient_id, to_char(cast(start_time as date),'MM-DD-YYYY') as apt_date,"+
+                " extract( day from diff )*24*60*60 + extract( hour from diff )*60*60 + "+
+                " extract( minute from diff )*60 + extract( second from diff ) as duration, rank from  " +
+                "  (  " +
+                "    select facility_id from facility  " +
+                "  ) a  " +
+                "  left outer join  " +
+                "  (  " +
+                "    select patient_id, visit_id, facility_id, start_time, (end_time - start_time) as diff, rank() over (PARTITION BY facility_id ORDER BY (end_time - start_time) DESC) rank from visit where end_time is not null  " +
+                "  ) b  " +
+                "  on a.facility_id = b.facility_id where rank <= 5  " +
+                ") sorted_patients  " +
+                "inner join   " +
+                "(  " +
+                "  select visit_id, symptom_name from patient_symptoms inner join symptom using (symptom_code)  " +
+                ") ps  " +
+                "on sorted_patients.visit_id = ps.visit_id group by (sorted_patients.facility_id, sorted_patients.visit_id, sorted_patients.patient_id,  sorted_patients.apt_date, sorted_patients.duration)";
+        ArrayList<String> header = new ArrayList<>();
+        header.add("FACILITY ID");
+        header.add("PATIENT ID");
+        header.add("VISIT ID");
+        header.add("SYMPTOMS");
+        header.add("DATE");
+        header.add("DURATION(SECONDS)");
+        results.add(header);
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            stmt = connection.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()){
+                ArrayList<String> row = new ArrayList<>();
+                row.add(String.valueOf(rs.getInt("FACILITY_ID")));
+                row.add(String.valueOf(rs.getInt("PATIENT_ID")));
+                row.add(String.valueOf(rs.getInt("VISIT_ID")));
+                row.add(rs.getString("SYMPTOMS"));
+                row.add(rs.getString("APT_DATE"));
+                row.add(String.valueOf(rs.getFloat("DURATION")));
+                results.add(row);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while executing query 6: " + e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt, rs);
+        }
+        return results;
     }
 }
