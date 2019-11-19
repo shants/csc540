@@ -62,7 +62,7 @@ public class PatientCheckoutAcknowledgement extends IScreen {
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.PatientRouting);
                         break;
                     case NO:
-                        System.out.println("NO");
+                        //System.out.println("NO");
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.PatientRouting);
                         break;
                     case GO_BACK:
