@@ -56,6 +56,7 @@ public class StaffMenu extends IScreen {
                         }
                         else{
                             System.out.println(MessageUtils.GLOBAL_ACCESS_DENIED);
+                            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffSignIn);
                         }
                         break;
                     case STAFF_MENU_TREATED_PATIENT:

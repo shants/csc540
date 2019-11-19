@@ -24,8 +24,8 @@ public class ServiceCRUD {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()){
                 Service s = new Service();
-                s.setName(rs.getString("SERVICE_CODE"));
-                s.setCode(rs.getInt("NAME"));
+                s.setCode(rs.getString("SERVICE_CODE"));
+                s.setName(rs.getString("NAME"));
                 servicelst.add(s);
             }
 
@@ -35,7 +35,7 @@ public class ServiceCRUD {
         return servicelst;
     }
 
-    public static int selectService() {
+    public static String selectService() {
         boolean invalid;
         ArrayList<Service> serviceList = ServiceCRUD.readAll();
         do {
@@ -59,6 +59,6 @@ public class ServiceCRUD {
                 invalid = true;
             }
         }while(invalid);
-        return 0;
+        return "";
     }
 }

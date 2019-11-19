@@ -33,13 +33,11 @@ public class ReferralReason extends IScreen {
         MessageUtils.REASON_CODE options = MessageUtils.REASON_CODE.values()[code];
         switch (options) {
             case SERVICE_UNAVAILABLE_TIME:
-                ServiceCRUD.selectService();
                 return MessageUtils.SERVICE_UNAVAILABLE_TIME;
             case SERVICE_NOT_PRESENT:
-                ServiceCRUD.selectService();
                 return MessageUtils.SERVICE_NOT_PRESENT;
             case NON_PAYMENT:
-                ViewerContext.getInstance().getPatientReport().setService_code(0);
+                ViewerContext.getInstance().getPatientReport().setService_code("");
                 return MessageUtils.NON_PAYMENT;
             default:
                 break;
@@ -66,7 +64,7 @@ public class ReferralReason extends IScreen {
                         String reason = getReasonFromCode(reason_code);
                         ViewerContext.getInstance().getPatientReport().setReason_code(reason_code);
                         ViewerContext.getInstance().getPatientReport().setReason(reason);
-                        int service_code = ServiceCRUD.selectService();
+                        String service_code = ServiceCRUD.selectService();
                         ViewerContext.getInstance().getPatientReport().setService_code(service_code);
                         Referral_Reason ref = new Referral_Reason();
                         ref.setReason_code(reason_code);
@@ -87,6 +85,6 @@ public class ReferralReason extends IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
-        } while (invalidOption && reason_count<5);
+        } while (invalidOption && reason_count<4);
     }
 }

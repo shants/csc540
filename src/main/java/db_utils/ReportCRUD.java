@@ -44,13 +44,13 @@ public class ReportCRUD {
         ResultSet rs = null;
         ArrayList<Referral_Reason> referral_reasons = ViewerContext.getInstance().getPatientReport().getReferralReasons();
         int entries = referral_reasons.size();
-        while (entries > 0) {
+        for(int i=0; i< entries; i++) {
             try {
                 ps = connection.prepareStatement(query, new String[]{"REASON_ID"});
                 ps.setInt(1, rep.getReport_id());
-                ps.setInt(2, referral_reasons.get(entries).getReason_code());
-                ps.setString(3, referral_reasons.get(entries).getReason_string());
-                ps.setInt(4, referral_reasons.get(entries).getService_code());
+                ps.setInt(2, referral_reasons.get(i).getReason_code());
+                ps.setString(3, referral_reasons.get(i).getReason_string());
+                ps.setString(4, referral_reasons.get(i).getService_code());
                 ps.execute();
                 rs = ps.getGeneratedKeys();
                 if (rs.next())
@@ -62,7 +62,6 @@ public class ReportCRUD {
             } finally {
                 DatabaseConnection.getInstance().finallyHandler(ps, rs);
             }
-            entries -=1;
         }
     }
 

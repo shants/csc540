@@ -29,7 +29,7 @@ public class StaffPatientReport extends IScreen {
     public void getPatientInformation() {
         ReportRefererral rep = new ReportRefererral();
         rep.setVisit_id(ViewerContext.getInstance().getPatientToCheckout().getVisit_id());
-        rep.setService_code(1);
+        rep.setService_code(" ");
         rep.setStaff_id(ViewerContext.getInstance().getValue(ViewerContext.IDENTIFIER_TYPES.STAFF_ID));
         // Default negative experience
         rep.setNegative_experience_value(0);

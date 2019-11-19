@@ -26,7 +26,7 @@ public class NegativeExperience extends IScreen {
             invalidOption = false;
             int option;
             display();
-            String opt = ReadInput();
+            String opt = CommandLineUtils.ReadInput();
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.NEGATIVE_EXP options = MessageUtils.NEGATIVE_EXP.values()[option];

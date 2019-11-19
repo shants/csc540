@@ -9,7 +9,7 @@ public class ReportRefererral {
     private int facility_id;
     private int visit_id;
     private int reason_code;
-    private int service_code;
+    private String service_code;
     private int referrer_id;
     private int negative_experience_value;
     private int staff_id;
@@ -38,7 +38,7 @@ public class ReportRefererral {
     private String discharge_status, reason, treatment, negative_experience_text;
 
     public ReportRefererral(int visit_id, int facility_id, int referrer_id, int report_id, int reason_code,
-                            int service_code, String discharge_status, String reason) {
+                            String service_code, String discharge_status, String reason) {
         this.discharge_status = discharge_status;
         this.reason = reason;
         this.visit_id = visit_id;
@@ -87,9 +87,9 @@ public class ReportRefererral {
 
     public void setReason_code(int reason_code) { this.reason_code = reason_code; }
 
-    public int getService_code() { return this.service_code; }
+    public String getService_code() { return this.service_code; }
 
-    public void setService_code(int service_code) { this.service_code = service_code; }
+    public void setService_code(String service_code) { this.service_code = service_code; }
 
     public int getReferrer_id() { return this.referrer_id; }
 

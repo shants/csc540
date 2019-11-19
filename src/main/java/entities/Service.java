@@ -5,7 +5,7 @@ public class Service {
     int dept_code;
     String name, equipment;
 
-    public Service(int dept_code, String name, String equipment, int code) {
+    public Service(int dept_code, String name, String equipment, String code) {
         this.dept_code = dept_code;
         this.name = name;
         this.equipment = equipment;
@@ -15,15 +15,15 @@ public class Service {
     public Service() {
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
-    int code;
+    String code;
 
     public int getDept_code() {
         return dept_code;

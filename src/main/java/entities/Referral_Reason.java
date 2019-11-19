@@ -1,8 +1,8 @@
 package entities;
 
 public class Referral_Reason {
-    private int reason_code, service_code;
-    private String reason_string;
+    private int reason_code;
+    private String reason_string, service_code;
 
     public int getReason_code() {
         return reason_code;
@@ -12,11 +12,11 @@ public class Referral_Reason {
         this.reason_code = reason_code;
     }
 
-    public int getService_code() {
+    public String getService_code() {
         return service_code;
     }
 
-    public void setService_code(int service_code) {
+    public void setService_code(String service_code) {
         this.service_code = service_code;
     }
 
