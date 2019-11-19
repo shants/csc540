@@ -145,4 +145,32 @@ public class SymptomCRUD {
         return m;
     }
 
+    public static ArrayList<String> getSymptonScale(String symCode) {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement stmt1 = null;
+        ResultSet rs1 = null;
+        ArrayList<String> symScale = new ArrayList<>();
+        try {
+            String sql = "select value  from SEVERITY_SCALE ss inner join symptom_severity " +
+                    "using(symptom_severity_id) " +
+                    "where symptom_severity.symptom_code = ?";
+            stmt1   = connection.prepareStatement(sql);
+            stmt1.setString(1, symCode);
+            rs1 = stmt1.executeQuery();
+
+            while (rs1.next()) {
+                symScale.add(rs1.getString("VALUE"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt1, rs1);
+        }
+        if (symScale.size() == 0)
+            return null;
+        return symScale;
+    }
+
+
 }
