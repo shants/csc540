@@ -45,6 +45,39 @@ public class DummyQueriesCRUD {
         return results;
     }
 
+    public static ArrayList<String> query2(String specified_start_time, String specified_end_time){
+        String query = "SELECT T.facility_id " +
+                " FROM(select V.facility_id AS facility_id, V.discharge_date AS " +
+                " discharge_time, R.neg_exp_id AS neg_exp_id " +
+                " FROM visit V, report R " +
+                " WHERE V.visit_id = R.visit_id) T " +
+                " WHERE T.discharge_time >= to_timestamp(?, 'YYYY/MM/DD HH24:MI') " +
+                " AND T.discharge_time <= to_timestamp(?,'YYYY/MM/DD HH24:MI' ) " +
+                " GROUP BY T.facility_id " +
+                " HAVING SUM(T.neg_exp_id) IS NULL";
+
+
+        ArrayList<String> results = new ArrayList<>();
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = connection.prepareStatement(query);
+            statement.setString(1,specified_start_time);
+            statement.setString(2,specified_end_time);
+            rs = statement.executeQuery();
+            results.add("FACILITY_ID");
+            while(rs.next()) {
+                results.add(String.valueOf(rs.getInt("FACILITY_ID")));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while executing query 2 :"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(statement, rs);
+        }
+        return  results;
+    }
+
     public static ArrayList<ArrayList<String>> query3() {
         ArrayList<ArrayList<String>> results = new ArrayList<>();
         Connection connection = DatabaseConnection.getInstance().getConnection();
