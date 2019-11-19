@@ -53,6 +53,7 @@ public class StaffAddSeverityScale extends IScreen{
                         break;
                     case ADD_SEVERITY_SCALE_NO_LEVEL:
                         CompleteSeverityScale(scale_values);
+                        ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.StaffMenu);
                         break;
                     default:
                         invalidOption = true;

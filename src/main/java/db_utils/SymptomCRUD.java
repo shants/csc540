@@ -64,30 +64,39 @@ public class SymptomCRUD {
         int severity_id=0;
         Connection connection = DatabaseConnection.getInstance().getConnection();
         ArrayList<String> lst_sev_values = new ArrayList<>();
+        PreparedStatement stmt2 = null;
+        ResultSet rs2 = null;
         try{
             String sql = "SELECT symptom_severity_id FROM SYMPTOM_SEVERITY WHERE SYMPTOM_CODE =? AND STAFF_ID =?";
-            PreparedStatement stmt2 = connection.prepareStatement(sql);
+            stmt2 = connection.prepareStatement(sql);
             stmt2.setString(1, symptom.getSymptom_code());
             stmt2.setInt(2,symptom_severity.getStaffID());
-            ResultSet rs2 = stmt2.executeQuery();
+            rs2 = stmt2.executeQuery();
             while(rs2.next()){
                 severity_id = rs2.getInt("SYMPTOM_SEVERITY_ID");
             }
 
         }catch (SQLException e){
             System.out.println("Unable to retrieve symptom severity id from symptom code:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt2, rs2);
         }
+
+        PreparedStatement stmt3 = null;
+        ResultSet rs3 = null;
         try{
             String sql = "SELECT value from SEVERITY_SCALE where symptom_severity_id =?";
-            PreparedStatement stmt3 = connection.prepareStatement(sql);
+            stmt3 = connection.prepareStatement(sql);
             stmt3.setInt(1, severity_id);
-            ResultSet rs3 = stmt3.executeQuery();
+            rs3 = stmt3.executeQuery();
             while(rs3.next()){
                 lst_sev_values.add(rs3.getString("VALUE"));
             }
 
         }catch (SQLException e){
             System.out.println("Unable to retrieve symptom code from symptom name:"+e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt3, rs3);
         }
 
         return lst_sev_values;
@@ -144,5 +153,33 @@ public class SymptomCRUD {
         }
         return m;
     }
+
+    public static ArrayList<String> getSymptonScale(String symCode) {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        PreparedStatement stmt1 = null;
+        ResultSet rs1 = null;
+        ArrayList<String> symScale = new ArrayList<>();
+        try {
+            String sql = "select value  from SEVERITY_SCALE ss inner join symptom_severity " +
+                    "using(symptom_severity_id) " +
+                    "where symptom_severity.symptom_code = ?";
+            stmt1   = connection.prepareStatement(sql);
+            stmt1.setString(1, symCode);
+            rs1 = stmt1.executeQuery();
+
+            while (rs1.next()) {
+                symScale.add(rs1.getString("VALUE"));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            DatabaseConnection.getInstance().finallyHandler(stmt1, rs1);
+        }
+        if (symScale.size() == 0)
+            return null;
+        return symScale;
+    }
+
 
 }

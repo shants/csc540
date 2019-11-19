@@ -408,10 +408,6 @@ DBMS_OUTPUT.PUT_LINE('Patient_id:' || to_char(v_patient_id));
 end sign_up_new_patient;
 /
 
-/*
-exec sign_up_new_patient(1,'Baker Street','London', 'London', 'UK', '221B','Shantanu', 'Sharma','2019/10/24',9193333333)
-*/
-
 /* create table staff_<facility_id> */
 
 CREATE OR REPLACE PROCEDURE create_new_staff_tables
@@ -523,6 +519,7 @@ bp_low NUMBER(10),
 bp_high NUMBER(10),
 body_temperature NUMBER(10),
 is_treated CHAR(1),
+discharge_date TIMESTAMP,
 priority_id NUMBER(10),
 CONSTRAINT visit_key PRIMARY KEY (visit_id),
 CONSTRAINT fk_vis_fa FOREIGN KEY (facility_id) REFERENCES facility (facility_id),
@@ -553,7 +550,7 @@ BEGIN
 new_query := 'CREATE TABLE service(
 service_code VARCHAR2(20) NOT NULL,
 service_dept_code VARCHAR2(20) NOT NULL,
-equipment VARCHAR2(35),
+equipment VARCHAR2(40),
 name VARCHAR2(30) NOT NULL,
 CONSTRAINT pk_service_key PRIMARY KEY (service_code, service_dept_code),
 CONSTRAINT fk_serv_sdept_key FOREIGN KEY (service_dept_code) REFERENCES fc_has_serv_dept(service_dept_code)
@@ -612,11 +609,6 @@ DBMS_OUTPUT.PUT_LINE('Facility_id:' || to_char(v_facility_id));
 
 end create_new_facility;
 /
-
-/*
-exec create_new_facility('Baker Street','London', 'London', 'UK', '221B','SHANTS HOSPITAL', 'PRIMARY', 300)
-*/
-
 
 CREATE OR REPLACE PROCEDURE new_symptoms_table
 AUTHID CURRENT_USER IS
@@ -769,6 +761,26 @@ EXECUTE IMMEDIATE new_query;
 end new_rules_tables;
 /
 
+CREATE OR REPLACE PROCEDURE add_assesment_rules
+(ass_staff_id number, ass_rule varchar2,
+sym_code varchar2, ass_priority_id number)
+
+AUTHID CURRENT_USER IS
+new_query varchar2(5000);
+ass_rule_id number;
+
+BEGIN
+
+new_query := 'INSERT INTO RULES_SYMPTOMS(staff_id, symptom_code) SELECT :b1, :b2 FROM DUAL WHERE NOT EXISTS (SELECT * FROM RULES_SYMPTOMS WHERE STAFF_ID =:b3 AND SYMPTOM_CODE =:b4 )';
+execute immediate new_query using ass_staff_id, sym_code, ass_staff_id, sym_code;
+select rule_id into ass_rule_id from RULES_SYMPTOMS where symptom_code = sym_code and staff_id = ass_staff_id;
+
+new_query := 'INSERT INTO ASSES_RULES(rule_id, asses_rule, priority_id) VALUES(:b1, :b2, :b3)';
+execute immediate new_query using ass_rule_id, ass_rule, ass_priority_id;
+
+end add_assesment_rules;
+/
+
 
 /*service code is not added(as this table is not created ) in the */
 
@@ -779,14 +791,14 @@ new_query varchar2(5000);
 BEGIN
 new_query := 'CREATE TABLE report(
 report_id NUMBER(10) NOT NULL,
-neg_exp_id NUMBER(10) NOT NULL,
-negative_experience_text VARCHAR2(100) NOT NULL,
+neg_exp_id NUMBER(10),
+negative_experience_text VARCHAR2(100),
 treatment VARCHAR2(50) NOT NULL,
 visit_id NUMBER(10) NOT NULL,
 discharge_status VARCHAR2(50) NOT NULL,
 CONSTRAINT report_id_key PRIMARY KEY (report_id),
-CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id),
-CONSTRAINT fk_report_neg_exp FOREIGN KEY (neg_exp_id) REFERENCES negative_experience(neg_exp_id))';
+CONSTRAINT fk_report_visit FOREIGN KEY (visit_id) REFERENCES visit(visit_id)
+)';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE SEQUENCE report_seq START WITH 1';
@@ -802,9 +814,11 @@ END;';
 
 EXECUTE IMMEDIATE new_query;
 new_query := 'CREATE TABLE report_referral(
+facility_id NUMBER(10) NOT NULL,
 report_id NUMBER(10) NOT NULL,
 staff_id NUMBER(10) NOT NULL,
 CONSTRAINT report_referral_key PRIMARY KEY (report_id,staff_id),
+CONSTRAINT fk_report_ref_fac_id FOREIGN KEY (facility_id) REFERENCES facility(facility_id),
 CONSTRAINT fk_report_ref_rep_id FOREIGN KEY (report_id ) REFERENCES report(report_id),
 CONSTRAINT fk_report_ref_staff_id FOREIGN KEY(staff_id) REFERENCES staff(staff_id))';
 
@@ -814,7 +828,7 @@ reason_id NUMBER(10) NOT NULL,
 report_id NUMBER(10) NOT NULL,
 reason_code NUMBER(10) NOT NULL,
 reason_description VARCHAR2(100) NOT NULL,
-service_code NUMBER(10) NOT NULL,
+service_code VARCHAR2(20) NOT NULL,
 CONSTRAINT report_referral_reason_key PRIMARY KEY (report_id,reason_id),
 CONSTRAINT fk_report_ref_res_rep_id FOREIGN KEY (report_id) REFERENCES report(report_id))';
 
@@ -832,4 +846,3 @@ END;';
 EXECUTE IMMEDIATE new_query;
 end create_new_report;
 /
-

@@ -35,7 +35,9 @@ public class PatientRouting extends IScreen {
                         }
                         break;
                     case PATIENT_ROUTING_CHECK_OUT:
-                        System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+                        //System.out.println(MessageUtils.PATIENT_ROUTING_CHECK_OUT_ACK);
+                        IScreen scr = new PatientCheckoutAcknowledgement();
+                        scr.run();
                         break;
                     case PATIENT_ROUTING_GO_BACK:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);

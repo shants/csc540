@@ -23,7 +23,7 @@ public class PatientCRUD
             statement.setString(7,patient.getFirstName());
             statement.setString(8,patient.getLastName());
             statement.setString(9,patient.getDateOfBirth());
-            statement.setInt(10,patient.getPhoneNumber());
+            statement.setLong(10,patient.getPhoneNumber());
             statement.execute();
             System.out.println("New Patient signed up.");
         } catch (SQLException e) {

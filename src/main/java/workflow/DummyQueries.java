@@ -1,7 +1,6 @@
 package workflow;
 
 import Utils.CommandLineUtils;
-import Utils.IScreen;
 import Utils.MessageUtils;
 import Utils.ViewerContext;
 import db_utils.DummyQueriesCRUD;
@@ -9,6 +8,9 @@ import db_utils.DummyQueriesCRUD;
 import java.util.ArrayList;
 
 public class DummyQueries extends Utils.IScreen {
+
+    private String start_date;
+    private String end_date;
     public void display() {
         System.out.println(MessageUtils.DUMMY_QUERIES.D1.ordinal() + MessageUtils.GLOBAL_DELIMITER +
                 MessageUtils.DUMMY_QUERIES_1);
@@ -39,12 +41,20 @@ public class DummyQueries extends Utils.IScreen {
             try {
                 option = Integer.parseInt(opt);
                 MessageUtils.DUMMY_QUERIES options = MessageUtils.DUMMY_QUERIES.values()[option];
-                IScreen scr;
                 switch (options) {
                     case D1:
                         d1();
                         break;
                     case D2:
+                        System.out.println("Enter the start date: ");
+                        //System.out.println(MessageUtils.GLOBAL_NEWLINE);
+                        System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
+                        start_date = CommandLineUtils.ReadInput();
+                        System.out.println("Enter the End date: ");
+                        //System.out.println(MessageUtils.GLOBAL_NEWLINE);
+                        System.out.println(MessageUtils.GLOBAL_ENTER_OPTION + MessageUtils.GLOBAL_DELIMITER);
+                        end_date = CommandLineUtils.ReadInput();
+                        d2(start_date,end_date);
                         break;
                     case D3:
                         d3();
@@ -56,6 +66,7 @@ public class DummyQueries extends Utils.IScreen {
                         d5();
                         break;
                     case D6:
+                        d6();
                         break;
                     case Back:
                         ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
@@ -68,12 +79,18 @@ public class DummyQueries extends Utils.IScreen {
                 System.out.println(MessageUtils.GLOBAL_OPTION_ERROR);
                 invalidOption = true;
             }
+            ViewerContext.getInstance().setGoToPage(ViewerContext.PAGES.Home);
         } while (invalidOption);
     }
 
     private void d1() {
         ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query1();
         prettyPrintNColumnData(results);
+    }
+
+    private void d2(String start_date, String end_date){
+        ArrayList<String> results = DummyQueriesCRUD.query2(start_date, end_date);
+        prettyPrintOneColumnData(results);
     }
 
     private void d3() {
@@ -89,6 +106,11 @@ public class DummyQueries extends Utils.IScreen {
     private void d5() {
         ArrayList<String> results = DummyQueriesCRUD.query5();
         prettyPrintOneColumnData(results);
+    }
+
+    private void d6() {
+        ArrayList<ArrayList<String>> results = DummyQueriesCRUD.query6();
+        prettyPrintNColumnData(results);
     }
 
     private void prettyPrintNColumnData(ArrayList<ArrayList<String>> results) {

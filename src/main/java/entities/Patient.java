@@ -1,11 +1,12 @@
 package entities;
 
 public class Patient {
-    private int facilityId, phoneNumber, id;
+    private int facilityId, id;
     private String firstName, lastName, dateOfBirth;
     private Address address;
+    private long phoneNumber;
 
-    public Patient(int facilityId, int phoneNumber, String firstName,
+    public Patient(int facilityId, long phoneNumber, String firstName,
                    String lastName, String dateOfBirth, Address address, int patientId){
         this.facilityId = facilityId;
         this.phoneNumber = phoneNumber;
@@ -42,7 +43,7 @@ public class Patient {
         this.firstName = firstName.toUpperCase();
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -57,7 +58,7 @@ public class Patient {
     public int getFacilityId() {
         return facilityId;
     }
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
     public String getFirstName() {

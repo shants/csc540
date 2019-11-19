@@ -55,7 +55,7 @@ public class AssessmentRuleCRUD {
     public static void AddRules(SymptomSeverity symptom_severity, AssessmentRule rule){
 
         Connection connection = DatabaseConnection.getInstance().getConnection();
-        CallableStatement statement;
+        CallableStatement statement= null;
         String procedure_call = "{call add_assesment_rules(?,?,?,?)}";
         try {
             statement = connection.prepareCall(procedure_call);
@@ -67,6 +67,8 @@ public class AssessmentRuleCRUD {
             System.out.println("New Assesment rule Added.");
         } catch (SQLException e) {
             System.out.println("Unable to add a new Assesment rule:"+e.getMessage());
+        }finally {
+            DatabaseConnection.getInstance().finallyHandler(statement);
         }
     }
 }
