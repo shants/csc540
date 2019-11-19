@@ -40,7 +40,7 @@ public class SignUp extends IScreen {
         System.out.println(MessageUtils.PATIENT_SIGNUP_DOB);
         patient.setDateOfBirth(CommandLineUtils.ReadInput());
         System.out.println(MessageUtils.PATIENT_SIGNUP_PHONE_NUM);
-        patient.setPhoneNumber(Integer.parseInt(CommandLineUtils.ReadInput()));
+        patient.setPhoneNumber(Long.parseLong(CommandLineUtils.ReadInput()));
     }
 
     public void run() {
